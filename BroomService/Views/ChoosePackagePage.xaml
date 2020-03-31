@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:views="clr-namespace:BroomService.Views"
+             BackgroundColor="{StaticResource TransparentColor}"
+             x:Class="BroomService.Views.ChoosePackagePage">
+    <StackLayout BackgroundColor="{StaticResource BlueColor}" Spacing="20" >
+        <views:BackArrowHeader TitleText="Welcome" UserNameText="Emma Wilson" IsBackVisible="True" Margin="0,15"/>
+
+        <Frame IsClippedToBounds="True" HasShadow="False" HorizontalOptions="FillAndExpand" CornerRadius="20" Padding="0">
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10" Padding="20">
+                <Label Text="Choose Package" Style="{StaticResource Black1BoldCenterLabel}" FontSize="{StaticResource FontSize20}"/>
+                <Label Text="Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum " Style="{StaticResource Black1MediumCenterLabel}" FontSize="{StaticResource FontSize15}"/>
+
+                <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <CollectionView x:Name="packageList" ItemsSource="{Binding ServiceList}" SelectedItem="{Binding SelectedServiceList}" SelectionMode="Single" SelectionChanged="serviceList_SelectionChanged" ItemsLayout="VerticalList" Margin="-20,0"
+                                VerticalOptions="FillAndExpand">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid x:Name="packageListItem" Padding="40,10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Frame Grid.Row="0" Padding="50,20" CornerRadius="5" HorizontalOptions="FillAndExpand" HasShadow="{Binding ServiceShadow}" BackgroundColor="{Binding ServiceSelectedColor}" IsClippedToBounds="True">
+                                        <StackLayout>
+                                            <Grid>
+                                                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                                    <StackLayout Orientation="Vertical" Spacing="8" VerticalOptions="FillAndExpand">
+                                                        <Label Text="{Binding category_service_name}" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
+                                                        <Label Text="Lorem Ipsum is simply ke a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged." Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                                                    </StackLayout>
+                                                </StackLayout>
+                                            </Grid>
+                                        </StackLayout>
+                                    </Frame>
+
+
+
+                                    <Grid BackgroundColor="{StaticResource TransparentColor}" Padding="0,10" VerticalOptions="Start" HorizontalOptions="Start" TranslationX="-30">
+                                        <!--<img:CircleImage Source="{Binding UserPic}" HorizontalOptions="Center" VerticalOptions="Start" HeightRequest="80" WidthRequest="80" BorderColor="{StaticResource YellowColor}" BorderThickness="2.5"/>-->
+                                        <Image Style="{StaticResource Image70HW}" Source="{Binding service_image}"/>
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <Image Style="{StaticResource Image60HW}" Source="ic_btn_back.png" HorizontalOptions="End" VerticalOptions="End">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BackIconCommand}"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Grid>
+
+
+                <!--#region Bottom Tab Page-->
+                <Frame Style="{StaticResource ShadowFrame60h}" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" CornerRadius="25" Padding="10" BackgroundColor="{StaticResource WhiteColor}" Margin="0">
+                    <Grid HorizontalOptions="FillAndExpand" ColumnSpacing="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Grid.Column="0" Style="{StaticResource Image30HW}" Source="ic_footer_home_select.png" HorizontalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                        <Image Grid.Column="1" Style="{StaticResource Image30HW}" Source="ic_footer_buildin.png" HorizontalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                        <Image Grid.Column="2" Style="{StaticResource Image50HW}" Source="ic_search.png" HorizontalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                        <Image Grid.Column="3" Style="{StaticResource Image30HW}" Source="ic_footer_calendar.png" HorizontalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                        <Image Grid.Column="4" Style="{StaticResource Image30HW}" Source="ic_footer_profile.png" HorizontalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Grid>
+                </Frame>
+                <!--#endregion-->
+            </StackLayout>
+        </Frame>
+    </StackLayout>
+</ContentPage>

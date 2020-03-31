@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:views="clr-namespace:BroomService.Views"
+             BackgroundColor="{StaticResource TransparentColor}"
+             x:Class="BroomService.Views.AddCardPage">
+    <StackLayout BackgroundColor="{StaticResource BlueColor}" Spacing="20" >
+        <views:BackArrowHeader TitleText="Welcome" UserNameText="Emma Wilson" IsBackVisible="True" Margin="0,15"/>
+
+        <Frame IsClippedToBounds="True" HasShadow="False" HorizontalOptions="FillAndExpand" CornerRadius="25" Padding="0" VerticalOptions="FillAndExpand">
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="20" Spacing="10">
+                <ScrollView Margin="-20,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="20" Padding="20" >
+                        <Label Text="Add Card" Style="{StaticResource Black1BoldCenterLabel}" FontSize="{StaticResource FontSize20}"/>
+                        <Label Text="Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum " Style="{StaticResource Black1MediumCenterLabel}" FontSize="{StaticResource FontSize15}"/>
+
+                        <!--Add Job Request Page-->
+                        <Frame Style="{StaticResource ShadowFrame30h}" HorizontalOptions="End" CornerRadius="25" Padding="20,10" BackgroundColor="{StaticResource WhiteColor}" Margin="0">
+                            <Label Text="View Job Details" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ViewJobDetailCommand}" NumberOfTapsRequired="1"/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+
+                        <Frame Padding="10,5" Style="{StaticResource ShadowFrame50h}" BackgroundColor="{StaticResource WhiteColor}">
+                            <Grid>
+                                <StackLayout HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
+                                    <Label Text="Name As on Card" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                                    <Entry Text="" Placeholder="Enter your name" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}"/>
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
+
+                        <Frame Padding="10,5" Style="{StaticResource ShadowFrame50h}" BackgroundColor="{StaticResource WhiteColor}">
+                            <Grid>
+                                <StackLayout HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
+                                    <Label Text="Email" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                                    <Entry Text="" Placeholder="Enter your email" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}"/>
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
+
+                        <Frame Padding="10,5" Style="{StaticResource ShadowFrame50h}" BackgroundColor="{StaticResource WhiteColor}">
+                            <Grid>
+                                <StackLayout HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
+                                    <Label Text="Card Number*" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                                    <Entry Text="" Placeholder="Enter your card number" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}"/>
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
+
+                        <Frame Padding="10,5" Style="{StaticResource ShadowFrame50h}" BackgroundColor="{StaticResource WhiteColor}">
+                            <Grid>
+                                <StackLayout HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
+                                    <Label Text="CVV" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                                    <Entry Text="" Placeholder="Enter CVV" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}"/>
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
+
+                        <Frame Padding="10,5" Style="{StaticResource ShadowFrame50h}" BackgroundColor="{StaticResource WhiteColor}">
+                            <Grid>
+                                <StackLayout HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
+                                    <Label Text="Expiration (MM/YYYY)*" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Entry Text="" Placeholder="MM" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}" MaxLength="2"/>
+                                        <Entry Text="" Placeholder="YYYY" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}" MaxLength="2"/>
+                                    </Grid>
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
+
+                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10" Orientation="Horizontal">
+                            <Image Style="{StaticResource Image20HW}" Source="ic_checkbox_uncheck.png"/>
+                            <Label Text="Please accept the terms &amp; conditions to add job request." Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" LineBreakMode="WordWrap"/>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="End">
+                            <Image Style="{StaticResource Image60HW}" Source="ic_btn_back.png" HorizontalOptions="End" VerticalOptions="End">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding BackIconCommand}"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <Image Style="{StaticResource Image60HW}" Source="ic_login_btn.png" HorizontalOptions="End" VerticalOptions="End">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding NextIconButton}"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </StackLayout>
+
+                    </StackLayout>
+                </ScrollView>
+
+
+
+                <!--#region Bottom Tab Page-->
+                <Frame Style="{StaticResource ShadowFrame60h}" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" CornerRadius="20" Padding="10" BackgroundColor="{StaticResource WhiteColor}" Margin="0">
+                    <Grid HorizontalOptions="FillAndExpand" ColumnSpacing="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Grid.Column="0" Style="{StaticResource Image30HW}" Source="ic_footer_home_select.png" HorizontalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                        <Image Grid.Column="1" Style="{StaticResource Image30HW}" Source="ic_footer_buildin.png" HorizontalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                        <Image Grid.Column="2" Style="{StaticResource Image50HW}" Source="ic_search.png" HorizontalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                        <Image Grid.Column="3" Style="{StaticResource Image30HW}" Source="ic_footer_calendar.png" HorizontalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                        <Image Grid.Column="4" Style="{StaticResource Image30HW}" Source="ic_footer_profile.png" HorizontalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Grid>
+                </Frame>
+                <!--#endregion-->
+            </StackLayout>
+        </Frame>
+    </StackLayout>
+</ContentPage>

@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com" xmlns:views="clr-namespace:BroomService.Views"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{StaticResource TransparentColor}"
+             x:Class="BroomService.Views.WelcomePage">
+    <StackLayout BackgroundColor="{StaticResource BlueColor}" Spacing="20" >
+        <views:BackArrowHeader TitleText="Welcome" UserNameText="Emma Wilson" IsBackVisible="False" Margin="0,15"/>
+
+        <Frame IsClippedToBounds="True" HasShadow="False" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" CornerRadius="20" Padding="0">
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="10">
+                <ScrollView HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand">
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10" Padding="10,20">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="10" Margin="0,0,0,10">
+                            <StackLayout HorizontalOptions="Center" Spacing="10">
+                                <Label Text="Property Listing" Style="{StaticResource Black1BoldCenterLabel}" FontSize="{StaticResource FontSize20}"/>
+                                <Label Text="Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum " Style="{StaticResource Black1MediumCenterLabel}" FontSize="{StaticResource FontSize15}"/>
+                            </StackLayout>
+                        </StackLayout>
+
+
+
+                        <CollectionView x:Name="propertyList" HeightRequest="200" ItemsSource="{Binding PropertyList}" SelectedItem="{Binding NotificationSelected}" SelectionMode="None" ItemsLayout="HorizontalList" Margin="-10,0"
+                                VerticalOptions="FillAndExpand">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid x:Name="propertyListItem" Padding="10,15" WidthRequest="330">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Frame CornerRadius="20" Margin="0" OutlineColor="{Binding FrameColor}" IsClippedToBounds="True" HasShadow="True" Padding="0,0,0,15">
+                                            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="0">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="100"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                <Image Grid.Row="0" Source="image1.jpg" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="Fill"/>
+                                                <StackLayout Grid.Row="1" HorizontalOptions="FillAndExpand" Spacing="10" VerticalOptions="FillAndExpand" Padding="10,10">
+                                                    <StackLayout Orientation="Horizontal" Spacing="10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                                        <Label Text="{Binding category_service_name}" Style="{StaticResource Black1BoldLabel}" FontSize="{StaticResource FontSize18}"/>
+
+                                                        <Image Style="{StaticResource Image15HW}" Source="ic_online.png" HorizontalOptions="End"/>
+                                                    </StackLayout>
+
+                                                    <StackLayout Orientation="Horizontal" Spacing="5" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                                        <Label Text="Type of Property :" HorizontalOptions="Start" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize15}"/>
+                                                        <Label Text="House\Apartment" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize15}"/>
+
+                                                        <Image Style="{StaticResource Image15HW}" Source="ic_edit.png" HorizontalOptions="End"/>
+                                                    </StackLayout>
+                                                    <Label Text="Short Term Airbnb Apartment" Style="{StaticResource BlueMediumLabel}" FontSize="{StaticResource FontSize15}"/>
+
+                                                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="10">
+                                                        <Label Text="Fast Order | Order Service | Change Service" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}"/>
+                                                    </StackLayout>
+                                                </StackLayout>
+                                            </Grid>
+                                        </Frame>
+
+                                        <Image Style="{StaticResource Image30HW}" Source="ic_drop_btn.png" VerticalOptions="End" HorizontalOptions="Center" Margin="0,0,0,-12"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                        <!--View All Properties-->
+                        <Frame Style="{StaticResource ShadowFrame40h}" HorizontalOptions="CenterAndExpand" CornerRadius="25" Padding="20,10" BackgroundColor="{StaticResource WhiteColor}" Margin="0">
+                            <Label Text="View All Properties" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ViewPropertiesList}" NumberOfTapsRequired="1"/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="10" Margin="0,10">
+                            <StackLayout HorizontalOptions="Center" Spacing="10">
+                                <Label Text="Our Specialization Areas" Style="{StaticResource Black1BoldCenterLabel}" FontSize="{StaticResource FontSize20}"/>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="10">
+                                    <Label FontSize="{StaticResource FontSize15}">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Providing Professional Services All Around The " Style="{StaticResource Black1MediumCenterLabel}"/>
+                                                <Span Text="Israel" Style="{StaticResource BlueBoldCenterLabel}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+
+                    </StackLayout>
+                </ScrollView>
+
+
+                <!--#region Bottom Tab Page-->
+                <Frame Style="{StaticResource ShadowFrame40h}" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" CornerRadius="25" Padding="10" BackgroundColor="{StaticResource WhiteColor}" Margin="0">
+                    <Grid HorizontalOptions="FillAndExpand" ColumnSpacing="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Grid.Column="0" Style="{StaticResource Image30HW}" Source="ic_footer_home_select.png" HorizontalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                        <Image Grid.Column="1" Style="{StaticResource Image30HW}" Source="ic_footer_buildin.png" HorizontalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                        <Image Grid.Column="2" Style="{StaticResource Image50HW}" Source="ic_search.png" HorizontalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                        <Image Grid.Column="3" Style="{StaticResource Image30HW}" Source="ic_footer_calendar.png" HorizontalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                        <Image Grid.Column="4" Style="{StaticResource Image30HW}" Source="ic_footer_profile.png" HorizontalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Grid>
+                </Frame>
+                <!--#endregion-->
+            </StackLayout>
+        </Frame>
+    </StackLayout>
+</ContentPage>

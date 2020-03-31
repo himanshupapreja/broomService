@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:views="clr-namespace:BroomService.Views"
+             BackgroundColor="{StaticResource TransparentColor}"
+             x:Class="BroomService.Views.CardListPage">
+    <StackLayout BackgroundColor="{StaticResource BlueColor}" Spacing="20" >
+        <views:BackArrowHeader TitleText="Welcome" UserNameText="Emma Wilson" IsBackVisible="True" Margin="0,15"/>
+
+        <Frame IsClippedToBounds="True" HasShadow="False" HorizontalOptions="FillAndExpand" CornerRadius="25" Padding="0" VerticalOptions="FillAndExpand">
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="20" Spacing="10">
+                <Label Text="Select Card" Style="{StaticResource Black1BoldCenterLabel}" FontSize="{StaticResource FontSize20}"/>
+                <Label Text="Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum " Style="{StaticResource Black1MediumCenterLabel}" FontSize="{StaticResource FontSize15}"/>
+
+                <!--View Job Request Page-->
+                <Frame Style="{StaticResource ShadowFrame30h}" HorizontalOptions="End" CornerRadius="25" Padding="20,10" BackgroundColor="{StaticResource WhiteColor}" Margin="0">
+                    <Label Text="View Job Details" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ViewJobDetailCommand}" NumberOfTapsRequired="1"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+
+                <CollectionView x:Name="cardList" ItemsSource="{Binding CardList}" SelectedItem="{Binding SelectedCardList}" SelectionMode="None" SelectionChanged="cardList_SelectionChanged" ItemsLayout="VerticalList" Margin="-20,0"
+                                VerticalOptions="FillAndExpand">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid x:Name="cardListItem" Padding="20,15">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Frame Grid.Row="0" Padding="0" CornerRadius="5" HorizontalOptions="FillAndExpand" HasShadow="True" BackgroundColor="{StaticResource WhiteColor}" IsClippedToBounds="True">
+                                    <Grid HorizontalOptions="FillAndExpand">
+                                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="20" Spacing="20">
+                                            <StackLayout Spacing="8" VerticalOptions="FillAndExpand">
+                                                <Label Text="Card Number" Style="{StaticResource Black1BoldLabel}" FontSize="{StaticResource FontSize16}"/>
+                                                <Label Text="{Binding card_number}" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}"/>
+                                            </StackLayout>
+
+                                            <StackLayout Orientation="Horizontal" Spacing="50" HorizontalOptions="FillAndExpand">
+                                                <StackLayout Spacing="8" VerticalOptions="CenterAndExpand">
+                                                    <Label Text="Expiry Date" Style="{StaticResource Black1BoldLabel}" FontSize="{StaticResource FontSize16}"/>
+                                                    <Label Text="12/2022" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}"/>
+                                                </StackLayout>
+                                                <StackLayout Spacing="8" VerticalOptions="CenterAndExpand">
+                                                    <Label Text="CVV" Style="{StaticResource Black1BoldLabel}" FontSize="{StaticResource FontSize16}"/>
+                                                    <Label Text="***" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}"/>
+                                                </StackLayout>
+
+                                                <Image Style="{StaticResource Image60HW}" Source="visa_logo.png" HorizontalOptions="EndAndExpand" VerticalOptions="Start"/>
+                                            </StackLayout>
+
+                                            <StackLayout Spacing="8" VerticalOptions="FillAndExpand">
+                                                <Label Text="Name on Card" Style="{StaticResource Black1BoldLabel}" FontSize="{StaticResource FontSize16}"/>
+                                                <Label Text="Lidor Ma" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}"/>
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </Grid>
+                                </Frame>
+
+                                <Image VerticalOptions="Start" Style="{StaticResource Image20HW}" Source="ic_close_blue.png" HorizontalOptions="End" TranslationX="8" TranslationY="-8"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Frame Style="{StaticResource ShadowFrame30h}" HorizontalOptions="CenterAndExpand" CornerRadius="25" Padding="20,10" BackgroundColor="{StaticResource WhiteColor}" Margin="0">
+                    <Label Text="Add New Card" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AddCardCommand}" NumberOfTapsRequired="1"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+
+                <!--#region Bottom Tab Page-->
+                <Frame Style="{StaticResource ShadowFrame60h}" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" CornerRadius="20" Padding="10" BackgroundColor="{StaticResource WhiteColor}" Margin="0">
+                    <Grid HorizontalOptions="FillAndExpand" ColumnSpacing="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Grid.Column="0" Style="{StaticResource Image30HW}" Source="ic_footer_home_select.png" HorizontalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                        <Image Grid.Column="1" Style="{StaticResource Image30HW}" Source="ic_footer_buildin.png" HorizontalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                        <Image Grid.Column="2" Style="{StaticResource Image50HW}" Source="ic_search.png" HorizontalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                        <Image Grid.Column="3" Style="{StaticResource Image30HW}" Source="ic_footer_calendar.png" HorizontalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                        <Image Grid.Column="4" Style="{StaticResource Image30HW}" Source="ic_footer_profile.png" HorizontalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Grid>
+                </Frame>
+                <!--#endregion-->
+            </StackLayout>
+        </Frame>
+    </StackLayout>  
+</ContentPage>

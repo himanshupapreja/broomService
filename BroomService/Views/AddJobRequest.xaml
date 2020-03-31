@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:views="clr-namespace:BroomService.Views"
+             BackgroundColor="{StaticResource TransparentColor}"
+             x:Class="BroomService.Views.AddJobRequest">
+    <StackLayout BackgroundColor="{StaticResource BlueColor}" Spacing="20" >
+        <views:BackArrowHeader TitleText="Welcome" UserNameText="Emma Wilson" IsBackVisible="True" Margin="0,15"/>
+
+        <Frame IsClippedToBounds="True" HasShadow="False" HorizontalOptions="FillAndExpand" CornerRadius="25" Padding="0" VerticalOptions="FillAndExpand">
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="20" Spacing="10">
+                <ScrollView Margin="-20,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="20" Padding="20" >
+                        <Label Text="Job Request" Style="{StaticResource Black1BoldCenterLabel}" FontSize="{StaticResource FontSize20}"/>
+                        <Label Text="Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum " Style="{StaticResource Black1MediumCenterLabel}" FontSize="{StaticResource FontSize15}"/>
+
+                        <Frame Padding="10,5" Style="{StaticResource ShadowFrame50h}" BackgroundColor="{StaticResource WhiteColor}">
+                            <Grid>
+                                <StackLayout HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
+                                    <Label Text="Service Name" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                                    <Label Text="Regular Room Cleaning" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}"/>
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
+
+                        <Frame Padding="10,5" Style="{StaticResource ShadowFrame50h}" BackgroundColor="{StaticResource WhiteColor}">
+                            <Grid>
+                                <StackLayout HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
+                                    <Label Text="Property Name" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                                    <Label Text="Luxary Villa" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}"/>
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
+
+                        <Frame Padding="10,5" Style="{StaticResource ShadowFrame50h}" BackgroundColor="{StaticResource WhiteColor}">
+                            <Grid>
+                                <StackLayout HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
+                                    <Label Text="Full Address of Property" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                                    <Label Text="Luxary Villa" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}"/>
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
+
+                        <Frame Padding="10,5" Style="{StaticResource ShadowFrame50h}" BackgroundColor="{StaticResource WhiteColor}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="50"/>
+                                </Grid.ColumnDefinitions>
+                                <StackLayout Grid.Column="0" HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
+                                    <Label Text="Start Date / Time" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                                    <Label Text="12-Feb-2020 11:43 am" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}"/>
+                                </StackLayout>
+
+                                <Image Grid.Column="1"  Style="{StaticResource Image20HW}" Source="ic_footer_calendar.png" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            </Grid>
+                        </Frame>
+
+                        <Label Text="Would You Like To Add End Date / Time?" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
+
+                        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="50">
+                            <Image Style="{StaticResource Image60H}" Source="ic_on.png"/>
+                            <Frame CornerRadius="25" HeightRequest="20" Padding="20,0" HorizontalOptions="FillAndExpand" IsClippedToBounds="True" HasShadow="True">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="50"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Text="Enter End Date/Time" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" VerticalOptions="Center" VerticalTextAlignment="Center"/>
+                                    <Image Grid.Column="1"  Style="{StaticResource Image20HW}" Source="ic_footer_calendar.png" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                </Grid>
+                            </Frame>
+                        </StackLayout>
+
+                        <Label Text="Would You Like To Add Checklist?" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
+
+                        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="50">
+                            <Image Style="{StaticResource Image60H}" Source="ic_on.png"/>
+                            <Frame CornerRadius="25" HeightRequest="20" Padding="20,0" HorizontalOptions="FillAndExpand" IsClippedToBounds="True" HasShadow="True">
+                                <!--<Entry Text="{Binding Name}" Placeholder="Enter your name" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}"/>-->
+                                <Label Text="Checklist 1" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" VerticalOptions="Center" VerticalTextAlignment="Center"/>
+                            </Frame>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="50">
+                            <Frame CornerRadius="25" HeightRequest="20" Padding="20,0" HorizontalOptions="FillAndExpand" IsClippedToBounds="True" HasShadow="True">
+                                <Entry Text="Checklist 2" Placeholder="Enter Checklist" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}"/>
+                            </Frame>
+                            <Image Style="{StaticResource Image60H}" Source="ic_add_btn_blue.png"/>
+                        </StackLayout>
+
+                        <Label Text="Would You Like To Add Order Inventory?" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
+
+                        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="50">
+                            <Image Style="{StaticResource Image60H}" Source="ic_on.png"/>
+                            <Frame CornerRadius="25" HeightRequest="20" Padding="20,0" HorizontalOptions="FillAndExpand" IsClippedToBounds="True" HasShadow="True">
+                                <Entry Text="Inventory 1" Placeholder="Enter Inventory" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}"/>
+                                <!--<Label Text="Checklist 1" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" VerticalOptions="Center" VerticalTextAlignment="Center"/>-->
+                            </Frame>
+                            <Image Style="{StaticResource Image60H}" Source="ic_add_btn_blue.png" HorizontalOptions="End"/>
+                        </StackLayout>
+                        
+                        <Label Text="Would You Like To Add Another Job on Same Time?" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
+
+                        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="50">
+                            <Image Style="{StaticResource Image60H}" Source="ic_on.png"/>
+                            <Frame CornerRadius="25" HeightRequest="20" Padding="20,0" HorizontalOptions="FillAndExpand" IsClippedToBounds="True" HasShadow="True">
+                                <Entry Text="{Binding Name}" Placeholder="Enter your name" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}"/>
+                            </Frame>
+                        </StackLayout>
+                        
+                        <Label Text="Would You Like To Add Job Description?" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
+
+                        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="50">
+                            <Image Style="{StaticResource Image60H}" Source="ic_off.png"/>
+                            <!--<Frame CornerRadius="25" HeightRequest="20" Padding="20,0" HorizontalOptions="FillAndExpand" IsClippedToBounds="True" HasShadow="True">
+                                <Entry Text="{Binding Name}" Placeholder="Enter your name" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}"/>
+                                <Label Text="Checklist 1" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" VerticalOptions="Center" VerticalTextAlignment="Center"/>
+                            </Frame>-->
+                        </StackLayout>
+                        
+                        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="End">
+                            <Image Style="{StaticResource Image60HW}" Source="ic_btn_back.png" HorizontalOptions="End" VerticalOptions="End">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding BackIconCommand}"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <Image Style="{StaticResource Image60HW}" Source="ic_login_btn.png" HorizontalOptions="End" VerticalOptions="End">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding NextIconButton}"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </StackLayout>
+                        
+                    </StackLayout>
+                </ScrollView>
+
+
+
+                <!--#region Bottom Tab Page-->
+                <Frame Style="{StaticResource ShadowFrame60h}" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" CornerRadius="20" Padding="10" BackgroundColor="{StaticResource WhiteColor}" Margin="0">
+                    <Grid HorizontalOptions="FillAndExpand" ColumnSpacing="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Grid.Column="0" Style="{StaticResource Image30HW}" Source="ic_footer_home_select.png" HorizontalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                        <Image Grid.Column="1" Style="{StaticResource Image30HW}" Source="ic_footer_buildin.png" HorizontalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                        <Image Grid.Column="2" Style="{StaticResource Image50HW}" Source="ic_search.png" HorizontalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                        <Image Grid.Column="3" Style="{StaticResource Image30HW}" Source="ic_footer_calendar.png" HorizontalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                        <Image Grid.Column="4" Style="{StaticResource Image30HW}" Source="ic_footer_profile.png" HorizontalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Grid>
+                </Frame>
+                <!--#endregion-->
+            </StackLayout>
+        </Frame>
+    </StackLayout>
+</ContentPage>

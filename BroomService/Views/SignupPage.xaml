@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{StaticResource WhiteColor}"
+             x:Class="BroomService.Views.SignupPage">
+    <StackLayout Padding="20,30" Spacing="20" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Image Style="{StaticResource PageCloseImage}" HeightRequest="20" WidthRequest="20">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding CloseCommand}"/>
+            </Image.GestureRecognizers>
+        </Image>
+
+        <ScrollView Margin="-20,0">
+            <StackLayout Padding="20,0" Spacing="20">
+
+                <Label Text="Create Your Account" Style="{StaticResource Black1BoldLabel}" FontSize="{StaticResource FontSize20}"/>
+                <Label Text="Please Fill Below Details" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize15}"/>
+
+                <Grid HorizontalOptions="Center" HeightRequest="100" WidthRequest="100">
+                    <Image HorizontalOptions="Center" Aspect="AspectFit" Source="ic_default_image.png" WidthRequest="100" HeightRequest="100"/>
+                    <Grid BackgroundColor="Black" HeightRequest="22" WidthRequest="22" HorizontalOptions="Start" VerticalOptions="End" Margin="5,0,0,5">
+                        <Image Style="{StaticResource Image15HW}" Source="ic_camera.png" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    </Grid>
+                </Grid>
+
+                <!--Name Field-->
+                <Frame Style="{StaticResource ShadowFrame50h}" CornerRadius="7" Padding="15,5">
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0">
+                        <Label Text="Enter Full Name" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+
+                        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
+                            <Image Style="{StaticResource Image15HW}" Source="ic_user.png"/>
+                            <Entry Text="{Binding Name}" Placeholder="Enter your name" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10">
+                    <Label Text="Company Name" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+
+                    <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                        <Image Style="{StaticResource Image60H}" Source="ic_on.png"/>
+                        <Frame CornerRadius="20" HeightRequest="20" Padding="20,0" HorizontalOptions="FillAndExpand" IsClippedToBounds="True" HasShadow="True">
+                            <Entry Text="{Binding Name}" Placeholder="Enter your name" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}"/>
+                        </Frame>
+                    </StackLayout>
+                </StackLayout>
+
+                <!--Email Field-->
+                <Frame Style="{StaticResource ShadowFrame50h}" CornerRadius="7" Padding="15,5">
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0">
+                        <Label Text="Enter Your Email" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+
+                        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
+                            <Image Style="{StaticResource Image15HW}" Source="ic_email.png"/>
+                            <Entry Text="{Binding Email}" Placeholder="Enter your email" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <!--Phone Field-->
+                <Frame Style="{StaticResource ShadowFrame50h}" CornerRadius="7" Padding="15,5">
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0">
+                        <Label Text="Phone" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+
+                        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
+                            <Image Style="{StaticResource Image15HW}" Source="ic_Call.png"/>
+                            <Entry Text="{Binding Email}" Placeholder="Enter your phone" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <!--Password-->
+                <Frame Style="{StaticResource ShadowFrame50h}" CornerRadius="7" Padding="15,5">
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="5">
+                        <Label Text="Password" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+
+                        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
+                            <Image Style="{StaticResource Image15HW}" Source="ic_password.png"/>
+                            <Entry Text="{Binding Password}" Placeholder="Enter your password" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" IsPassword="True"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <!--Confirm Password-->
+                <Frame Style="{StaticResource ShadowFrame50h}" CornerRadius="7" Padding="15,5">
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="5">
+                        <Label Text="Confirm Password" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+
+                        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
+                            <Image Style="{StaticResource Image15HW}" Source="ic_password.png"/>
+                            <Entry Text="{Binding ConfirmPassword}" Placeholder="Enter your password again" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" IsPassword="True"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <!--Address-->
+                <Frame Style="{StaticResource ShadowFrame50h}" CornerRadius="7" Padding="15,5">
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="5">
+                        <Label Text="Full Address" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+
+                        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
+                            <Image Style="{StaticResource Image15HW}" Source="ic_location.png"/>
+                            <Entry Text="{Binding Address}" Placeholder="Enter your address" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" IsPassword="True"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10">
+                    <Label Text="Add Billing Address" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+
+                    <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                        <Image Style="{StaticResource Image60H}" Source="ic_on.png"/>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10" Orientation="Horizontal">
+                    <Image Style="{StaticResource Image20HW}" Source="ic_checkbox_uncheck.png"/>
+                    <Label Text="I have read &amp; agree with terms &amp; conditions" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" LineBreakMode="WordWrap"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" Margin="0,0">
+
+                    <Image Style="{StaticResource Image50HW}" Source="ic_login_btn.png  " HorizontalOptions="EndAndExpand">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding RegisterCommand}"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+
+        <StackLayout Margin="-20,0,-20,-30" HeightRequest="40" Padding="20,8" Orientation="Horizontal" BackgroundColor="{StaticResource BlueColor}" VerticalOptions="EndAndExpand">
+            <Label Text="Already Member? Login Now" Style="{StaticResource WhiteMediumLabel}" FontSize="{StaticResource FontSize15}" VerticalOptions="Center"/>
+
+            <Image Style="{StaticResource Image20HW}" Source="ic_arrow_next_white.png" HorizontalOptions="End">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding LoginCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
+
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding LoginCommand}"/>
+            </StackLayout.GestureRecognizers>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

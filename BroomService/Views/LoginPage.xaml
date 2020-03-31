@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{StaticResource WhiteColor}"
+             x:Class="BroomService.Views.LoginPage">
+    <StackLayout Padding="20,30" Spacing="20" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <!--<Image Style="{StaticResource PageCloseImage}" HeightRequest="20" WidthRequest="20"/>-->
+
+        <Image HorizontalOptions="Center" Aspect="AspectFit" Source="ic_logo.png" WidthRequest="200" HeightRequest="150"/>
+
+        <Label Text="Login To Continue" Style="{StaticResource Black1BoldLabel}" FontSize="{StaticResource FontSize20}"/>
+        <Label Text="Please Fill Below Details" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize15}"/>
+
+        <Frame Style="{StaticResource ShadowFrame50h}" CornerRadius="7" Padding="15,5">
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0">
+                <Label Text="Enter Your Email" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+
+                <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
+                    <Image Style="{StaticResource Image15HW}" Source="ic_email.png"/>
+                    <Entry Text="{Binding Email}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Placeholder="abc@domain.com" FontSize="{StaticResource FontSize15}"/>
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+
+        <Frame Style="{StaticResource ShadowFrame50h}" CornerRadius="7" Padding="15,5">
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="5">
+                <Label Text="Enter Password" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+
+                <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
+                    <Image Style="{StaticResource Image15HW}" Source="ic_password.png"/>
+                    <Entry Text="{Binding Password}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Placeholder="********" FontSize="{StaticResource FontSize15}" IsPassword="True"/>
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+
+        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" Margin="0,0">
+            <Label Text="Forgot Password?" Style="{StaticResource BlueSemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
+
+            <Image Style="{StaticResource Image50HW}" Source="ic_login_btn.png  " HorizontalOptions="End">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding LoginCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
+        </StackLayout>
+
+
+        <StackLayout Margin="-20,0,-20,-30" HeightRequest="40" Padding="20,8" Orientation="Horizontal" BackgroundColor="{StaticResource BlueColor}" VerticalOptions="EndAndExpand">
+            <Label Text="Don't have an account? Create Now" Style="{StaticResource WhiteMediumLabel}" FontSize="{StaticResource FontSize15}" VerticalOptions="Center"/>
+
+            <Image Style="{StaticResource Image20HW}" Source="ic_arrow_next_white.png" HorizontalOptions="End">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SignupCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
+
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding SignupCommand}"/>
+            </StackLayout.GestureRecognizers>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

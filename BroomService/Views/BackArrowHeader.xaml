@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Name="Root" Padding="0"
+             BackgroundColor="{StaticResource TransparentColor}"
+             x:Class="BroomService.Views.BackArrowHeader">
+    <Grid BackgroundColor="{StaticResource TransparentColor}" HorizontalOptions="FillAndExpand">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="50"/>
+        </Grid.ColumnDefinitions>
+        <Image HorizontalOptions="Center" Style="{StaticResource Image20HW}" Source="ic_arrow_back_white.png" Grid.Column="0" IsVisible="{Binding Source={x:Reference Root}, Path=IsBackVisible}">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding BackIconCommand}"/>
+            </Image.GestureRecognizers>
+        </Image>
+        <BoxView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Column="0" BackgroundColor="{StaticResource TransparentColor}" IsVisible="{Binding IsBackVisible}">
+            <BoxView.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding BackIconCommand}"/>
+            </BoxView.GestureRecognizers>
+        </BoxView>
+
+        <StackLayout Grid.Column="1" Spacing="5" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+            <Label Text="{Binding Source={x:Reference Root}, Path=TitleText}" Style="{StaticResource HomeHeaderStyle}"  BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+            <Label Text="{Binding Source={x:Reference Root}, Path=UserNameText}" Style="{StaticResource HomeHeaderBoldStyle}"  BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+        </StackLayout>
+
+        <Image HorizontalOptions="Center" Style="{StaticResource Image20HW}" Source="ic_notify_bell.png" Grid.Column="2">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding RightIconCommand}"/>
+            </Image.GestureRecognizers>
+        </Image>
+        <BoxView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Column="2" BackgroundColor="{StaticResource TransparentColor}">
+            <BoxView.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding RightIconCommand}"/>
+            </BoxView.GestureRecognizers>
+        </BoxView>
+    </Grid>
+</ContentView>

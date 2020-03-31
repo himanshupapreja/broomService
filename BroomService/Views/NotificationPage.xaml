@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com" xmlns:views="clr-namespace:BroomService.Views"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{StaticResource TransparentColor}"
+             x:Class="BroomService.Views.NotificationPage">
+    <StackLayout BackgroundColor="{StaticResource BlueColor}" Spacing="20" >
+        <views:BackArrowHeader TitleText="Welcome" UserNameText="Emma Wilson" IsBackVisible="True" Margin="0,15"/>
+
+        <Frame IsClippedToBounds="True" HasShadow="False" HorizontalOptions="FillAndExpand" CornerRadius="20" Padding="0">
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10" Padding="20">
+                <Label Text="Notifications" Style="{StaticResource Black1BoldCenterLabel}" FontSize="{StaticResource FontSize20}"/>
+
+                <Frame CornerRadius="15" Style="{StaticResource ShadowFrame60h}" Padding="0" BackgroundColor="{StaticResource LightGrayColor}">
+                    <Grid Padding="10,5" RowSpacing="0" ColumnSpacing="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="30"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Entry Grid.Column="0" Text="{Binding SearchData}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Placeholder="Search By Date, Service Name and Property Name.." FontSize="{StaticResource FontSize15}" VerticalOptions="FillAndExpand" VerticalTextAlignment="Center"/>
+
+                        <Image Grid.Column="1" Style="{StaticResource Image20HW}" Source="ic_search_small.png" HorizontalOptions="End">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SearchCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <BoxView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Column="1" BackgroundColor="{StaticResource TransparentColor}">
+                            <BoxView.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SearchCommand}"/>
+                            </BoxView.GestureRecognizers>
+                        </BoxView>
+                    </Grid>
+                </Frame>
+
+                <CollectionView x:Name="notificationList" ItemsSource="{Binding NotificationList}" SelectedItem="{Binding NotificationSelected}" SelectionMode="None" ItemsLayout="VerticalList" 
+                                VerticalOptions="FillAndExpand">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid x:Name="notificationListItem" Padding="0,2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Frame Grid.Row="0" Padding="20" CornerRadius="0" HorizontalOptions="FillAndExpand" HasShadow="False" BackgroundColor="{StaticResource WhiteColor}">
+                                    <StackLayout>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid BackgroundColor="{StaticResource TransparentColor}" Padding="4" HeightRequest="90" WidthRequest="90" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" Grid.Column="0">
+                                                <!--<img:CircleImage Source="{Binding UserPic}" HorizontalOptions="Center" VerticalOptions="Start" HeightRequest="80" WidthRequest="80" BorderColor="{StaticResource YellowColor}" BorderThickness="2.5"/>-->
+                                                <Image Style="{StaticResource Image90HW}" Source="ic_cat_cleen.png"/>
+                                            </Grid>
+                                            <StackLayout Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                                <StackLayout Orientation="Vertical" Spacing="8" VerticalOptions="FillAndExpand">
+                                                    <Label Text="{Binding category_service_name}" Style="{StaticResource Black1BoldLabel}" FontSize="{StaticResource FontSize16}"/>
+                                                    <Label Text="3-Feb-2020, 9:00-11:00" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}"/>
+                                                    <Label Text="The Luxary Villa" Style="{StaticResource BlueMediumLabel}" FontSize="{StaticResource FontSize16}"/>
+                                                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="10">
+                                                        <Image Style="{StaticResource Image15HW}" Source="ic_location.png"/>
+                                                        <Label Text="Allenby St 12, Tel Aviv-Yafo, Israel" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                                                    </StackLayout>
+                                                </StackLayout>
+                                            </StackLayout>
+                                        </Grid>
+                                    </StackLayout>
+                                </Frame>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+
+                <!--#region Bottom Tab Page-->
+                <Frame Style="{StaticResource ShadowFrame60h}" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" CornerRadius="25" Padding="10" BackgroundColor="{StaticResource WhiteColor}" Margin="0">
+                    <Grid HorizontalOptions="FillAndExpand" ColumnSpacing="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Grid.Column="0" Style="{StaticResource Image30HW}" Source="ic_footer_home_select.png" HorizontalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                        <Image Grid.Column="1" Style="{StaticResource Image30HW}" Source="ic_footer_buildin.png" HorizontalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                        <Image Grid.Column="2" Style="{StaticResource Image50HW}" Source="ic_search.png" HorizontalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                        <Image Grid.Column="3" Style="{StaticResource Image30HW}" Source="ic_footer_calendar.png" HorizontalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+
+                        <Image Grid.Column="4" Style="{StaticResource Image30HW}" Source="ic_footer_profile.png" HorizontalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Grid>
+                </Frame>
+                <!--#endregion-->
+            </StackLayout>
+        </Frame>
+    </StackLayout>
+</ContentPage>

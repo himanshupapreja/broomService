@@ -1,0 +1,821 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<prism:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.DryIoc;assembly=Prism.DryIoc.Forms"
+             xmlns:adc="clr-namespace:BroomService.Helpers"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="True"
+             x:Class="BroomService.App">
+	<Application.Resources>
+
+		<!-- Application resource dictionary -->
+        <ResourceDictionary>
+            <!--<converters:BoolToNotBoolConverter x:Key="BoolToNotBoolConverter"/>-->
+
+            <!--#region Font Family Style-->
+            <OnPlatform x:Key="DefaultFontFamily" x:TypeArguments="x:String">
+                <On Platform="iOS" Value="{x:Static adc:App_FontFamilies.RegularFont}" />
+                <On Platform="Android,UWP" Value="{x:Static adc:App_FontFamilies.RegularFont}" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="BoldFontFamily" x:TypeArguments="x:String">
+                <On Platform="iOS" Value="{x:Static adc:App_FontFamilies.BoldFont}" />
+                <On Platform="Android,UWP" Value="{x:Static adc:App_FontFamilies.BoldFont}" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="SemiBoldFontFamily" x:TypeArguments="x:String">
+                <On Platform="iOS" Value="{x:Static adc:App_FontFamilies.SemiBoldFont}" />
+                <On Platform="Android,UWP" Value="{x:Static adc:App_FontFamilies.SemiBoldFont}" />
+            </OnPlatform>
+
+            <OnPlatform x:Key="MediumFontFamily" x:TypeArguments="x:String">
+                <On Platform="iOS" Value="{x:Static adc:App_FontFamilies.MediumFont}" />
+                <On Platform="Android,UWP" Value="{x:Static adc:App_FontFamilies.MediumFont}" />
+            </OnPlatform>
+            <!--#endregion-->
+
+
+            <!--#region Font Size Style -->
+            <OnPlatform x:Key="FontSize13" x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="13" />
+                <On Platform="Android,UWP" Value="13" />
+            </OnPlatform>
+            <OnPlatform x:Key="FontSize15" x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="13" />
+                <On Platform="Android,UWP" Value="15" />
+            </OnPlatform>
+            <OnPlatform x:Key="FontSize18" x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="16" />
+                <On Platform="Android,UWP" Value="18" />
+            </OnPlatform>
+            <OnPlatform x:Key="FontSize16" x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="16" />
+                <On Platform="Android,UWP" Value="16" />
+            </OnPlatform>
+            <OnPlatform x:Key="FontSize20" x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="20" />
+                <On Platform="Android,UWP" Value="20" />
+            </OnPlatform>
+            <OnPlatform x:Key="FontSize25" x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="25" />
+                <On Platform="Android,UWP" Value="25" />
+            </OnPlatform>
+            <OnPlatform x:Key="FontSize30" x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="30" />
+                <On Platform="Android,UWP" Value="30" />
+            </OnPlatform>
+            <!--#endregion-->
+
+
+            <OnPlatform x:Key="CornerRadius15" x:TypeArguments="x:Int32">
+                <On Platform="iOS" Value="13" />
+                <On Platform="Android,UWP" Value="15" />
+            </OnPlatform>
+
+            <Color x:Key="WhiteColor">#FFFFFF</Color>
+            <Color x:Key="Black1Color">#000000</Color>
+            <Color x:Key="Black2Color">#959595</Color>
+            <Color x:Key="Black3Color">#545353</Color>
+            <Color x:Key="GrayColor">#d2d2d2</Color>
+            <Color x:Key="LightGrayColor">#F9F9F9</Color>
+            <Color x:Key="BlueColor">#214378</Color>
+            <Color x:Key="TransparentColor">#00000000</Color>
+
+            <Style TargetType="ListView">
+                <Setter Property="BackgroundColor" Value="{StaticResource TransparentColor}"/>
+            </Style>
+
+            <!--<Style x:Key="jobpopupBlueButtonStyle" TargetType="Button">
+                <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="FontFamily" Value="{StaticResource BoldFontFamily}"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="HorizontalOptions" Value="End"/>
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource BlueColor}"/>
+                <Setter Property="CornerRadius" Value="7"/>
+            </Style>
+
+            <Style x:Key="jobRedButtonStyle" TargetType="Button">
+                <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="BorderColor" Value="{StaticResource RedColor}"/>
+                <Setter Property="BorderWidth" Value="1"/>
+                <Setter Property="FontFamily" Value="{StaticResource BoldFontFamily}"/>
+                <Setter Property="HorizontalOptions" Value="End"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="TextColor" Value="{StaticResource RedColor}"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource TransparentColor}"/>
+                <Setter Property="CornerRadius" Value="15"/>
+                <Setter Property="CornerRadius" Value="{StaticResource CornerRadius15}"/>
+            </Style>
+
+            <Style x:Key="BlueButtonStyle" TargetType="Button">
+                <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="FontFamily" Value="{StaticResource BoldFontFamily}"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource BlueColor}"/>
+                <Setter Property="CornerRadius" Value="5"/>
+            </Style>-->
+
+            <!--#region Blue Label Style-->
+            <Style x:Key="BlueBoldLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource BlueColor}"/>
+                <Setter Property="FontFamily" Value="{StaticResource BoldFontFamily}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="HorizontalTextAlignment" Value="Start"/>
+            </Style>
+            <Style x:Key="BlueSemiBoldLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource BlueColor}"/>
+                <Setter Property="FontFamily" Value="{StaticResource SemiBoldFontFamily}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="HorizontalTextAlignment" Value="Start"/>
+            </Style>
+            <Style x:Key="BlueMediumLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource BlueColor}"/>
+                <Setter Property="FontFamily" Value="{StaticResource MediumFontFamily}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="HorizontalTextAlignment" Value="Start"/>
+            </Style>
+
+            <Style x:Key="BlueRegularLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource BlueColor}"/>
+                <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="HorizontalTextAlignment" Value="Start"/>
+            </Style>
+
+            <Style x:Key="BlueBoldCenterLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource BlueColor}"/>
+                <Setter Property="FontFamily" Value="{StaticResource BoldFontFamily}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="BlueSemiBoldCenterLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource BlueColor}"/>
+                <Setter Property="FontFamily" Value="{StaticResource SemiBoldFontFamily}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="BlueMediumCenterLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource BlueColor}"/>
+                <Setter Property="FontFamily" Value="{StaticResource MediumFontFamily}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            </Style>
+
+            <Style x:Key="BlueRegularCenterLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource BlueColor}"/>
+                <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            </Style>
+            <!--#endregion-->
+
+            <!--#region White Label Style-->
+            <Style x:Key="WhiteBoldLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}"/>
+                <Setter Property="FontFamily" Value="{StaticResource BoldFontFamily}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="HorizontalTextAlignment" Value="Start"/>
+            </Style>
+            <Style x:Key="WhiteSemiBoldLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}"/>
+                <Setter Property="FontFamily" Value="{StaticResource SemiBoldFontFamily}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="HorizontalTextAlignment" Value="Start"/>
+            </Style>
+            <Style x:Key="WhiteMediumLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}"/>
+                <Setter Property="FontFamily" Value="{StaticResource MediumFontFamily}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="HorizontalTextAlignment" Value="Start"/>
+            </Style>
+
+            <Style x:Key="WhiteRegularLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}"/>
+                <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="HorizontalTextAlignment" Value="Start"/>
+            </Style>
+
+            <Style x:Key="WhiteBoldCenterLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}"/>
+                <Setter Property="FontFamily" Value="{StaticResource BoldFontFamily}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="WhiteSemiBoldCenterLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}"/>
+                <Setter Property="FontFamily" Value="{StaticResource SemiBoldFontFamily}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            </Style>
+
+            <Style x:Key="WhiteMediumCenterLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}"/>
+                <Setter Property="FontFamily" Value="{StaticResource MediumFontFamily}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            </Style>
+
+            <Style x:Key="WhiteRegularCenterLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}"/>
+                <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            </Style>
+            <!--#endregion-->
+
+            <!--#region Black1 Label Style-->
+            <Style x:Key="Black1BoldLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource Black1Color}"/>
+                <Setter Property="FontFamily" Value="{StaticResource BoldFontFamily}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="HorizontalTextAlignment" Value="Start"/>
+            </Style>
+            <Style x:Key="Black1SemiBoldLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource Black1Color}"/>
+                <Setter Property="FontFamily" Value="{StaticResource SemiBoldFontFamily}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="HorizontalTextAlignment" Value="Start"/>
+            </Style>
+            <Style x:Key="Black1MediumLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource Black1Color}"/>
+                <Setter Property="FontFamily" Value="{StaticResource MediumFontFamily}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="HorizontalTextAlignment" Value="Start"/>
+            </Style>
+
+            <Style x:Key="Black1RegularLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource Black1Color}"/>
+                <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="HorizontalTextAlignment" Value="Start"/>
+            </Style>
+
+            <Style x:Key="Black1BoldCenterLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource Black1Color}"/>
+                <Setter Property="FontFamily" Value="{StaticResource BoldFontFamily}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="Black1SemiBoldCenterLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource Black1Color}"/>
+                <Setter Property="FontFamily" Value="{StaticResource SemiBoldFontFamily}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            </Style>
+
+            <Style x:Key="Black1MediumCenterLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource Black1Color}"/>
+                <Setter Property="FontFamily" Value="{StaticResource MediumFontFamily}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            </Style>
+
+            <Style x:Key="Black1RegularCenterLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource Black1Color}"/>
+                <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            </Style>
+            <!--#endregion-->
+
+            <!--#region LightGray Label Style-->
+            <Style x:Key="LightGrayBoldLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource LightGrayColor}"/>
+                <Setter Property="FontFamily" Value="{StaticResource BoldFontFamily}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="HorizontalTextAlignment" Value="Start"/>
+            </Style>
+            <Style x:Key="LightGraySemiBoldLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource LightGrayColor}"/>
+                <Setter Property="FontFamily" Value="{StaticResource SemiBoldFontFamily}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="HorizontalTextAlignment" Value="Start"/>
+            </Style>
+            <Style x:Key="LightGrayMediumLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource LightGrayColor}"/>
+                <Setter Property="FontFamily" Value="{StaticResource MediumFontFamily}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="HorizontalTextAlignment" Value="Start"/>
+            </Style>
+
+            <Style x:Key="LightGrayRegularLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource LightGrayColor}"/>
+                <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="HorizontalTextAlignment" Value="Start"/>
+            </Style>
+
+            <Style x:Key="LightGrayBoldCenterLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource LightGrayColor}"/>
+                <Setter Property="FontFamily" Value="{StaticResource BoldFontFamily}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="LightGraySemiBoldCenterLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource LightGrayColor}"/>
+                <Setter Property="FontFamily" Value="{StaticResource SemiBoldFontFamily}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            </Style>
+
+            <Style x:Key="LightGrayMediumCenterLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource LightGrayColor}"/>
+                <Setter Property="FontFamily" Value="{StaticResource MediumFontFamily}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            </Style>
+
+            <Style x:Key="LightGrayRegularCenterLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource LightGrayColor}"/>
+                <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            </Style>
+            <!--#endregion-->
+            
+            <!--#region Frame Style-->
+            <Style x:Key="Frame30h" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="30"/>
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            </Style>
+
+            <Style x:Key="Frame30hw" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="30"/>
+                <Setter Property="WidthRequest" Value="30"/>
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+            </Style>
+            <Style x:Key="Frame40h" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="40"/>
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            </Style>
+
+            <Style x:Key="Frame40hw" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="40"/>
+                <Setter Property="WidthRequest" Value="40"/>
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+            </Style>
+            <Style x:Key="Frame50h" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="50"/>
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            </Style>
+
+            <Style x:Key="Frame50hw" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="50"/>
+                <Setter Property="WidthRequest" Value="50"/>
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+            </Style>
+
+            <Style x:Key="Frame60hw" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="60"/>
+                <Setter Property="WidthRequest" Value="60"/>
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+            </Style>
+
+            <Style x:Key="Frame60h" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="60"/>
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            </Style>
+
+            <Style x:Key="Frame70hw" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="70"/>
+                <Setter Property="WidthRequest" Value="70"/>
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+            </Style>
+
+            <Style x:Key="Frame70h" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="70"/>
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            </Style>
+
+            <Style x:Key="Frame80h" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="80"/>
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            </Style>
+
+            <Style x:Key="Frame80hw" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="80"/>
+                <Setter Property="WidthRequest" Value="80"/>
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            </Style>
+
+            <Style x:Key="Frame90h" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="90"/>
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            </Style>
+
+            <Style x:Key="Frame90hw" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="90"/>
+                <Setter Property="WidthRequest" Value="90"/>
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+            </Style>
+
+            <Style x:Key="Frame100hw" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="100"/>
+                <Setter Property="WidthRequest" Value="100"/>
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+            </Style>
+
+            <Style x:Key="Frame100h" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="100"/>
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            </Style>
+
+            <Style x:Key="Frame120h" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="120"/>
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            </Style>
+
+            <Style x:Key="Frame150h" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="120"/>
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            </Style>
+
+            <Style x:Key="Frame200h" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="120"/>
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            </Style>
+
+
+            <Style x:Key="ShadowFrame30h" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="30"/>
+                <Setter Property="HasShadow" Value="True"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            </Style>
+
+            <Style x:Key="ShadowFrame40h" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="40"/>
+                <Setter Property="HasShadow" Value="True"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            </Style>
+
+            <Style x:Key="ShadowFrame50h" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="50"/>
+                <Setter Property="HasShadow" Value="True"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            </Style>
+
+            <Style x:Key="ShadowFrame30hw" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="30"/>
+                <Setter Property="WidthRequest" Value="30"/>
+                <Setter Property="HasShadow" Value="True"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+            </Style>
+
+            <Style x:Key="ShadowFrame40hw" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="40"/>
+                <Setter Property="WidthRequest" Value="40"/>
+                <Setter Property="HasShadow" Value="True"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+            </Style>
+
+            <Style x:Key="ShadowFrame50hw" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="50"/>
+                <Setter Property="WidthRequest" Value="50"/>
+                <Setter Property="HasShadow" Value="True"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+            </Style>
+
+            <Style x:Key="ShadowFrame60hw" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="60"/>
+                <Setter Property="WidthRequest" Value="60"/>
+                <Setter Property="HasShadow" Value="True"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+            </Style>
+
+            <Style x:Key="ShadowFrame70hw" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="70"/>
+                <Setter Property="WidthRequest" Value="70"/>
+                <Setter Property="HasShadow" Value="True"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+            </Style>
+
+            <Style x:Key="ShadowFrame80hw" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="80"/>
+                <Setter Property="WidthRequest" Value="80"/>
+                <Setter Property="HasShadow" Value="True"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+            </Style>
+
+            <Style x:Key="ShadowFrame90hw" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="90"/>
+                <Setter Property="WidthRequest" Value="90"/>
+                <Setter Property="HasShadow" Value="True"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+            </Style>
+
+            <Style x:Key="ShadowFrame60h" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="60"/>
+                <Setter Property="HasShadow" Value="True"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            </Style>
+
+            <Style x:Key="ShadowFrame70h" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="70"/>
+                <Setter Property="HasShadow" Value="True"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            </Style>
+
+            <Style x:Key="ShadowFrame80h" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="80"/>
+                <Setter Property="HasShadow" Value="True"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            </Style>
+
+            <Style x:Key="ShadowFrame90h" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="90"/>
+                <Setter Property="HasShadow" Value="True"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            </Style>
+
+            <Style x:Key="ShadowFrame100h" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="100"/>
+                <Setter Property="HasShadow" Value="True"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            </Style>
+
+            <Style x:Key="ShadowFrame120h" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="120"/>
+                <Setter Property="HasShadow" Value="True"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            </Style>
+
+            <Style x:Key="ShadowFrame150h" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="150"/>
+                <Setter Property="HasShadow" Value="True"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            </Style>
+
+            <Style x:Key="ShadowFrame200h" TargetType="Frame">
+                <Setter Property="HeightRequest" Value="200"/>
+                <Setter Property="HasShadow" Value="True"/>
+                <Setter Property="IsClippedToBounds" Value="True"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            </Style>
+            <!--#endregion-->
+
+            <Style x:Key="PageBGImage" TargetType="Image">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="Aspect" Value="AspectFill"/>
+            </Style>
+
+            <Style x:Key="PageCloseImage" TargetType="Image">
+                <Setter Property="VerticalOptions" Value="Start"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+                <Setter Property="Source" Value="ic_close.png"/>
+                <Setter Property="Aspect" Value="AspectFill"/>
+            </Style>
+
+            <!--#region Boxview style-->
+            <Style x:Key="HorizontalTransparentBoxViewStyle" TargetType="BoxView">
+                <Setter Property="BackgroundColor" Value="{StaticResource TransparentColor}" />
+                <Setter Property="HeightRequest" Value="1" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+
+            <Style x:Key="HorizontalBoxViewStyle" TargetType="BoxView">
+                <Setter Property="BackgroundColor" Value="{StaticResource GrayColor}" />
+                <Setter Property="HeightRequest" Value="1" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+
+            <Style x:Key="VerticalTransparentBoxViewStyle" TargetType="BoxView">
+                <Setter Property="BackgroundColor" Value="{StaticResource TransparentColor}" />
+                <Setter Property="WidthRequest" Value="1" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+            </Style>
+
+            <Style x:Key="VerticalBoxViewStyle" TargetType="BoxView">
+                <Setter Property="BackgroundColor" Value="{StaticResource GrayColor}" />
+                <Setter Property="WidthRequest" Value="1" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+            </Style>
+            <!--#endregion-->
+
+
+
+            <Style x:Key="HomeHeaderStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
+                <Setter Property="FontFamily" Value="{StaticResource MediumFontFamily}" />
+                <Setter Property="FontSize" Value="16"/>
+            </Style>
+            <Style x:Key="HomeHeaderBoldStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
+                <Setter Property="FontFamily" Value="{StaticResource BoldFontFamily}" />
+                <Setter Property="FontSize" Value="16"/>
+            </Style>
+
+            <Style x:Key="EntryStyle" TargetType="Entry">
+                <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
+                <Setter Property="FontSize" Value="{StaticResource FontSize15}"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="PlaceholderColor" Value="{StaticResource GrayColor}"/>
+                <Setter Property="TextColor" Value="{StaticResource Black1Color}"/>
+            </Style>
+
+
+
+            <!--#region Image Style -->
+            
+            <Style x:Key="Image10HW" TargetType="Image">
+                <Setter Property="HeightRequest" Value="10" />
+                <Setter Property="WidthRequest" Value="10" />
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="Image15HW" TargetType="Image">
+                <Setter Property="HeightRequest" Value="15" />
+                <Setter Property="WidthRequest" Value="15" />
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="Image20HW" TargetType="Image">
+                <Setter Property="HeightRequest" Value="20" />
+                <Setter Property="WidthRequest" Value="20" />
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="Image25HW" TargetType="Image">
+                <Setter Property="HeightRequest" Value="25" />
+                <Setter Property="WidthRequest" Value="25" />
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="Image30HW" TargetType="Image">
+                <Setter Property="HeightRequest" Value="30" />
+                <Setter Property="WidthRequest" Value="30" />
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="Image40HW" TargetType="Image">
+                <Setter Property="HeightRequest" Value="40" />
+                <Setter Property="WidthRequest" Value="40" />
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="Image50HW" TargetType="Image">
+                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="WidthRequest" Value="50" />
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="Image60HW" TargetType="Image">
+                <Setter Property="HeightRequest" Value="60" />
+                <Setter Property="WidthRequest" Value="60" />
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="Image70HW" TargetType="Image">
+                <Setter Property="HeightRequest" Value="70" />
+                <Setter Property="WidthRequest" Value="70" />
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="Image80HW" TargetType="Image">
+                <Setter Property="HeightRequest" Value="80" />
+                <Setter Property="WidthRequest" Value="80" />
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="Image90HW" TargetType="Image">
+                <Setter Property="HeightRequest" Value="90" />
+                <Setter Property="WidthRequest" Value="90" />
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="Image100HW" TargetType="Image">
+                <Setter Property="HeightRequest" Value="100" />
+                <Setter Property="WidthRequest" Value="100" />
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="Image150HW" TargetType="Image">
+                <Setter Property="HeightRequest" Value="150" />
+                <Setter Property="WidthRequest" Value="150" />
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            
+            <Style x:Key="Image10H" TargetType="Image">
+                <Setter Property="HeightRequest" Value="10" />
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="Image15H" TargetType="Image">
+                <Setter Property="HeightRequest" Value="15" />
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="Image20H" TargetType="Image">
+                <Setter Property="HeightRequest" Value="20" />
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="Image25H" TargetType="Image">
+                <Setter Property="HeightRequest" Value="25" />
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="Image30H" TargetType="Image">
+                <Setter Property="HeightRequest" Value="30" />
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="Image40H" TargetType="Image">
+                <Setter Property="HeightRequest" Value="40" />
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="Image50H" TargetType="Image">
+                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="Image60H" TargetType="Image">
+                <Setter Property="HeightRequest" Value="60" />
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="Image70H" TargetType="Image">
+                <Setter Property="HeightRequest" Value="70" />
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="Image80H" TargetType="Image">
+                <Setter Property="HeightRequest" Value="80" />
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="Image90H" TargetType="Image">
+                <Setter Property="HeightRequest" Value="90" />
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="Image100H" TargetType="Image">
+                <Setter Property="HeightRequest" Value="100" />
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="Image150H" TargetType="Image">
+                <Setter Property="HeightRequest" Value="150" />
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <!--#endregion-->
+
+            <!--<Style x:Key="DatePickerStyle" TargetType="DatePicker">
+                <Setter Property="TextColor" Value="{StaticResource Black2Color}" />
+                <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
+                <Setter Property="FontSize" Value="{StaticResource FontSize15}"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            </Style>
+
+            <Style x:Key="SearchBarStyle" TargetType="SearchBar">
+                <Setter Property="TextColor" Value="{StaticResource Black2Color}" />
+                <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
+                <Setter Property="FontSize" Value="{StaticResource FontSize15}"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="PlaceholderColor" Value="{StaticResource GrayColor}"/>
+            </Style>-->
+        </ResourceDictionary>
+    </Application.Resources>
+</prism:PrismApplication>
