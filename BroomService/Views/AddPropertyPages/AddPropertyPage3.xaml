@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{StaticResource WhiteColor}"
+             x:Class="BroomService.Views.AddPropertyPage3">
+    <ScrollView>
+        <StackLayout Padding="20,30" Spacing="20" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Image Style="{StaticResource PageBackarrowImage}" HeightRequest="20" WidthRequest="20">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BackIconCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
+
+            <Image HorizontalOptions="Center" Aspect="AspectFit" Source="ic_logo.png" WidthRequest="200" HeightRequest="150"/>
+
+            <Label Text="Other Details" Style="{StaticResource Black1BoldLabel}" FontSize="{StaticResource FontSize20}"/>
+            <Label Text="Enter Property Address" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize15}"/>
+
+
+
+            <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                <Label Text="Doorman" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center"/>
+                <Image Style="{StaticResource Image60H}" Source="ic_on.png" HorizontalOptions="End"/>
+            </StackLayout>
+
+
+            <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                <Label Text="Parking" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center"/>
+                <Image Style="{StaticResource Image60H}" Source="ic_off.png" HorizontalOptions="End"/>
+            </StackLayout>
+
+
+            <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                <Label Text="Balcony" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center"/>
+                <Image Style="{StaticResource Image60H}" Source="ic_off.png" HorizontalOptions="End"/>
+            </StackLayout>
+
+
+            <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                <Label Text="Dishwasher" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center"/>
+                <Image Style="{StaticResource Image60H}" Source="ic_off.png" HorizontalOptions="End"/>
+            </StackLayout>
+
+
+            <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                <Label Text="Pool" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center"/>
+                <Image Style="{StaticResource Image60H}" Source="ic_off.png" HorizontalOptions="End"/>
+            </StackLayout>
+
+
+            <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                <Label Text="Garden" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center"/>
+                <Image Style="{StaticResource Image60H}" Source="ic_off.png" HorizontalOptions="End"/>
+            </StackLayout>
+
+
+            <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                <Label Text="Elevator" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center"/>
+                <Image Style="{StaticResource Image60H}" Source="ic_off.png" HorizontalOptions="End"/>
+            </StackLayout>
+
+
+            <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                <Label Text="Coffee Machine" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center"/>
+                <Image Style="{StaticResource Image60H}" Source="ic_off.png" HorizontalOptions="End"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" Margin="0,0">
+
+                <Image Style="{StaticResource Image50HW}" Source="ic_login_btn.png  " HorizontalOptions="EndAndExpand">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NextIconButton}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

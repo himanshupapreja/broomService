@@ -1,40 +1,29 @@
-﻿using BroomService.Views;
+﻿using BroomService.Models;
+using BroomService.Views;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Xamarin.Forms;
 
 namespace BroomService.ViewModels
 {
-    public class SignupPageViewModel : BaseViewModel
+    public class AddPropertyPageViewModel : BaseViewModel
     {
         private readonly INavigationService NavigationService;
-        
+
         #region Constructor
-        public SignupPageViewModel(INavigationService navigationService)
+        public AddPropertyPageViewModel(INavigationService navigationService)
         {
             NavigationService = navigationService;
         }
         #endregion
 
-        #region RegisterCommand
-        public Command RegisterCommand
-        {
-            get
-            {
-                return new Command(async () =>
-                {
-                    await NavigationService.NavigateAsync(nameof(AddPropertyPage));
-                });
-            }
-        }
-        #endregion
-
-        #region LoginCommand
-        public Command LoginCommand
+        #region BackIconCommand
+        public Command BackIconCommand
         {
             get
             {
@@ -46,14 +35,14 @@ namespace BroomService.ViewModels
         }
         #endregion
 
-        #region CloseCommand
-        public Command CloseCommand
+        #region NextIconButton
+        public Command NextIconButton
         {
             get
             {
                 return new Command(async () =>
                 {
-                    await NavigationService.GoBackAsync();
+                    await NavigationService.NavigateAsync(nameof(AddPropertyPage2));
                 });
             }
         }

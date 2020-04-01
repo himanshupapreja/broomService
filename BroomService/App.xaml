@@ -629,6 +629,13 @@
                 <Setter Property="Aspect" Value="AspectFill"/>
             </Style>
 
+            <Style x:Key="PageBackarrowImage" TargetType="Image">
+                <Setter Property="VerticalOptions" Value="Start"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+                <Setter Property="Source" Value="ic_back_black.png"/>
+                <Setter Property="Aspect" Value="AspectFill"/>
+            </Style>
+
             <!--#region Boxview style-->
             <Style x:Key="HorizontalTransparentBoxViewStyle" TargetType="BoxView">
                 <Setter Property="BackgroundColor" Value="{StaticResource TransparentColor}" />

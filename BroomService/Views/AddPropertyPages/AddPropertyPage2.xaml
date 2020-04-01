@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{StaticResource WhiteColor}"
+             x:Class="BroomService.Views.AddPropertyPage2">
+    <ScrollView>
+        <StackLayout Padding="20,30" Spacing="20" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Image Style="{StaticResource PageCloseImage}" HeightRequest="20" WidthRequest="20">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BackIconCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
+
+            <Image HorizontalOptions="Center" Aspect="AspectFit" Source="ic_logo.png" WidthRequest="200" HeightRequest="150"/>
+
+            <Label Text="Add Property" Style="{StaticResource Black1BoldLabel}" FontSize="{StaticResource FontSize20}"/>
+            <Label Text="You can list as many properties you want for each kind" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize15}"/>
+
+            <Frame Style="{StaticResource ShadowFrame50h}" CornerRadius="7" Padding="15,5">
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0">
+                    <Label Text="Floor" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+
+                    <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
+                        <Entry Text="5" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Placeholder="Enter Floor Number" FontSize="{StaticResource FontSize15}"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+
+            <Frame Style="{StaticResource ShadowFrame50h}" CornerRadius="7" Padding="15,5">
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="5">
+                    <Label Text="Apartment Number" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+
+                    <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
+                        <Entry Text="" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Placeholder="Enter Apartment Number" FontSize="{StaticResource FontSize15}" IsEnabled="False"/>
+                        <Image Style="{StaticResource Image15HW}" Source="ic_drop.png" HorizontalOptions="End"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+
+            <Frame Style="{StaticResource ShadowFrame50h}" CornerRadius="7" Padding="15,5">
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="5">
+                    <Label Text="Building Code" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+
+                    <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
+                        <Entry Text="" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Placeholder="Enter Building Code" FontSize="{StaticResource FontSize15}"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+
+            <Frame Style="{StaticResource ShadowFrame50h}" CornerRadius="7" Padding="15,5">
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="5">
+                    <Label Text="Access To Property" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+
+                    <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
+                        <Entry Text="" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Placeholder="Ex. Doorman, Elock, Keybox, Key, other" FontSize="{StaticResource FontSize15}"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+
+            <Frame Style="{StaticResource ShadowFrame50h}" CornerRadius="7" Padding="15,5">
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="5">
+                    <Label Text="Wifi Login" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+
+                    <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
+                        <Entry Text="" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Placeholder="Wifi Login Key" FontSize="{StaticResource FontSize15}"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+
+            <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" Margin="0,0">
+
+                <Image Style="{StaticResource Image50HW}" Source="ic_login_btn.png  " HorizontalOptions="EndAndExpand">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NextIconButton}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

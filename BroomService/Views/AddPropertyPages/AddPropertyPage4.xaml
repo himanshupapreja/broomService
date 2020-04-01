@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{StaticResource WhiteColor}"
+             x:Class="BroomService.Views.AddPropertyPage4">
+    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <ScrollView>
+            <StackLayout Padding="20,30" Spacing="20" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Image Style="{StaticResource PageBackarrowImage}" HeightRequest="20" WidthRequest="20">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BackIconCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Image HorizontalOptions="Center" Aspect="AspectFit" Source="ic_logo.png" WidthRequest="200" HeightRequest="150"/>
+
+                <Label Text="Other Details" Style="{StaticResource Black1BoldLabel}" FontSize="{StaticResource FontSize20}"/>
+                <Label Text="Enter Property Address" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center" FontSize="{StaticResource FontSize15}"/>
+
+
+
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10">
+                    <Label Text="Size in Sqm" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+
+                    <Grid HorizontalOptions="FillAndExpand">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0" Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                            <Image Style="{StaticResource Image30H}" Source="ic_radio_select.png"/>
+                            <Label Text="20-40" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+                        </StackLayout>
+
+                        <StackLayout Grid.Column="1" Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                            <Image Style="{StaticResource Image30H}" Source="ic_radio_unselect.png"/>
+                            <Label Text="45-60" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+                        </StackLayout>
+
+                        <StackLayout Grid.Column="2" Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                            <Image Style="{StaticResource Image30H}" Source="ic_radio_unselect.png"/>
+                            <Label Text="65-90" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+                        </StackLayout>
+
+                        <StackLayout Grid.Column="3" Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                            <Image Style="{StaticResource Image30H}" Source="ic_radio_unselect.png"/>
+                            <Label Text="More" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+                        </StackLayout>
+                    </Grid>
+                </StackLayout>
+
+
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10">
+                    <Label Text="Number of Bedrooms" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+
+                    <Grid HorizontalOptions="FillAndExpand">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0" Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                            <Image Style="{StaticResource Image30H}" Source="ic_radio_select.png"/>
+                            <Label Text="1" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+                        </StackLayout>
+
+                        <StackLayout Grid.Column="1" Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                            <Image Style="{StaticResource Image30H}" Source="ic_radio_unselect.png"/>
+                            <Label Text="2" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+                        </StackLayout>
+
+                        <StackLayout Grid.Column="2" Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                            <Image Style="{StaticResource Image30H}" Source="ic_radio_unselect.png"/>
+                            <Label Text="3" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+                        </StackLayout>
+
+                        <StackLayout Grid.Column="3" Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                            <Image Style="{StaticResource Image30H}" Source="ic_radio_unselect.png"/>
+                            <Label Text="More" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+                        </StackLayout>
+                    </Grid>
+                </StackLayout>
+
+
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10">
+                    <Label Text="Number of BathRooms" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+
+                    <Grid HorizontalOptions="FillAndExpand">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0" Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                            <Image Style="{StaticResource Image30H}" Source="ic_radio_select.png"/>
+                            <Label Text="1" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+                        </StackLayout>
+
+                        <StackLayout Grid.Column="1" Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                            <Image Style="{StaticResource Image30H}" Source="ic_radio_unselect.png"/>
+                            <Label Text="2" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+                        </StackLayout>
+
+                        <StackLayout Grid.Column="2" Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                            <Image Style="{StaticResource Image30H}" Source="ic_radio_unselect.png"/>
+                            <Label Text="3" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+                        </StackLayout>
+
+                        <StackLayout Grid.Column="3" Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                            <Image Style="{StaticResource Image30H}" Source="ic_radio_unselect.png"/>
+                            <Label Text="More" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+                        </StackLayout>
+                    </Grid>
+                </StackLayout>
+
+
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10">
+                    <Label Text="Number of Toilets" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+
+                    <Grid HorizontalOptions="FillAndExpand">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0" Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                            <Image Style="{StaticResource Image30H}" Source="ic_radio_select.png"/>
+                            <Label Text="1" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+                        </StackLayout>
+
+                        <StackLayout Grid.Column="1" Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                            <Image Style="{StaticResource Image30H}" Source="ic_radio_unselect.png"/>
+                            <Label Text="2" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+                        </StackLayout>
+
+                        <StackLayout Grid.Column="2" Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                            <Image Style="{StaticResource Image30H}" Source="ic_radio_unselect.png"/>
+                            <Label Text="3" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+                        </StackLayout>
+
+                        <StackLayout Grid.Column="3" Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                            <Image Style="{StaticResource Image30H}" Source="ic_radio_unselect.png"/>
+                            <Label Text="More" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+                        </StackLayout>
+                    </Grid>
+                </StackLayout>
+
+
+                <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                    <StackLayout>
+                        <Label Text="Queen/Double Beds" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center"/>
+                        <Label Text="(160 x 200)" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center"/>
+                    </StackLayout>
+                    <Image Style="{StaticResource Image30H}" Source="ic_on.png" HorizontalOptions="End"/>
+                    <Frame CornerRadius="20" HeightRequest="20" Padding="20,0" HorizontalOptions="FillAndExpand" IsClippedToBounds="True" HasShadow="True">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <Image Style="{StaticResource Image25HW}" Source="ic_minus.png"/>
+                            <Label Text="1" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+                            <Image Style="{StaticResource Image25HW}" Source="ic_plus.png"/>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+
+
+                <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                    <Label Text="King Beds" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center"/>
+                    <Image Style="{StaticResource Image30H}" Source="ic_off.png" HorizontalOptions="End"/>
+                </StackLayout>
+
+
+                <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                    <Label Text="Single Beds" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center"/>
+                    <Image Style="{StaticResource Image30H}" Source="ic_off.png" HorizontalOptions="End"/>
+                </StackLayout>
+
+
+                <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                    <Label Text="Sofa Beds" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center"/>
+                    <Image Style="{StaticResource Image30H}" Source="ic_off.png" HorizontalOptions="End"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" Margin="0,0">
+
+                    <Image Style="{StaticResource Image50HW}" Source="ic_login_btn.png  " HorizontalOptions="EndAndExpand">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NextIconButton}"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+
+        <BoxView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource Black1Color}" Opacity="0.5" IsVisible="{Binding IsPropertyPopupVisible}"/>
+        <StackLayout HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding IsPropertyPopupVisible}" Margin="30,0">
+            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Frame HasShadow="False" IsClippedToBounds="True" Padding="20" CornerRadius="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="15">
+                        <Image Style="{StaticResource Image90HW}" HorizontalOptions="Center" Source="ic_fonrim.png"/>
+
+                        <Label Text="Property Added Successfully" Style="{StaticResource Black1BoldLabel}" FontSize="{StaticResource FontSize20}" HorizontalOptions="Center"/>
+                        <Label Text="Sub-Users Login Details As Below" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center" FontSize="{StaticResource FontSize16}" HorizontalOptions="Center"/>
+
+                        <StackLayout HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource LightGrayColor}" Padding="30">
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" BackgroundColor="Transparent">
+                                <Label Text="Username :" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center" FontSize="{StaticResource FontSize16}"/>
+                                <Label Text="luxaryvilla" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center" FontSize="{StaticResource FontSize16}"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" BackgroundColor="Transparent">
+                                <Label Text="Password :" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center" FontSize="{StaticResource FontSize16}"/>
+                                <Label Text="luxaryvillabnb" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center" FontSize="{StaticResource FontSize16}"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <Image Source="ic_close_blue.png" Style="{StaticResource Image30HW}" HorizontalOptions="End" VerticalOptions="Start" Margin="0,-12,-12,0">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding PropertyCompleteCommand}" NumberOfTapsRequired="1"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </Grid>
+        </StackLayout>
+    </Grid>
+</ContentPage>

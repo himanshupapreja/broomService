@@ -45,6 +45,10 @@ namespace BroomService
             containerRegistry.RegisterForNavigation<CardListPage, CardListPageViewModel>();
             containerRegistry.RegisterForNavigation<ChatPage, ChatPageViewModel>();
             containerRegistry.RegisterForNavigation<ChatDetailPage, ChatDetailPageViewModel>();
+            containerRegistry.RegisterForNavigation<AddPropertyPage, AddPropertyPageViewModel>();
+            containerRegistry.RegisterForNavigation<AddPropertyPage2, AddPropertyPage2ViewModel>();
+            containerRegistry.RegisterForNavigation<AddPropertyPage3, AddPropertyPage3ViewModel>();
+            containerRegistry.RegisterForNavigation<AddPropertyPage4, AddPropertyPage4ViewModel>();
         }
     }
 }
