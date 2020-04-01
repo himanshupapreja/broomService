@@ -16,10 +16,20 @@ namespace BroomService.ViewModels
     {
         private readonly INavigationService NavigationService;
 
+        #region IsPropertyPopupVisible
+        private bool _IsPropertyPopupVisible;
+        public bool IsPropertyPopupVisible
+        {
+            get { return _IsPropertyPopupVisible; }
+            set { SetProperty(ref _IsPropertyPopupVisible, value); }
+        }
+        #endregion
+
         #region Constructor
         public PropertyDetailPageViewModel(INavigationService navigationService)
         {
             NavigationService = navigationService;
+            IsPropertyPopupVisible = false;
         }
         #endregion
 
@@ -44,6 +54,46 @@ namespace BroomService.ViewModels
                 return new Command(async () =>
                 {
                     await NavigationService.NavigateAsync(nameof(NotificationPage));
+                });
+            }
+        }
+        #endregion
+
+        #region ViewPropertiesListCommand
+        public Command ViewPropertiesListCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    IsPropertyPopupVisible = true;
+                });
+            }
+        }
+        #endregion
+
+        #region PropertyCloseCommand
+        public Command PropertyCloseCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    IsPropertyPopupVisible = false;
+                });
+            }
+        }
+        #endregion
+
+        #region NextIconButton
+        public Command NextIconButton
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    IsPropertyPopupVisible = false;
+                    await NavigationService.GoBackAsync();
                 });
             }
         }

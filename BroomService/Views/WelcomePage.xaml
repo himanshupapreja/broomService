@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="http://prismlibrary.com" xmlns:views="clr-namespace:BroomService.Views"
+             xmlns:prism="http://prismlibrary.com" xmlns:views="clr-namespace:BroomService.Views" xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              prism:ViewModelLocator.AutowireViewModel="True"
              NavigationPage.HasNavigationBar="False"
              BackgroundColor="{StaticResource TransparentColor}"
@@ -9,7 +9,7 @@
     <StackLayout BackgroundColor="{StaticResource BlueColor}" Spacing="20" >
         <views:BackArrowHeader TitleText="Welcome" UserNameText="Emma Wilson" IsBackVisible="False" Margin="0,15"/>
 
-        <Frame IsClippedToBounds="True" HasShadow="False" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" CornerRadius="20" Padding="0">
+        <yummy:PancakeView BackgroundColor="{StaticResource WhiteColor}" CornerRadius="60,60,0,0" IsClippedToBounds="True" HasShadow="False" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0">
             <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="10">
                 <ScrollView HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand">
                     <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10" Padding="10,20">
@@ -22,7 +22,7 @@
 
 
 
-                        <CollectionView x:Name="propertyList" HeightRequest="200" ItemsSource="{Binding PropertyList}" SelectedItem="{Binding NotificationSelected}" SelectionMode="None" ItemsLayout="HorizontalList" Margin="-10,0"
+                        <CollectionView x:Name="propertyList" HeightRequest="300" ItemsSource="{Binding PropertyList}" SelectedItem="{Binding NotificationSelected}" SelectionMode="None" ItemsLayout="HorizontalList" Margin="-10,0"
                                 VerticalOptions="FillAndExpand">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
@@ -82,8 +82,8 @@
                                     <Label FontSize="{StaticResource FontSize15}">
                                         <Label.FormattedText>
                                             <FormattedString>
-                                                <Span Text="Providing Professional Services All Around The " Style="{StaticResource Black1MediumCenterLabel}"/>
-                                                <Span Text="Israel" Style="{StaticResource BlueBoldCenterLabel}"/>
+                                                <Span Text="Providing Professional Services All Around The " TextColor="{StaticResource Black1Color}" FontFamily="MediumFontFamily"/>
+                                                <Span Text="Israel" TextColor="{StaticResource BlueColor}" FontFamily="BoldFontFamily" FontAttributes="Bold"/>
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>
@@ -91,12 +91,42 @@
                             </StackLayout>
                         </StackLayout>
 
+                        <CollectionView x:Name="propertyAreaList" HeightRequest="250" ItemsSource="{Binding PropertyList}" SelectedItem="{Binding NotificationSelected}" SelectionMode="None" ItemsLayout="HorizontalList" Margin="-10,0"
+                                VerticalOptions="FillAndExpand">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid x:Name="propertyAreaListItem" Padding="10,15" WidthRequest="250">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Image Grid.Row="0" Source="image1.jpg" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="Fill" Opacity="0.1"/>
+                                        <Frame CornerRadius="0" Margin="10" OutlineColor="{StaticResource BlueColor}" IsClippedToBounds="True" HasShadow="False" Padding="0,0,0,15" BackgroundColor="{StaticResource TransparentColor}" BorderColor="{StaticResource BlueColor}">
+                                            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="0">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                <StackLayout Grid.Row="0" HorizontalOptions="FillAndExpand" Spacing="10" VerticalOptions="FillAndExpand" Padding="10,10">
+                                                    <Label Text="{Binding category_service_name}" Style="{StaticResource BlueBoldLabel}" FontSize="{StaticResource FontSize20}"/>
+
+                                                    <Label Text="Lorem Ipsum is a simple dummy text generatorLorem Ipsum is a simple dummy text generatorLorem Ipsum is a simple dummy text generatorLorem Ipsum is a simple dummy text generatorLorem Ipsum is a simple dummy text generator" HorizontalOptions="Start" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize15}" MaxLines="3" LineBreakMode="WordWrap"/>
+
+
+                                                    <Frame HorizontalOptions="Start" Padding="0" Style="{StaticResource Frame50h}" WidthRequest="80" BackgroundColor="{StaticResource BlueColor}" CornerRadius="3" Margin="0,10,0,0">
+                                                        <Image Style="{StaticResource Image20HW}" Source="ic_arrow_next_white.png" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                                    </Frame>
+                                                </StackLayout>
+                                            </Grid>
+                                        </Frame>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
                     </StackLayout>
                 </ScrollView>
 
 
                 <!--#region Bottom Tab Page-->
-                <Frame Style="{StaticResource ShadowFrame40h}" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" CornerRadius="25" Padding="10" BackgroundColor="{StaticResource WhiteColor}" Margin="0">
+                <Frame Style="{StaticResource ShadowFrame60h}" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" CornerRadius="25" Padding="10" BackgroundColor="{StaticResource WhiteColor}" Margin="0">
                     <Grid HorizontalOptions="FillAndExpand" ColumnSpacing="10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -139,6 +169,6 @@
                 </Frame>
                 <!--#endregion-->
             </StackLayout>
-        </Frame>
+        </yummy:PancakeView>
     </StackLayout>
 </ContentPage>

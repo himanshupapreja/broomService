@@ -67,7 +67,7 @@ namespace BroomService.ViewModels
                 return new Command(async () =>
                 {
                     IsPropertyPopupVisible = false;
-                    await NavigationService.NavigateAsync(nameof(PropertyListPage));
+                    await NavigationService.NavigateAsync(nameof(WelcomePage));
                 });
             }
         }

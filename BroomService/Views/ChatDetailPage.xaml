@@ -10,7 +10,7 @@
     <StackLayout BackgroundColor="{StaticResource BlueColor}" Spacing="20" >
         <views:BackArrowHeader TitleText="Welcome" UserNameText="Emma Wilson" IsBackVisible="True" Margin="0,15"/>
 
-        <Frame IsClippedToBounds="True" HasShadow="False" HorizontalOptions="FillAndExpand" CornerRadius="20" Padding="0">
+        <yummy:PancakeView BackgroundColor="{StaticResource WhiteColor}" CornerRadius="60,60,0,0" IsClippedToBounds="True" HasShadow="False" HorizontalOptions="FillAndExpand" Padding="0">
             <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10" Padding="20">
                 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="-20" Padding="20,10">
                     <Image Source="ic_footer_profile_select.png" Style="{StaticResource Image25HW}"/>
@@ -81,6 +81,6 @@
                     </Grid>
                 </Frame>
             </StackLayout>
-        </Frame>
+        </yummy:PancakeView>
     </StackLayout>
 </ContentPage>

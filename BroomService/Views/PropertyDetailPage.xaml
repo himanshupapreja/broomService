@@ -1,296 +1,332 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="http://prismlibrary.com" xmlns:views="clr-namespace:BroomService.Views"
+             xmlns:prism="http://prismlibrary.com" xmlns:views="clr-namespace:BroomService.Views" xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              prism:ViewModelLocator.AutowireViewModel="True"
              NavigationPage.HasNavigationBar="False"
              BackgroundColor="{StaticResource TransparentColor}"
              x:Class="BroomService.Views.PropertyDetailPage">
-    <StackLayout BackgroundColor="{StaticResource BlueColor}" Spacing="20" >
-        <views:BackArrowHeader TitleText="Welcome" UserNameText="Emma Wilson" IsBackVisible="True" Margin="0,15"/>
+    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <StackLayout BackgroundColor="{StaticResource BlueColor}" Spacing="20" >
+            <views:BackArrowHeader TitleText="Welcome" UserNameText="Emma Wilson" IsBackVisible="True" Margin="0,15"/>
 
-        <Frame IsClippedToBounds="True" HasShadow="False" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" CornerRadius="20" Padding="0">
-            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="10,20">
-                <ScrollView HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand">
-                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10" Padding="10,20">
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="10" Margin="0,0,0,10">
-                            <StackLayout HorizontalOptions="Center" Spacing="10">
-                                <Label Text="Property Details" Style="{StaticResource Black1BoldCenterLabel}" FontSize="{StaticResource FontSize20}"/>
-                                <Label Text="Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum " Style="{StaticResource Black1MediumCenterLabel}" FontSize="{StaticResource FontSize15}"/>
+            <yummy:PancakeView BackgroundColor="{StaticResource WhiteColor}" CornerRadius="60,60,0,0" IsClippedToBounds="True" HasShadow="False" HorizontalOptions="FillAndExpand" Padding="0">
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="10,20">
+                    <ScrollView HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand">
+                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10" Padding="10,20">
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="10" Margin="0,0,0,10">
+                                <StackLayout HorizontalOptions="Center" Spacing="10">
+                                    <Label Text="Property Details" Style="{StaticResource Black1BoldCenterLabel}" FontSize="{StaticResource FontSize20}"/>
+                                    <Label Text="Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum " Style="{StaticResource Black1MediumCenterLabel}" FontSize="{StaticResource FontSize15}"/>
+                                </StackLayout>
                             </StackLayout>
+
+
+                            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="130"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Image Grid.Row="0" Source="image1.jpg" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="Fill"/>
+                                <StackLayout Grid.Row="1" HorizontalOptions="FillAndExpand" Spacing="20" VerticalOptions="FillAndExpand" Padding="10,10">
+                                    <StackLayout Orientation="Horizontal" Spacing="10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                        <Label Text="Luxary Apartment" Style="{StaticResource Black1BoldLabel}" FontSize="{StaticResource FontSize18}"/>
+                                    </StackLayout>
+
+                                    <StackLayout Orientation="Horizontal" Spacing="5" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                        <Label Text="Type of Property :" HorizontalOptions="Start" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize15}"/>
+                                        <Label Text="House\Apartment" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize15}"/>
+                                    </StackLayout>
+                                    <Label Text="Short Term Airbnb Apartment" Style="{StaticResource BlueMediumLabel}" FontSize="{StaticResource FontSize15}"/>
+
+                                    <Frame Padding="10,5" Style="{StaticResource Frame50h}" BackgroundColor="{StaticResource TransparentColor}" BorderColor="{StaticResource Black2Color}">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="6*"/>
+                                                <ColumnDefinition Width="4*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <StackLayout Grid.Column="0" HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
+                                                <Label Text="Building Code" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}"/>
+                                                <Label Text="Gft55" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                                            </StackLayout>
+
+                                            <Frame Grid.Column="1" Style="{StaticResource ShadowFrame30h}" HorizontalOptions="Center" CornerRadius="25" Padding="20,5" BackgroundColor="{StaticResource WhiteColor}" Margin="0,5">
+                                                <Label Text="Change" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                                                <Frame.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding ViewPropertiesListCommand}" NumberOfTapsRequired="1"/>
+                                                </Frame.GestureRecognizers>
+                                            </Frame>
+                                        </Grid>
+                                    </Frame>
+
+                                    <Frame Padding="10,5"  BackgroundColor="{StaticResource TransparentColor}" BorderColor="{StaticResource Black2Color}">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="6*"/>
+                                                <ColumnDefinition Width="4*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <StackLayout Grid.Column="0" HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
+                                                <Label Text="Access To Property(With Details)" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}"/>
+                                                <Label Text="Gft55" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                                            </StackLayout>
+
+                                            <Frame Grid.Column="1" Style="{StaticResource ShadowFrame30h}" HorizontalOptions="Center" CornerRadius="25" Padding="20,5" BackgroundColor="{StaticResource WhiteColor}" Margin="0,5">
+                                                <Label Text="Change" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                                                <Frame.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding ViewPropertiesListCommand}" NumberOfTapsRequired="1"/>
+                                                </Frame.GestureRecognizers>
+                                            </Frame>
+                                        </Grid>
+                                    </Frame>
+
+                                    <Grid ColumnSpacing="10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Frame Grid.Column="0" Style="{StaticResource Frame70h}" Padding="10,5" BackgroundColor="{StaticResource LightGrayColor}">
+                                            <StackLayout Grid.Column="0" HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
+                                                <Label Text="Floor" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
+                                                <Label Text="10" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                                            </StackLayout>
+                                        </Frame>
+                                        <Frame Grid.Column="1" Style="{StaticResource Frame70h}" Padding="10,5" BackgroundColor="{StaticResource LightGrayColor}">
+                                            <StackLayout Grid.Column="0" HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
+                                                <Label Text="Apartment" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
+                                                <Label Text="10" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                                            </StackLayout>
+                                        </Frame>
+                                    </Grid>
+
+                                    <Grid ColumnSpacing="10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Frame Grid.Column="0" Style="{StaticResource Frame70h}" Padding="10,5" BackgroundColor="{StaticResource LightGrayColor}">
+                                            <StackLayout Grid.Column="0" HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
+                                                <Label Text="Bathrooms" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
+                                                <Label Text="10" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                                            </StackLayout>
+                                        </Frame>
+                                        <Frame Grid.Column="1" Style="{StaticResource Frame70h}" Padding="10,5" BackgroundColor="{StaticResource LightGrayColor}">
+                                            <StackLayout Grid.Column="0" HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
+                                                <Label Text="Toilets" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
+                                                <Label Text="10" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                                            </StackLayout>
+                                        </Frame>
+                                    </Grid>
+
+                                    <Grid ColumnSpacing="10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Frame Grid.Column="0" Style="{StaticResource Frame70h}" Padding="10,5" BackgroundColor="{StaticResource LightGrayColor}">
+                                            <StackLayout Grid.Column="0" HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
+                                                <Label Text="Bedrooms" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
+                                                <Label Text="10" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                                            </StackLayout>
+                                        </Frame>
+                                        <Frame Grid.Column="1" Style="{StaticResource Frame70h}" Padding="10,5" BackgroundColor="{StaticResource LightGrayColor}">
+                                            <StackLayout Grid.Column="0" HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
+                                                <Label Text="Beds" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
+                                                <Label Text="10" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                                            </StackLayout>
+                                        </Frame>
+                                    </Grid>
+
+                                    <Grid ColumnSpacing="10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Frame Grid.Column="0" Style="{StaticResource Frame70h}" Padding="10,5" BackgroundColor="{StaticResource LightGrayColor}">
+                                            <StackLayout Grid.Column="0" HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
+                                                <Label Text="Double Beds" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
+                                                <Label Text="10" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                                            </StackLayout>
+                                        </Frame>
+                                        <Frame Grid.Column="1" Style="{StaticResource Frame70h}" Padding="10,5" BackgroundColor="{StaticResource LightGrayColor}">
+                                            <StackLayout Grid.Column="0" HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
+                                                <Label Text="Single Beds" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
+                                                <Label Text="10" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                                            </StackLayout>
+                                        </Frame>
+                                    </Grid>
+
+                                    <Grid ColumnSpacing="10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Frame Grid.Column="0" Style="{StaticResource Frame70h}" Padding="10,5" BackgroundColor="{StaticResource LightGrayColor}">
+                                            <StackLayout Grid.Column="0" HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
+                                                <Label Text="Sofa Beds" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
+                                                <Label Text="10" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                                            </StackLayout>
+                                        </Frame>
+                                    </Grid>
+
+                                    <StackLayout Orientation="Horizontal" Spacing="10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,20,0,0">
+                                        <Label Text="Other Features" Style="{StaticResource Black1BoldLabel}" FontSize="{StaticResource FontSize18}"/>
+                                    </StackLayout>
+
+
+
+                                    <Grid ColumnSpacing="10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackLayout Grid.Column="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="10" VerticalOptions="CenterAndExpand">
+                                            <Image Style="{StaticResource Image20HW}" Source="ic_offline.png"/>
+                                            <Label Text="Doorman" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                                        </StackLayout>
+                                        <StackLayout Grid.Column="1" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="10" VerticalOptions="CenterAndExpand">
+                                            <Image Style="{StaticResource Image20HW}" Source="ic_offline.png"/>
+                                            <Label Text="Parking" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                                        </StackLayout>
+                                        <StackLayout Grid.Column="2" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="10" VerticalOptions="CenterAndExpand">
+                                            <Image Style="{StaticResource Image20HW}" Source="ic_offline.png"/>
+                                            <Label Text="Balcony" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                                        </StackLayout>
+                                    </Grid>
+
+                                    <Grid ColumnSpacing="10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackLayout Grid.Column="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="10" VerticalOptions="CenterAndExpand">
+                                            <Image Style="{StaticResource Image20HW}" Source="ic_offline.png"/>
+                                            <Label Text="Garden" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                                        </StackLayout>
+                                        <StackLayout Grid.Column="1" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="10" VerticalOptions="CenterAndExpand">
+                                            <Image Style="{StaticResource Image20HW}" Source="ic_offline.png"/>
+                                            <Label Text="Pool" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                                        </StackLayout>
+                                        <StackLayout Grid.Column="2" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="10" VerticalOptions="CenterAndExpand">
+                                            <Image Style="{StaticResource Image20HW}" Source="ic_offline.png"/>
+                                            <Label Text="Dishwasher" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                                        </StackLayout>
+                                    </Grid>
+
+                                    <Grid ColumnSpacing="10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackLayout Grid.Column="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="10" VerticalOptions="CenterAndExpand">
+                                            <Image Style="{StaticResource Image20HW}" Source="ic_offline.png"/>
+                                            <Label Text="Elevator" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                                        </StackLayout>
+                                        <StackLayout Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="10" VerticalOptions="CenterAndExpand">
+                                            <Image Style="{StaticResource Image20HW}" Source="ic_offline.png"/>
+                                            <Label Text="Coffee Machine" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                                        </StackLayout>
+                                    </Grid>
+                                </StackLayout>
+                            </Grid>
+
+                            <!--Add Job Request Page-->
+                            <Frame Style="{StaticResource ShadowFrame30h}" HorizontalOptions="CenterAndExpand" CornerRadius="25" Padding="20,10" BackgroundColor="{StaticResource WhiteColor}" Margin="0">
+                                <Label Text="Add Job Request" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding AddJobCommand}" NumberOfTapsRequired="1"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+
+
                         </StackLayout>
+                    </ScrollView>
 
 
-                        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="130"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Image Grid.Row="0" Source="image1.jpg" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="Fill"/>
-                            <StackLayout Grid.Row="1" HorizontalOptions="FillAndExpand" Spacing="20" VerticalOptions="FillAndExpand" Padding="10,10">
-                                <StackLayout Orientation="Horizontal" Spacing="10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                                    <Label Text="Luxary Apartment" Style="{StaticResource Black1BoldLabel}" FontSize="{StaticResource FontSize18}"/>
-                                </StackLayout>
+                    <!--#region Bottom Tab Page-->
+                    <Frame Style="{StaticResource ShadowFrame90h}" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" CornerRadius="25" Padding="10" BackgroundColor="{StaticResource WhiteColor}" Margin="0">
+                        <Grid HorizontalOptions="FillAndExpand" ColumnSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
-                                <StackLayout Orientation="Horizontal" Spacing="5" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                                    <Label Text="Type of Property :" HorizontalOptions="Start" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize15}"/>
-                                    <Label Text="House\Apartment" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize15}"/>
-                                </StackLayout>
-                                <Label Text="Short Term Airbnb Apartment" Style="{StaticResource BlueMediumLabel}" FontSize="{StaticResource FontSize15}"/>
+                            <Image Grid.Column="0" Style="{StaticResource Image30HW}" Source="ic_footer_home_select.png" HorizontalOptions="Center">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                                </Image.GestureRecognizers>
+                            </Image>
 
-                                <Frame Padding="10,5" Style="{StaticResource Frame50h}" BackgroundColor="{StaticResource TransparentColor}" BorderColor="{StaticResource Black2Color}">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="6*"/>
-                                            <ColumnDefinition Width="4*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <StackLayout Grid.Column="0" HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
-                                            <Label Text="Building Code" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}"/>
-                                            <Label Text="Gft55" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
-                                        </StackLayout>
+                            <Image Grid.Column="1" Style="{StaticResource Image30HW}" Source="ic_footer_buildin.png" HorizontalOptions="Center">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                                </Image.GestureRecognizers>
+                            </Image>
 
-                                        <Frame Grid.Column="1" Style="{StaticResource ShadowFrame30h}" HorizontalOptions="Center" CornerRadius="25" Padding="20,5" BackgroundColor="{StaticResource WhiteColor}" Margin="0,5">
-                                            <Label Text="Change" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                            <Image Grid.Column="2" Style="{StaticResource Image50HW}" Source="ic_search.png" HorizontalOptions="Center">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                                </Image.GestureRecognizers>
+                            </Image>
 
-                                            <Frame.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding ViewPropertiesList}" NumberOfTapsRequired="1"/>
-                                            </Frame.GestureRecognizers>
-                                        </Frame>
-                                    </Grid>
-                                </Frame>
-                                
-                                <Frame Padding="10,5"  BackgroundColor="{StaticResource TransparentColor}" BorderColor="{StaticResource Black2Color}">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="6*"/>
-                                            <ColumnDefinition Width="4*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <StackLayout Grid.Column="0" HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
-                                            <Label Text="Access To Property(With Details)" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}"/>
-                                            <Label Text="Gft55" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
-                                        </StackLayout>
+                            <Image Grid.Column="3" Style="{StaticResource Image30HW}" Source="ic_footer_calendar.png" HorizontalOptions="Center">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                                </Image.GestureRecognizers>
+                            </Image>
 
-                                        <Frame Grid.Column="1" Style="{StaticResource ShadowFrame30h}" HorizontalOptions="Center" CornerRadius="25" Padding="20,5" BackgroundColor="{StaticResource WhiteColor}" Margin="0,5">
-                                            <Label Text="Change" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
-
-                                            <Frame.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding ViewPropertiesList}" NumberOfTapsRequired="1"/>
-                                            </Frame.GestureRecognizers>
-                                        </Frame>
-                                    </Grid>
-                                </Frame>
-
-                                <Grid ColumnSpacing="10">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Frame Grid.Column="0" Style="{StaticResource Frame70h}" Padding="10,5" BackgroundColor="{StaticResource LightGrayColor}">
-                                        <StackLayout Grid.Column="0" HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
-                                            <Label Text="Floor" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
-                                            <Label Text="10" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
-                                        </StackLayout>
-                                    </Frame>
-                                    <Frame Grid.Column="1" Style="{StaticResource Frame70h}" Padding="10,5" BackgroundColor="{StaticResource LightGrayColor}">
-                                        <StackLayout Grid.Column="0" HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
-                                            <Label Text="Apartment" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
-                                            <Label Text="10" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
-                                        </StackLayout>
-                                    </Frame>
-                                </Grid>
-
-                                <Grid ColumnSpacing="10">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Frame Grid.Column="0" Style="{StaticResource Frame70h}" Padding="10,5" BackgroundColor="{StaticResource LightGrayColor}">
-                                        <StackLayout Grid.Column="0" HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
-                                            <Label Text="Bathrooms" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
-                                            <Label Text="10" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
-                                        </StackLayout>
-                                    </Frame>
-                                    <Frame Grid.Column="1" Style="{StaticResource Frame70h}" Padding="10,5" BackgroundColor="{StaticResource LightGrayColor}">
-                                        <StackLayout Grid.Column="0" HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
-                                            <Label Text="Toilets" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
-                                            <Label Text="10" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
-                                        </StackLayout>
-                                    </Frame>
-                                </Grid>
-
-                                <Grid ColumnSpacing="10">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Frame Grid.Column="0" Style="{StaticResource Frame70h}" Padding="10,5" BackgroundColor="{StaticResource LightGrayColor}">
-                                        <StackLayout Grid.Column="0" HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
-                                            <Label Text="Bedrooms" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
-                                            <Label Text="10" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
-                                        </StackLayout>
-                                    </Frame>
-                                    <Frame Grid.Column="1" Style="{StaticResource Frame70h}" Padding="10,5" BackgroundColor="{StaticResource LightGrayColor}">
-                                        <StackLayout Grid.Column="0" HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
-                                            <Label Text="Beds" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
-                                            <Label Text="10" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
-                                        </StackLayout>
-                                    </Frame>
-                                </Grid>
-
-                                <Grid ColumnSpacing="10">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Frame Grid.Column="0" Style="{StaticResource Frame70h}" Padding="10,5" BackgroundColor="{StaticResource LightGrayColor}">
-                                        <StackLayout Grid.Column="0" HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
-                                            <Label Text="Double Beds" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
-                                            <Label Text="10" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
-                                        </StackLayout>
-                                    </Frame>
-                                    <Frame Grid.Column="1" Style="{StaticResource Frame70h}" Padding="10,5" BackgroundColor="{StaticResource LightGrayColor}">
-                                        <StackLayout Grid.Column="0" HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
-                                            <Label Text="Single Beds" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
-                                            <Label Text="10" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
-                                        </StackLayout>
-                                    </Frame>
-                                </Grid>
-
-                                <Grid ColumnSpacing="10">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Frame Grid.Column="0" Style="{StaticResource Frame70h}" Padding="10,5" BackgroundColor="{StaticResource LightGrayColor}">
-                                        <StackLayout Grid.Column="0" HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
-                                            <Label Text="Sofa Beds" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
-                                            <Label Text="10" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
-                                        </StackLayout>
-                                    </Frame>
-                                </Grid>
-
-                                <StackLayout Orientation="Horizontal" Spacing="10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="0,20,0,0">
-                                    <Label Text="Other Features" Style="{StaticResource Black1BoldLabel}" FontSize="{StaticResource FontSize18}"/>
-                                </StackLayout>
-
-
-
-                                <Grid ColumnSpacing="10">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <StackLayout Grid.Column="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="10" VerticalOptions="CenterAndExpand">
-                                        <Image Style="{StaticResource Image20HW}" Source="ic_offline.png"/>
-                                        <Label Text="Doorman" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
-                                    </StackLayout>
-                                    <StackLayout Grid.Column="1" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="10" VerticalOptions="CenterAndExpand">
-                                        <Image Style="{StaticResource Image20HW}" Source="ic_offline.png"/>
-                                        <Label Text="Parking" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
-                                    </StackLayout>
-                                    <StackLayout Grid.Column="2" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="10" VerticalOptions="CenterAndExpand">
-                                        <Image Style="{StaticResource Image20HW}" Source="ic_offline.png"/>
-                                        <Label Text="Balcony" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
-                                    </StackLayout>
-                                </Grid>
-
-                                <Grid ColumnSpacing="10">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <StackLayout Grid.Column="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="10" VerticalOptions="CenterAndExpand">
-                                        <Image Style="{StaticResource Image20HW}" Source="ic_offline.png"/>
-                                        <Label Text="Garden" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
-                                    </StackLayout>
-                                    <StackLayout Grid.Column="1" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="10" VerticalOptions="CenterAndExpand">
-                                        <Image Style="{StaticResource Image20HW}" Source="ic_offline.png"/>
-                                        <Label Text="Pool" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
-                                    </StackLayout>
-                                    <StackLayout Grid.Column="2" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="10" VerticalOptions="CenterAndExpand">
-                                        <Image Style="{StaticResource Image20HW}" Source="ic_offline.png"/>
-                                        <Label Text="Dishwasher" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
-                                    </StackLayout>
-                                </Grid>
-
-                                <Grid ColumnSpacing="10">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <StackLayout Grid.Column="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="10" VerticalOptions="CenterAndExpand">
-                                        <Image Style="{StaticResource Image20HW}" Source="ic_offline.png"/>
-                                        <Label Text="Elevator" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
-                                    </StackLayout>
-                                    <StackLayout Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="10" VerticalOptions="CenterAndExpand">
-                                        <Image Style="{StaticResource Image20HW}" Source="ic_offline.png"/>
-                                        <Label Text="Coffee Machine" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
-                                    </StackLayout>
-                                </Grid>
-                            </StackLayout>
+                            <Image Grid.Column="4" Style="{StaticResource Image30HW}" Source="ic_footer_profile.png" HorizontalOptions="Center">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                                </Image.GestureRecognizers>
+                            </Image>
                         </Grid>
+                    </Frame>
+                    <!--#endregion-->
+                </StackLayout>
+            </yummy:PancakeView>
+        </StackLayout>
 
-                        <!--Add Job Request Page-->
-                        <Frame Style="{StaticResource ShadowFrame30h}" HorizontalOptions="CenterAndExpand" CornerRadius="25" Padding="20,10" BackgroundColor="{StaticResource WhiteColor}" Margin="0">
-                            <Label Text="Add Job Request" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+        <BoxView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource Black1Color}" Opacity="0.7" IsVisible="{Binding IsPropertyPopupVisible}"/>
+        <StackLayout HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding IsPropertyPopupVisible}" Margin="20,0">
+            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Frame HasShadow="False" IsClippedToBounds="True" Padding="0" CornerRadius="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="15,15,15,30" >
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="15" Padding="20">
+                        <Label Text="Manage Access Code" Style="{StaticResource Black1BoldLabel}" FontSize="{StaticResource FontSize20}" HorizontalOptions="Center"/>
+                        <Label Text="Lorem Ipsum is simply dummy text generator." Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center" FontSize="{StaticResource FontSize16}" HorizontalOptions="Center"/>
 
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding AddJobCommand}" NumberOfTapsRequired="1"/>
-                            </Frame.GestureRecognizers>
+                        <Frame Style="{StaticResource ShadowFrame50h}" CornerRadius="7" Padding="15,5" Margin="0,0,0,40">
+                            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0">
+                                <Label Text="Building Code" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+
+                                <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
+                                    <Label Text="GFT88697" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}"/>
+                                </StackLayout>
+                            </StackLayout>
                         </Frame>
-
-
                     </StackLayout>
-                </ScrollView>
-
-
-                <!--#region Bottom Tab Page-->
-                <Frame Style="{StaticResource ShadowFrame90h}" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" CornerRadius="25" Padding="10" BackgroundColor="{StaticResource WhiteColor}" Margin="0">
-                    <Grid HorizontalOptions="FillAndExpand" ColumnSpacing="10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Style="{StaticResource Image30HW}" Source="ic_footer_home_select.png" HorizontalOptions="Center">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
-                            </Image.GestureRecognizers>
-                        </Image>
-
-                        <Image Grid.Column="1" Style="{StaticResource Image30HW}" Source="ic_footer_buildin.png" HorizontalOptions="Center">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
-                            </Image.GestureRecognizers>
-                        </Image>
-
-                        <Image Grid.Column="2" Style="{StaticResource Image50HW}" Source="ic_search.png" HorizontalOptions="Center">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
-                            </Image.GestureRecognizers>
-                        </Image>
-
-                        <Image Grid.Column="3" Style="{StaticResource Image30HW}" Source="ic_footer_calendar.png" HorizontalOptions="Center">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
-                            </Image.GestureRecognizers>
-                        </Image>
-
-                        <Image Grid.Column="4" Style="{StaticResource Image30HW}" Source="ic_footer_profile.png" HorizontalOptions="Center">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
-                            </Image.GestureRecognizers>
-                        </Image>
-                    </Grid>
                 </Frame>
-                <!--#endregion-->
-            </StackLayout>
-        </Frame>
-    </StackLayout>
+
+                <Image Source="ic_close_blue.png" Style="{StaticResource Image30HW}" HorizontalOptions="End" VerticalOptions="Start">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding PropertyCloseCommand}" NumberOfTapsRequired="1"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Image Source="ic_login_btn.png" Style="{StaticResource Image60HW}" HorizontalOptions="Center" VerticalOptions="End">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NextIconButton}" NumberOfTapsRequired="1"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </Grid>
+        </StackLayout>
+    </Grid>
 </ContentPage>

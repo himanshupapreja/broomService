@@ -23,7 +23,7 @@ namespace BroomService
         {
             InitializeComponent();
 
-            //await NavigationService.NavigateAsync("NavigationPage/ChatPage");
+            //await NavigationService.NavigateAsync("NavigationPage/WelcomePage");
             await NavigationService.NavigateAsync("NavigationPage/LoginPage");
         }
 

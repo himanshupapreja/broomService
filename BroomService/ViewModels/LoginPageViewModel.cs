@@ -41,7 +41,7 @@ namespace BroomService.ViewModels
             {
                 return new Command(async () =>
                 {
-                    await NavigationService.NavigateAsync(nameof(PropertyListPage));
+                    await NavigationService.NavigateAsync(nameof(WelcomePage));
                 });
             }
         } 

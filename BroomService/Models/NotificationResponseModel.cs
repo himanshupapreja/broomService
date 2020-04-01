@@ -13,4 +13,9 @@ namespace BroomService.Models
         public string category_service_name { get; set; }
         public string notification_date { get; set; }
     }
+
+    public class WelcomePageDatModels
+    {
+        public string category_service_name { get; set; }
+    }
 }

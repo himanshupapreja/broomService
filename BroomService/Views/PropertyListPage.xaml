@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="http://prismlibrary.com" xmlns:views="clr-namespace:BroomService.Views"
+             xmlns:prism="http://prismlibrary.com" xmlns:views="clr-namespace:BroomService.Views" xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              prism:ViewModelLocator.AutowireViewModel="True"
              NavigationPage.HasNavigationBar="False"
              BackgroundColor="{StaticResource TransparentColor}"
@@ -9,7 +9,7 @@
     <StackLayout BackgroundColor="{StaticResource BlueColor}" Spacing="20" >
         <views:BackArrowHeader TitleText="Welcome" UserNameText="Emma Wilson" IsBackVisible="True" Margin="0,15"/>
 
-        <Frame IsClippedToBounds="True" HasShadow="False" HorizontalOptions="FillAndExpand" CornerRadius="20" Padding="0">
+        <yummy:PancakeView BackgroundColor="{StaticResource WhiteColor}" CornerRadius="60,60,0,0" IsClippedToBounds="True" HasShadow="False" HorizontalOptions="FillAndExpand" Padding="0">
             <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10" Padding="10,20">
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="10" Margin="0,0,0,10">
                     <StackLayout HorizontalOptions="Center" Spacing="10">
@@ -103,6 +103,6 @@
                 </Frame>
                 <!--#endregion-->
             </StackLayout>
-        </Frame>
+        </yummy:PancakeView>
     </StackLayout>
 </ContentPage>

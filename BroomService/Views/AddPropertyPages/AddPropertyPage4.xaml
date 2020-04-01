@@ -198,7 +198,7 @@
             </StackLayout>
         </ScrollView>
 
-        <BoxView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource Black1Color}" Opacity="0.5" IsVisible="{Binding IsPropertyPopupVisible}"/>
+        <BoxView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource Black1Color}" Opacity="0.7" IsVisible="{Binding IsPropertyPopupVisible}"/>
         <StackLayout HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding IsPropertyPopupVisible}" Margin="30,0">
             <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <Frame HasShadow="False" IsClippedToBounds="True" Padding="20" CornerRadius="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">

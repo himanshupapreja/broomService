@@ -4,13 +4,13 @@
              xmlns:prism="http://prismlibrary.com" 
              prism:ViewModelLocator.AutowireViewModel="True"
              NavigationPage.HasNavigationBar="False"
-             xmlns:views="clr-namespace:BroomService.Views"
+             xmlns:views="clr-namespace:BroomService.Views" xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              BackgroundColor="{StaticResource TransparentColor}"
              x:Class="BroomService.Views.ChooseServicePage">
     <StackLayout BackgroundColor="{StaticResource BlueColor}" Spacing="20" >
         <views:BackArrowHeader TitleText="Welcome" UserNameText="Emma Wilson" IsBackVisible="True" Margin="0,15"/>
 
-        <Frame IsClippedToBounds="True" HasShadow="False" HorizontalOptions="FillAndExpand" CornerRadius="20" Padding="0">
+        <yummy:PancakeView BackgroundColor="{StaticResource WhiteColor}" CornerRadius="60,60,0,0" IsClippedToBounds="True" HasShadow="False" HorizontalOptions="FillAndExpand" Padding="0">
             <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10" Padding="20">
                 <Label Text="Choose Services" Style="{StaticResource Black1BoldCenterLabel}" FontSize="{StaticResource FontSize20}"/>
                 <Label Text="Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum " Style="{StaticResource Black1MediumCenterLabel}" FontSize="{StaticResource FontSize15}"/>
@@ -92,6 +92,6 @@
                 </Frame>
                 <!--#endregion-->
             </StackLayout>
-        </Frame>
+        </yummy:PancakeView>
     </StackLayout>  
 </ContentPage>
