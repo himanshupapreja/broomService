@@ -3,14 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.DryIoc;assembly=Prism.DryIoc.Forms"
              xmlns:adc="clr-namespace:BroomService.Helpers"
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-             ios:Page.UseSafeArea="True"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:converters="clr-namespace:BroomService.CustomControls.Converters"
+                        ios:Page.UseSafeArea="True"
              x:Class="BroomService.App">
 	<Application.Resources>
 
 		<!-- Application resource dictionary -->
         <ResourceDictionary>
-            <!--<converters:BoolToNotBoolConverter x:Key="BoolToNotBoolConverter"/>-->
+            <converters:BoolToNotBoolConverter x:Key="BoolToNotBoolConverter"/>
 
             <!--#region Font Family Style-->
             <OnPlatform x:Key="DefaultFontFamily" x:TypeArguments="x:String">
@@ -78,6 +78,7 @@
             <Color x:Key="Black3Color">#545353</Color>
             <Color x:Key="GrayColor">#d2d2d2</Color>
             <Color x:Key="LightGrayColor">#F9F9F9</Color>
+            <Color x:Key="RecieverChatColor">#CCD9EA</Color>
             <Color x:Key="BlueColor">#214378</Color>
             <Color x:Key="TransparentColor">#00000000</Color>
 

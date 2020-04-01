@@ -10,7 +10,7 @@
         <views:BackArrowHeader TitleText="Welcome" UserNameText="Emma Wilson" IsBackVisible="True" Margin="0,15"/>
 
         <Frame IsClippedToBounds="True" HasShadow="False" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" CornerRadius="20" Padding="0">
-            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="10">
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="10,20">
                 <ScrollView HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand">
                     <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10" Padding="10,20">
                         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="10" Margin="0,0,0,10">
@@ -248,7 +248,7 @@
 
 
                 <!--#region Bottom Tab Page-->
-                <Frame Style="{StaticResource ShadowFrame60h}" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" CornerRadius="25" Padding="10" BackgroundColor="{StaticResource WhiteColor}" Margin="0">
+                <Frame Style="{StaticResource ShadowFrame90h}" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" CornerRadius="25" Padding="10" BackgroundColor="{StaticResource WhiteColor}" Margin="0">
                     <Grid HorizontalOptions="FillAndExpand" ColumnSpacing="10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>

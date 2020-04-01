@@ -14,5 +14,10 @@ namespace BroomService.Views
 			{
 			}
         }
-    }
+
+		private void notificationList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			notificationList.SelectedItem = null;
+		}
+	}
 }

@@ -1,4 +1,5 @@
 ﻿using BroomService.Models;
+using BroomService.Views;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -14,13 +15,29 @@ namespace BroomService.ViewModels
     {
         private readonly INavigationService NavigationService;
 
-        #region MotificationList
+        #region NotificationList
         public ObservableCollection<NotificationModel> AllNotificationList = new ObservableCollection<NotificationModel>();
         private ObservableCollection<NotificationModel> _NotificationList = new ObservableCollection<NotificationModel>();
         public ObservableCollection<NotificationModel> NotificationList
         {
             get { return _NotificationList; }
             set { SetProperty(ref _NotificationList, value); }
+        }
+        #endregion
+
+        #region NotificationListSelected
+        private NotificationModel _NotificationListSelected;
+        public NotificationModel NotificationListSelected
+        {
+            get { return _NotificationListSelected; }
+            set 
+            { 
+                SetProperty(ref _NotificationListSelected, value); 
+                if(NotificationListSelected != null)
+                {
+                    NavigationService.NavigateAsync(nameof(ChatPage));
+                }
+            }
         }
         #endregion
 

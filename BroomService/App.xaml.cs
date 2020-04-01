@@ -23,6 +23,7 @@ namespace BroomService
         {
             InitializeComponent();
 
+            //await NavigationService.NavigateAsync("NavigationPage/ChatPage");
             await NavigationService.NavigateAsync("NavigationPage/LoginPage");
         }
 
@@ -42,6 +43,8 @@ namespace BroomService
             containerRegistry.RegisterForNavigation<AddCardPage, AddCardPageViewModel>();
             containerRegistry.RegisterForNavigation<AddJobRequest, AddJobRequestViewModel>();
             containerRegistry.RegisterForNavigation<CardListPage, CardListPageViewModel>();
+            containerRegistry.RegisterForNavigation<ChatPage, ChatPageViewModel>();
+            containerRegistry.RegisterForNavigation<ChatDetailPage, ChatDetailPageViewModel>();
         }
     }
 }

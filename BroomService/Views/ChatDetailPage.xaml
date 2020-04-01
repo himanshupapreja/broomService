@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:views="clr-namespace:BroomService.Views" xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{StaticResource TransparentColor}"
+             x:Class="BroomService.Views.ChatDetailPage">
+    <StackLayout BackgroundColor="{StaticResource BlueColor}" Spacing="20" >
+        <views:BackArrowHeader TitleText="Welcome" UserNameText="Emma Wilson" IsBackVisible="True" Margin="0,15"/>
+
+        <Frame IsClippedToBounds="True" HasShadow="False" HorizontalOptions="FillAndExpand" CornerRadius="20" Padding="0">
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10" Padding="20">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="-20" Padding="20,10">
+                    <Image Source="ic_footer_profile_select.png" Style="{StaticResource Image25HW}"/>
+                    <Label Text="Emma" Style="{StaticResource Black1BoldCenterLabel}" FontSize="{StaticResource FontSize20}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center"/>
+                    <Image Source="ic_whatsapp.png" Style="{StaticResource Image50HW}" HorizontalOptions="End"/>
+                    <Image Source="ic_Call_btn.png" Style="{StaticResource Image50HW}" HorizontalOptions="End"/>
+                </StackLayout>
+
+                <CollectionView x:Name="chatDetailList" ItemsSource="{Binding ChatDetailList}" SelectionMode="None" ItemsLayout="VerticalList"
+                                VerticalOptions="FillAndExpand">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid x:Name="chatdetailListItem" Padding="0,5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <!--Sender View-->
+                                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0"  IsVisible="{Binding is_sender}">
+                                    <!--<Label Text="Me" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="End" TextColor="{StaticResource Black2Color}" FontSize="13" Margin="0,0,10,5" IsVisible="{Binding IsSender}"/>-->
+                                    <yummy:PancakeView BackgroundColor="{StaticResource BlueColor}" CornerRadius="20,20,20,0" IsClippedToBounds="true" HorizontalOptions="End" Padding="20" Margin="80,0,0,0">
+                                        <StackLayout Orientation="Vertical" Spacing="5" HorizontalOptions="FillAndExpand">
+                                            <Label Text="{Binding user_msg}" Style="{StaticResource Black1BoldLabel}" FontSize="{StaticResource FontSize16}"/>
+                                        </StackLayout>
+                                    </yummy:PancakeView>
+                                    <Label Text="12:48pm" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="End" TextColor="{StaticResource Black1Color}" FontSize="13" Margin="80,0,20,0"/>
+                                </StackLayout>
+
+
+
+                                <!--Reciever View-->
+                                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0" IsVisible="{Binding is_sender, Converter={StaticResource BoolToNotBoolConverter}}">
+                                    <!--<Label Text="{Binding receiver_user_Name}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" TextColor="{StaticResource Black2Color}" FontSize="13" Margin="10,0,0,5"/>-->
+                                    <yummy:PancakeView BackgroundColor="{StaticResource RecieverChatColor}" CornerRadius="20,20,20,0" IsClippedToBounds="true" HorizontalOptions="FillAndExpand" Padding="20" Margin="0,0,80,0">
+                                        <StackLayout Orientation="Vertical" Spacing="5" HorizontalOptions="FillAndExpand" Margin="-20" Padding="20">
+                                            <Label Text="{Binding user_msg}" Style="{StaticResource Black1BoldLabel}" FontSize="{StaticResource FontSize16}"/>
+                                        </StackLayout>
+                                    </yummy:PancakeView>
+                                    <Label Text="12:50pm" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="End" TextColor="{StaticResource Black1Color}" FontSize="13" Margin="0,0,100,0"/>
+                                </StackLayout>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+
+                
+                
+                <!--Message entry Field-->
+                <Frame Style="{StaticResource ShadowFrame70h}" BackgroundColor="{StaticResource WhiteColor}" CornerRadius="25" Padding="0">
+                    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="0" ColumnSpacing="0" BackgroundColor="Transparent" Padding="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="60"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Entry Placeholder="Enter your message" Text="{Binding MessageEntry}" Grid.Column="0" Margin="15,0"/>
+
+                        <Image Grid.Column="1" Style="{StaticResource Image40HW}" HorizontalOptions="Center" Source="ic_send.png" Margin="0,5">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SendMsgCommand}" NumberOfTapsRequired="1"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <BoxView Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource TransparentColor}">
+                            <BoxView.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SendMsgCommand}" NumberOfTapsRequired="1"/>
+                            </BoxView.GestureRecognizers>
+                        </BoxView>
+                    </Grid>
+                </Frame>
+            </StackLayout>
+        </Frame>
+    </StackLayout>
+</ContentPage>
