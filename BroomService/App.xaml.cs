@@ -4,6 +4,9 @@ using BroomService.ViewModels;
 using BroomService.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.Essentials;
+using Newtonsoft.Json;
+using BroomService.Models;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace BroomService
@@ -22,9 +25,33 @@ namespace BroomService
         protected override async void OnInitialized()
         {
             InitializeComponent();
+            XF.Material.Forms.Material.Init(this);
 
-            //await NavigationService.NavigateAsync("NavigationPage/WelcomePage");
-            await NavigationService.NavigateAsync("NavigationPage/LoginPage");
+            if (SecureStorage.GetAsync("LoginData") != null)
+            {
+                try
+                {
+                    var loginData = JsonConvert.DeserializeObject<LoginResponseModel>(SecureStorage.GetAsync("LoginData").Result.ToString());
+
+                    if (loginData.status)
+                    {
+                        BaseViewModel.userId = loginData.userData.UserId;
+                        await NavigationService.NavigateAsync("NavigationPage/WelcomePage");
+                    }
+                    else
+                    {
+                        await NavigationService.NavigateAsync("NavigationPage/LoginPage");
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    await NavigationService.NavigateAsync("NavigationPage/LoginPage");
+                }
+            }
+            else
+            {
+                await NavigationService.NavigateAsync("NavigationPage/LoginPage");
+            }
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -49,6 +76,12 @@ namespace BroomService
             containerRegistry.RegisterForNavigation<AddPropertyPage2, AddPropertyPage2ViewModel>();
             containerRegistry.RegisterForNavigation<AddPropertyPage3, AddPropertyPage3ViewModel>();
             containerRegistry.RegisterForNavigation<AddPropertyPage4, AddPropertyPage4ViewModel>();
+            containerRegistry.RegisterForNavigation<ForgotPasswordPage, ForgotPasswordPageViewModel>();
+            containerRegistry.RegisterForNavigation<TermConditionPage, TermConditionPageViewModel>();
+            containerRegistry.RegisterForNavigation<AboutUsPage, AboutUsPageViewModel>();
+            containerRegistry.RegisterForNavigation<PrivacyPolicy, PrivacyPolicyViewModel>();
+            containerRegistry.RegisterForNavigation<AddPropertyPage5, AddPropertyPage5ViewModel>();
+            containerRegistry.RegisterForNavigation<VideoPlayerPage, VideoPlayerPageViewModel>();
         }
     }
 }

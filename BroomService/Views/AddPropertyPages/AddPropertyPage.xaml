@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="http://prismlibrary.com"
+             xmlns:prism="http://prismlibrary.com" xmlns:cc="clr-namespace:BroomService.CustomControls"
              prism:ViewModelLocator.AutowireViewModel="True"
              NavigationPage.HasNavigationBar="False"
              BackgroundColor="{StaticResource WhiteColor}"
@@ -21,31 +21,31 @@
 
             <Frame Style="{StaticResource ShadowFrame50h}" CornerRadius="7" Padding="15,5">
                 <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0">
-                    <Label Text="Name of Property" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                    <Label Text="Name of Property *" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
 
                     <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
-                        <Entry Text="The Nature Villa" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Placeholder="Enter your property" FontSize="{StaticResource FontSize15}"/>
+                        <Entry Text="{Binding PropertyName}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Placeholder="Enter name of property" FontSize="{StaticResource FontSize15}"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+
+            <Frame Style="{StaticResource ShadowFrame70h}" CornerRadius="7" Padding="15,5">
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="5">
+                    <Label Text="Type of Property *" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+
+                    <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
+                        <cc:CustomPicker Icon="ic_drop.png" Title="Select your property type" ItemsSource="{Binding PropertyTypeList}" SelectedItem="{Binding PropertyTypeListSelected}" HorizontalOptions="FillAndExpand" IsBorderDisplay="False"/>
+                        <!--<Image Style="{StaticResource Image15HW}" Source="ic_drop.png" HorizontalOptions="End"/>-->
                     </StackLayout>
                 </StackLayout>
             </Frame>
 
             <Frame Style="{StaticResource ShadowFrame50h}" CornerRadius="7" Padding="15,5">
                 <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="5">
-                    <Label Text="Type of Property" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                    <Label Text="Full Address *" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
 
                     <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
-                        <Entry Text="Villa" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Placeholder="Enter type of your property" FontSize="{StaticResource FontSize15}" IsEnabled="False"/>
-                        <Image Style="{StaticResource Image15HW}" Source="ic_drop.png" HorizontalOptions="End"/>
-                    </StackLayout>
-                </StackLayout>
-            </Frame>
-
-            <Frame Style="{StaticResource ShadowFrame50h}" CornerRadius="7" Padding="15,5">
-                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="5">
-                    <Label Text="Full Address" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
-
-                    <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
-                        <Entry Text="10 Bay City, Avenue Street, Israel" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Placeholder="Enter Your Address Here" FontSize="{StaticResource FontSize15}"/>
+                        <Entry Text="{Binding Address}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Placeholder="Enter Your Address Here" FontSize="{StaticResource FontSize15}"/>
                     </StackLayout>
                 </StackLayout>
             </Frame>
@@ -54,7 +54,23 @@
                 <Label Text="Short Term AirBNB Apartment" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
 
                 <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
-                    <Image Style="{StaticResource Image60H}" Source="ic_on.png"/>
+                    <Image Style="{StaticResource Image60H}" Source="{Binding ShortAirBnbImage}">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ShortTermCommand}"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </StackLayout>
+            </StackLayout>
+
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10" IsVisible="{Binding IsAccessPropertyAccessVisible}">
+                <Label Text="Would you like to change code or access-usually?" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+
+                <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                    <Image Style="{StaticResource Image60H}" Source="{Binding AccessPropertyAccessImage}">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding AccessPropertyAccessCommand}"/>
+                        </Image.GestureRecognizers>
+                    </Image>
                 </StackLayout>
             </StackLayout>
 

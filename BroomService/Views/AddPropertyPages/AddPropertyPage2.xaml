@@ -21,31 +21,30 @@
 
             <Frame Style="{StaticResource ShadowFrame50h}" CornerRadius="7" Padding="15,5">
                 <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0">
-                    <Label Text="Floor" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                    <Label Text="Floor *" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
 
                     <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
-                        <Entry Text="5" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Placeholder="Enter Floor Number" FontSize="{StaticResource FontSize15}"/>
+                        <Entry Text="{Binding FloorNumber}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Placeholder="Enter Floor Number" FontSize="{StaticResource FontSize15}" Keyboard="Numeric"/>
                     </StackLayout>
                 </StackLayout>
             </Frame>
 
             <Frame Style="{StaticResource ShadowFrame50h}" CornerRadius="7" Padding="15,5">
                 <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="5">
-                    <Label Text="Apartment Number" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                    <Label Text="Apartment Number *" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
 
                     <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
-                        <Entry Text="" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Placeholder="Enter Apartment Number" FontSize="{StaticResource FontSize15}" IsEnabled="False"/>
-                        <Image Style="{StaticResource Image15HW}" Source="ic_drop.png" HorizontalOptions="End"/>
+                        <Entry Text="{Binding ApartmentNumber}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Placeholder="Enter Apartment Number" FontSize="{StaticResource FontSize15}" Keyboard="Numeric"/>
                     </StackLayout>
                 </StackLayout>
             </Frame>
 
             <Frame Style="{StaticResource ShadowFrame50h}" CornerRadius="7" Padding="15,5">
                 <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="5">
-                    <Label Text="Building Code" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                    <Label Text="Building Code *" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
 
                     <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
-                        <Entry Text="" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Placeholder="Enter Building Code" FontSize="{StaticResource FontSize15}"/>
+                        <Entry Text="{Binding BuildingCode}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Placeholder="Enter Building Code" FontSize="{StaticResource FontSize15}"/>
                     </StackLayout>
                 </StackLayout>
             </Frame>
@@ -55,7 +54,7 @@
                     <Label Text="Access To Property" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
 
                     <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
-                        <Entry Text="" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Placeholder="Ex. Doorman, Elock, Keybox, Key, other" FontSize="{StaticResource FontSize15}"/>
+                        <Entry Text="{Binding AccessProperty}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Placeholder="Ex. Doorman, Elock, Keybox, Key, other" FontSize="{StaticResource FontSize15}"/>
                     </StackLayout>
                 </StackLayout>
             </Frame>
@@ -65,7 +64,7 @@
                     <Label Text="Wifi Login" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
 
                     <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
-                        <Entry Text="" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Placeholder="Wifi Login Key" FontSize="{StaticResource FontSize15}"/>
+                        <Entry Text="{Binding WifiLoginKey}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Placeholder="Wifi Login Key" FontSize="{StaticResource FontSize15}"/>
                     </StackLayout>
                 </StackLayout>
             </Frame>

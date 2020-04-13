@@ -1,4 +1,6 @@
-﻿using BroomService.Models;
+﻿using Acr.UserDialogs;
+using BroomService.Helpers;
+using BroomService.Models;
 using BroomService.Views;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -15,10 +17,10 @@ namespace BroomService.ViewModels
     {
         private readonly INavigationService NavigationService;
 
-        #region MotificationList
-        public ObservableCollection<NotificationModel> AllPropertyList = new ObservableCollection<NotificationModel>();
-        private ObservableCollection<NotificationModel> _PropertyList = new ObservableCollection<NotificationModel>();
-        public ObservableCollection<NotificationModel> PropertyList
+        #region PropertyList
+        public ObservableCollection<PropertyModel> AllPropertyList = new ObservableCollection<PropertyModel>();
+        private ObservableCollection<PropertyModel> _PropertyList = new ObservableCollection<PropertyModel>();
+        public ObservableCollection<PropertyModel> PropertyList
         {
             get { return _PropertyList; }
             set { SetProperty(ref _PropertyList, value); }
@@ -30,16 +32,44 @@ namespace BroomService.ViewModels
         {
             NavigationService = navigationService;
 
-            var propertyItem = new NotificationModel()
-            {
-                category_service_name = "Luxary Apartment"
-            };
-            for (int i = 0; i < 5; i++)
-            {
-                AllPropertyList.Add(propertyItem);
-            }
+            GetPropertyList();
+        }
+        #endregion
 
-            PropertyList = AllPropertyList;
+        #region GetPropertyList
+        private async void GetPropertyList()
+        {
+            try
+            {
+                PropertyListResponseModel response;
+                try
+                {
+                    response = await webApiRestClient.GetAsync<PropertyListResponseModel>(string.Format(ApiUrl.GetPropertiesByUserId, userId));
+                }
+                catch(Exception ex)
+                {
+                    response = null;
+                }
+                if(response != null)
+                {
+                    if (response.status)
+                    {
+                        foreach(var item in response.data)
+                        {
+                            AllPropertyList.Add(item.PropertyModel);
+                        }
+
+                        PropertyList = AllPropertyList;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+            finally
+            {
+
+            }
         }
         #endregion
 
@@ -63,7 +93,20 @@ namespace BroomService.ViewModels
             {
                 return new Command(async () =>
                 {
-                    await NavigationService.NavigateAsync(nameof(PropertyListPage));
+                    try
+                    {
+                        UserDialogs.Instance.ShowLoading();
+                        var param = new NavigationParameters();
+                        param.Add("PropertyList", PropertyList);
+                        await NavigationService.NavigateAsync(nameof(PropertyListPage), param);
+                    }
+                    catch (Exception ex)
+                    {
+                    }
+                    finally
+                    {
+                        UserDialogs.Instance.HideLoading();
+                    }
                 });
             }
         }

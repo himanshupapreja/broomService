@@ -20,9 +20,13 @@
                 <Label Text="Please Fill Below Details" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize15}"/>
 
                 <Grid HorizontalOptions="Center" HeightRequest="100" WidthRequest="100">
-                    <Image HorizontalOptions="Center" Aspect="AspectFit" Source="ic_default_image.png" WidthRequest="100" HeightRequest="100"/>
+                    <Image HorizontalOptions="Center" Aspect="AspectFit" Source="{Binding ProfilePic}" WidthRequest="100" HeightRequest="100"/>
                     <Grid BackgroundColor="Black" HeightRequest="22" WidthRequest="22" HorizontalOptions="Start" VerticalOptions="End" Margin="5,0,0,5">
-                        <Image Style="{StaticResource Image15HW}" Source="ic_camera.png" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <Image Style="{StaticResource Image15HW}" Source="ic_camera.png" HorizontalOptions="Center" VerticalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ImageUploadCommand}" NumberOfTapsRequired="1"/>
+                            </Image.GestureRecognizers>
+                        </Image>
                     </Grid>
                 </Grid>
 
@@ -42,9 +46,13 @@
                     <Label Text="Company Name" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
 
                     <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
-                        <Image Style="{StaticResource Image60H}" Source="ic_on.png"/>
-                        <Frame CornerRadius="20" HeightRequest="20" Padding="20,0" HorizontalOptions="FillAndExpand" IsClippedToBounds="True" HasShadow="True">
-                            <Entry Text="{Binding Name}" Placeholder="Enter your name" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}"/>
+                        <Image Style="{StaticResource Image60H}" Source="{Binding CompanyNameToggle}">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding CompanyToggleSwitchCommand}" NumberOfTapsRequired="1"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <Frame CornerRadius="20" HeightRequest="20" Padding="20,0" HorizontalOptions="FillAndExpand" IsClippedToBounds="True" HasShadow="True" IsVisible="{Binding IsCompanyName}">
+                            <Entry Text="{Binding CompanyName}" Placeholder="Enter Company Name" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}"/>
                         </Frame>
                     </StackLayout>
                 </StackLayout>
@@ -68,7 +76,7 @@
 
                         <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
                             <Image Style="{StaticResource Image15HW}" Source="ic_Call.png"/>
-                            <Entry Text="{Binding Email}" Placeholder="Enter your phone" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}"/>
+                            <Entry Text="{Binding PhoneNumber}" Placeholder="Enter your phone" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" Keyboard="Telephone"/>
                         </StackLayout>
                     </StackLayout>
                 </Frame>
@@ -86,7 +94,7 @@
                 </Frame>
 
                 <!--Confirm Password-->
-                <Frame Style="{StaticResource ShadowFrame50h}" CornerRadius="7" Padding="15,5">
+                <!--<Frame Style="{StaticResource ShadowFrame50h}" CornerRadius="7" Padding="15,5">
                     <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="5">
                         <Label Text="Confirm Password" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
 
@@ -95,7 +103,7 @@
                             <Entry Text="{Binding ConfirmPassword}" Placeholder="Enter your password again" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" IsPassword="True"/>
                         </StackLayout>
                     </StackLayout>
-                </Frame>
+                </Frame>-->
 
                 <!--Address-->
                 <Frame Style="{StaticResource ShadowFrame50h}" CornerRadius="7" Padding="15,5">
@@ -104,7 +112,7 @@
 
                         <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
                             <Image Style="{StaticResource Image15HW}" Source="ic_location.png"/>
-                            <Entry Text="{Binding Address}" Placeholder="Enter your address" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" IsPassword="True"/>
+                            <Entry Text="{Binding Address}" Placeholder="Enter your address" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" />
                         </StackLayout>
                     </StackLayout>
                 </Frame>
@@ -112,14 +120,29 @@
                 <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10">
                     <Label Text="Add Billing Address" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
 
-                    <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
-                        <Image Style="{StaticResource Image60H}" Source="ic_on.png"/>
+                    <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" >
+                        <Image Style="{StaticResource Image40H}" Source="{Binding BillingAddressToggle}" VerticalOptions="Start">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BillingToggleSwitchCommand}" NumberOfTapsRequired="1"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <Frame CornerRadius="20" HeightRequest="100" Padding="10,10" HorizontalOptions="FillAndExpand" IsClippedToBounds="True" HasShadow="True" IsVisible="{Binding IsBillingAddress}">
+                            <Editor Text="{Binding BillingAddress}" Placeholder="Enter Billing Address" HorizontalOptions="FillAndExpand" FontSize="{StaticResource FontSize15}"/>
+                        </Frame>
                     </StackLayout>
                 </StackLayout>
 
                 <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10" Orientation="Horizontal">
-                    <Image Style="{StaticResource Image20HW}" Source="ic_checkbox_uncheck.png"/>
-                    <Label Text="I have read &amp; agree with terms &amp; conditions" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" LineBreakMode="WordWrap"/>
+                    <Image Style="{StaticResource Image20HW}" Source="{Binding TermCheckImage}">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TermCheckCommand}" NumberOfTapsRequired="1"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label Text="I have read &amp; agree with terms &amp; conditions" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" LineBreakMode="WordWrap">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TermConditionCommand}" NumberOfTapsRequired="1"/>
+                        </Label.GestureRecognizers>
+                    </Label>
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" Margin="0,0">

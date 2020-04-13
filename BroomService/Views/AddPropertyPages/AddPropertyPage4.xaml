@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="http://prismlibrary.com"
+             xmlns:prism="http://prismlibrary.com" xmlns:cc="clr-namespace:BroomService.CustomControls"
              prism:ViewModelLocator.AutowireViewModel="True"
              NavigationPage.HasNavigationBar="False"
              BackgroundColor="{StaticResource WhiteColor}"
@@ -17,8 +17,8 @@
 
                 <Image HorizontalOptions="Center" Aspect="AspectFit" Source="ic_logo.png" WidthRequest="200" HeightRequest="150"/>
 
-                <Label Text="Other Details" Style="{StaticResource Black1BoldLabel}" FontSize="{StaticResource FontSize20}"/>
-                <Label Text="Enter Property Address" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center" FontSize="{StaticResource FontSize15}"/>
+                <Label Text="Add Property" Style="{StaticResource Black1BoldLabel}" FontSize="{StaticResource FontSize20}"/>
+                <Label Text="Other Details" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center" FontSize="{StaticResource FontSize15}"/>
 
 
 
@@ -33,25 +33,47 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <StackLayout Grid.Column="0" Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
-                            <Image Style="{StaticResource Image30H}" Source="ic_radio_select.png"/>
+                            <Image Style="{StaticResource Image25H}" Source="{Binding Size1RadioButtonImage}"/>
+
                             <Label Text="20-40" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Size1RadioButtonCommand}" CommandParameter="20-40" NumberOfTapsRequired="1"/>
+                            </StackLayout.GestureRecognizers>
                         </StackLayout>
 
                         <StackLayout Grid.Column="1" Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
-                            <Image Style="{StaticResource Image30H}" Source="ic_radio_unselect.png"/>
+                            <Image Style="{StaticResource Image25H}" Source="{Binding Size2RadioButtonImage}"/>
+
                             <Label Text="45-60" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Size2RadioButtonCommand}" CommandParameter="45-60" NumberOfTapsRequired="1"/>
+                            </StackLayout.GestureRecognizers>
                         </StackLayout>
 
                         <StackLayout Grid.Column="2" Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
-                            <Image Style="{StaticResource Image30H}" Source="ic_radio_unselect.png"/>
+                            <Image Style="{StaticResource Image25H}" Source="{Binding Size3RadioButtonImage}"/>
+
                             <Label Text="65-90" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Size3RadioButtonCommand}" CommandParameter="65-90" NumberOfTapsRequired="1"/>
+                            </StackLayout.GestureRecognizers>
                         </StackLayout>
 
                         <StackLayout Grid.Column="3" Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
-                            <Image Style="{StaticResource Image30H}" Source="ic_radio_unselect.png"/>
+                            <Image Style="{StaticResource Image25H}" Source="{Binding Size4RadioButtonImage}"/>
+
                             <Label Text="More" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Size4RadioButtonCommand}" NumberOfTapsRequired="1"/>
+                            </StackLayout.GestureRecognizers>
                         </StackLayout>
                     </Grid>
+
+                    <cc:CustomPicker Icon="ic_drop.png" ItemsSource="{Binding SizeList}" SelectedItem="{Binding SizeListSelected}" SelectedIndex="{Binding SizeListIndexSelected}" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsMoreSizeVisible}"/>
                 </StackLayout>
 
 
@@ -66,25 +88,44 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <StackLayout Grid.Column="0" Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
-                            <Image Style="{StaticResource Image30H}" Source="ic_radio_select.png"/>
+                            <Image Style="{StaticResource Image25H}" Source="{Binding Bedroom1RadioButtonImage}"/>
                             <Label Text="1" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Bedroom1RadioButtonCommand}" CommandParameter="1" NumberOfTapsRequired="1"/>
+                            </StackLayout.GestureRecognizers>
                         </StackLayout>
 
                         <StackLayout Grid.Column="1" Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
-                            <Image Style="{StaticResource Image30H}" Source="ic_radio_unselect.png"/>
+                            <Image Style="{StaticResource Image25H}" Source="{Binding Bedroom2RadioButtonImage}"/>
                             <Label Text="2" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Bedroom2RadioButtonCommand}" CommandParameter="2" NumberOfTapsRequired="1"/>
+                            </StackLayout.GestureRecognizers>
                         </StackLayout>
 
                         <StackLayout Grid.Column="2" Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
-                            <Image Style="{StaticResource Image30H}" Source="ic_radio_unselect.png"/>
+                            <Image Style="{StaticResource Image25H}" Source="{Binding Bedroom3RadioButtonImage}"/>
                             <Label Text="3" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Bedroom3RadioButtonCommand}" CommandParameter="3" NumberOfTapsRequired="1"/>
+                            </StackLayout.GestureRecognizers>
                         </StackLayout>
 
                         <StackLayout Grid.Column="3" Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
-                            <Image Style="{StaticResource Image30H}" Source="ic_radio_unselect.png"/>
+                            <Image Style="{StaticResource Image25H}" Source="{Binding BedroomMoreRadioButtonImage}"/>
                             <Label Text="More" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BedroomMoreRadioButtonCommand}" NumberOfTapsRequired="1"/>
+                            </StackLayout.GestureRecognizers>
                         </StackLayout>
                     </Grid>
+
+                    <cc:CustomPicker Icon="ic_drop.png" ItemsSource="{Binding BedroomList}" SelectedItem="{Binding BedroomSelected}" SelectedIndex="{Binding BedroomIndexSelected}" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsMoreBedroomVisible}"/>
+
                 </StackLayout>
 
 
@@ -99,25 +140,43 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <StackLayout Grid.Column="0" Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
-                            <Image Style="{StaticResource Image30H}" Source="ic_radio_select.png"/>
+                            <Image Style="{StaticResource Image25H}" Source="{Binding Bathroom1RadioButtonImage}"/>
                             <Label Text="1" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Bathroom1RadioButtonCommand}" CommandParameter="1" NumberOfTapsRequired="1"/>
+                            </StackLayout.GestureRecognizers>
                         </StackLayout>
 
                         <StackLayout Grid.Column="1" Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
-                            <Image Style="{StaticResource Image30H}" Source="ic_radio_unselect.png"/>
+                            <Image Style="{StaticResource Image25H}" Source="{Binding Bathroom2RadioButtonImage}"/>
                             <Label Text="2" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Bathroom2RadioButtonCommand}" CommandParameter="2" NumberOfTapsRequired="1"/>
+                            </StackLayout.GestureRecognizers>
                         </StackLayout>
 
                         <StackLayout Grid.Column="2" Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
-                            <Image Style="{StaticResource Image30H}" Source="ic_radio_unselect.png"/>
+                            <Image Style="{StaticResource Image25H}" Source="{Binding Bathroom3RadioButtonImage}"/>
                             <Label Text="3" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Bathroom3RadioButtonCommand}" CommandParameter="3" NumberOfTapsRequired="1"/>
+                            </StackLayout.GestureRecognizers>
                         </StackLayout>
 
                         <StackLayout Grid.Column="3" Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
-                            <Image Style="{StaticResource Image30H}" Source="ic_radio_unselect.png"/>
+                            <Image Style="{StaticResource Image25H}" Source="{Binding BathroomMoreRadioButtonImage}"/>
                             <Label Text="More" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BathroomMoreRadioButtonCommand}" NumberOfTapsRequired="1"/>
+                            </StackLayout.GestureRecognizers>
                         </StackLayout>
                     </Grid>
+
+                    <cc:CustomPicker Icon="ic_drop.png" ItemsSource="{Binding BathroomList}" SelectedItem="{Binding BathroomSelected}" SelectedIndex="{Binding BathroomIndexSelected}" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsMoreBathroomVisible}"/>
                 </StackLayout>
 
 
@@ -132,25 +191,43 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <StackLayout Grid.Column="0" Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
-                            <Image Style="{StaticResource Image30H}" Source="ic_radio_select.png"/>
+                            <Image Style="{StaticResource Image25H}" Source="{Binding Toilets1RadioButtonImage}"/>
                             <Label Text="1" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Toilets1RadioButtonCommand}" CommandParameter="1" NumberOfTapsRequired="1"/>
+                            </StackLayout.GestureRecognizers>
                         </StackLayout>
 
                         <StackLayout Grid.Column="1" Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
-                            <Image Style="{StaticResource Image30H}" Source="ic_radio_unselect.png"/>
+                            <Image Style="{StaticResource Image25H}" Source="{Binding Toilets2RadioButtonImage}"/>
                             <Label Text="2" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Toilets2RadioButtonCommand}" CommandParameter="2" NumberOfTapsRequired="1"/>
+                            </StackLayout.GestureRecognizers>
                         </StackLayout>
 
                         <StackLayout Grid.Column="2" Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
-                            <Image Style="{StaticResource Image30H}" Source="ic_radio_unselect.png"/>
+                            <Image Style="{StaticResource Image25H}" Source="{Binding Toilets3RadioButtonImage}"/>
                             <Label Text="3" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Toilets3RadioButtonCommand}" CommandParameter="3" NumberOfTapsRequired="1"/>
+                            </StackLayout.GestureRecognizers>
                         </StackLayout>
 
                         <StackLayout Grid.Column="3" Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
-                            <Image Style="{StaticResource Image30H}" Source="ic_radio_unselect.png"/>
+                            <Image Style="{StaticResource Image25H}" Source="{Binding ToiletsMoreRadioButtonImage}"/>
                             <Label Text="More" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ToiletsMoreRadioButtonCommand}" NumberOfTapsRequired="1"/>
+                            </StackLayout.GestureRecognizers>
                         </StackLayout>
                     </Grid>
+
+                    <cc:CustomPicker Icon="ic_drop.png" ItemsSource="{Binding ToiletList}" SelectedItem="{Binding ToiletSelected}" SelectedIndex="{Binding ToiletIndexSelected}" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsMoreToiletVisible}"/>
                 </StackLayout>
 
 
@@ -159,12 +236,24 @@
                         <Label Text="Queen/Double Beds" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center"/>
                         <Label Text="(160 x 200)" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center"/>
                     </StackLayout>
-                    <Image Style="{StaticResource Image30H}" Source="ic_on.png" HorizontalOptions="End"/>
-                    <Frame CornerRadius="20" HeightRequest="20" Padding="20,0" HorizontalOptions="FillAndExpand" IsClippedToBounds="True" HasShadow="True">
+                    <Image Style="{StaticResource Image30H}" Source="{Binding DoubleBedImage}" HorizontalOptions="EndAndExpand">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding DoubleBedCountCommand}" NumberOfTapsRequired="1"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Frame CornerRadius="20" HeightRequest="20" Padding="20,0" HorizontalOptions="FillAndExpand" IsClippedToBounds="True" HasShadow="True" IsVisible="{Binding IsDoubleBedCountVisible}">
                         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                            <Image Style="{StaticResource Image25HW}" Source="ic_minus.png"/>
-                            <Label Text="1" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
-                            <Image Style="{StaticResource Image25HW}" Source="ic_plus.png"/>
+                            <Image Style="{StaticResource Image25HW}" Source="ic_minus.png">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding DoubleBedcountMinusCommand}" NumberOfTapsRequired="1"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <Label Text="{Binding DoubleBedCount}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+                            <Image Style="{StaticResource Image25HW}" Source="ic_plus.png">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding DoubleBedcountPlusCommand}" NumberOfTapsRequired="1"/>
+                                </Image.GestureRecognizers>
+                            </Image>
                         </StackLayout>
                     </Frame>
                 </StackLayout>
@@ -172,20 +261,93 @@
 
                 <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
                     <Label Text="King Beds" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center"/>
-                    <Image Style="{StaticResource Image30H}" Source="ic_off.png" HorizontalOptions="End"/>
+                    <Image Style="{StaticResource Image30H}" Source="{Binding KingBedImage}" HorizontalOptions="End">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding KingBedImageCommand}" NumberOfTapsRequired="1"/>
+                        </Image.GestureRecognizers>
+                    </Image>
                 </StackLayout>
 
 
                 <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
                     <Label Text="Single Beds" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center"/>
-                    <Image Style="{StaticResource Image30H}" Source="ic_off.png" HorizontalOptions="End"/>
+                    <Image Style="{StaticResource Image30H}" Source="{Binding SingleBedImage}" HorizontalOptions="EndAndExpand">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SingleBedImageCommand}" NumberOfTapsRequired="1"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Frame CornerRadius="20" HeightRequest="20" WidthRequest="40" Padding="20,0" HorizontalOptions="FillAndExpand" IsClippedToBounds="True" HasShadow="True" IsVisible="{Binding IsSingleBedCountVisible}">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <Image Style="{StaticResource Image25HW}" Source="ic_minus.png">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SingleBedcountMinusCommand}" NumberOfTapsRequired="1"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <Label Text="{Binding SingleBedCount}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+                            <Image Style="{StaticResource Image25HW}" Source="ic_plus.png">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SingleBedcountPlusCommand}" NumberOfTapsRequired="1"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </StackLayout>
+                    </Frame>
                 </StackLayout>
 
 
                 <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
                     <Label Text="Sofa Beds" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center"/>
-                    <Image Style="{StaticResource Image30H}" Source="ic_off.png" HorizontalOptions="End"/>
+                    <Image Style="{StaticResource Image30H}" Source="{Binding SofaBedImage}" HorizontalOptions="End">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SofaBedImageCommand}" NumberOfTapsRequired="1"/>
+                        </Image.GestureRecognizers>
+                    </Image>
                 </StackLayout>
+
+                <Frame CornerRadius="20" BackgroundColor="{StaticResource GrayColor}" Padding="20" HorizontalOptions="FillAndExpand" IsClippedToBounds="True" HasShadow="False" IsVisible="{Binding IsSofaBedCountVisible}" HeightRequest="70">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout HorizontalOptions="FillAndExpand" Grid.Column="0">
+                            <Label Text="Single Sofa Bed" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center"/>
+                            <Frame CornerRadius="20" HeightRequest="20" Padding="10" HorizontalOptions="Start" IsClippedToBounds="True" HasShadow="True">
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                    <Image Style="{StaticResource Image25HW}" Source="ic_minus.png">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding SingleSofaBedcountMinusCommand}" NumberOfTapsRequired="1"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                    <Label Text="{Binding SingleSofaBedCount}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+                                    <Image Style="{StaticResource Image25HW}" Source="ic_plus.png">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding SingleSofaBedcountPlusCommand}" NumberOfTapsRequired="1"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+                        
+                        <StackLayout HorizontalOptions="FillAndExpand" Grid.Column="1">
+                            <Label Text="Double Sofa Bed" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center"/>
+                            <Frame CornerRadius="20" HeightRequest="20" Padding="10" HorizontalOptions="Start" IsClippedToBounds="True" HasShadow="True">
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                    <Image Style="{StaticResource Image25HW}" Source="ic_minus.png">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding DoubleSofaBedcountMinusCommand}" NumberOfTapsRequired="1"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                    <Label Text="{Binding DoubleSofaBedCount}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+                                    <Image Style="{StaticResource Image25HW}" Source="ic_plus.png">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding DoubleSofaBedcountPlusCommand}" NumberOfTapsRequired="1"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+                    </Grid>
+                </Frame>
 
                 <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" Margin="0,0">
 
@@ -198,7 +360,7 @@
             </StackLayout>
         </ScrollView>
 
-        <BoxView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource Black1Color}" Opacity="0.7" IsVisible="{Binding IsPropertyPopupVisible}"/>
+        <!--<BoxView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource Black1Color}" Opacity="0.7" IsVisible="{Binding IsPropertyPopupVisible}"/>
         <StackLayout HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding IsPropertyPopupVisible}" Margin="30,0">
             <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <Frame HasShadow="False" IsClippedToBounds="True" Padding="20" CornerRadius="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
@@ -227,6 +389,6 @@
                     </Image.GestureRecognizers>
                 </Image>
             </Grid>
-        </StackLayout>
+        </StackLayout>-->
     </Grid>
 </ContentPage>

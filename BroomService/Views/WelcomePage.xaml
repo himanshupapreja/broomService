@@ -39,18 +39,19 @@
                                                 <Image Grid.Row="0" Source="image1.jpg" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="Fill"/>
                                                 <StackLayout Grid.Row="1" HorizontalOptions="FillAndExpand" Spacing="10" VerticalOptions="FillAndExpand" Padding="10,10">
                                                     <StackLayout Orientation="Horizontal" Spacing="10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                                                        <Label Text="{Binding category_service_name}" Style="{StaticResource Black1BoldLabel}" FontSize="{StaticResource FontSize18}"/>
+                                                        <Label Text="{Binding Name}" Style="{StaticResource Black1BoldLabel}" FontSize="{StaticResource FontSize18}"/>
 
                                                         <Image Style="{StaticResource Image15HW}" Source="ic_online.png" HorizontalOptions="End"/>
                                                     </StackLayout>
 
                                                     <StackLayout Orientation="Horizontal" Spacing="5" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                                                        <Label Text="Type of Property :" HorizontalOptions="Start" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize15}"/>
-                                                        <Label Text="House\Apartment" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize15}"/>
+                                                        <Label Text="Type of Property :" HorizontalOptions="Start" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize15}" />
+                                                        <Label Text="{Binding Type}" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize15}"/>
 
                                                         <Image Style="{StaticResource Image15HW}" Source="ic_edit.png" HorizontalOptions="End"/>
                                                     </StackLayout>
-                                                    <Label Text="Short Term Airbnb Apartment" Style="{StaticResource BlueMediumLabel}" FontSize="{StaticResource FontSize15}"/>
+                                                    <Label Text="Short Term Airbnb Apartment" Style="{StaticResource BlueMediumLabel}" FontSize="{StaticResource FontSize15}" IsVisible="{Binding ShortTermApartment}"/>
+                                                    <Label Text="" Style="{StaticResource BlueMediumLabel}" FontSize="{StaticResource FontSize15}" IsVisible="{Binding ShortTermApartment, Converter={StaticResource BoolToNotBoolConverter}}"/>
 
                                                     <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="10">
                                                         <Label Text="Fast Order | Order Service | Change Service" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}"/>

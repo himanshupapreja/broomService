@@ -29,12 +29,12 @@
             <Label Text="{Binding Source={x:Reference Root}, Path=UserNameText}" Style="{StaticResource HomeHeaderBoldStyle}"  BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
         </StackLayout>
 
-        <Image HorizontalOptions="Center" Style="{StaticResource Image20HW}" Source="ic_notify_bell.png" Grid.Column="2">
+        <Image HorizontalOptions="Center" Style="{StaticResource Image20HW}" Source="ic_notify_bell.png" Grid.Column="2"  IsVisible="{Binding Source={x:Reference Root}, Path=IsNotificationVisible}">
             <Image.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding RightIconCommand}"/>
             </Image.GestureRecognizers>
         </Image>
-        <BoxView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Column="2" BackgroundColor="{StaticResource TransparentColor}">
+        <BoxView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Column="2" BackgroundColor="{StaticResource TransparentColor}" IsVisible="{Binding IsNotificationVisible}">
             <BoxView.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding RightIconCommand}"/>
             </BoxView.GestureRecognizers>

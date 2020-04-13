@@ -11,13 +11,9 @@ namespace BroomService.Helpers
         public enum UserTypeEnum
         {
             Admin = 1,
-            Customer = 2,
+            ServiceProvider = 2,
             Worker = 3,
-            [Description("Sub Admin")]
-            SubAdmin = 4,
-            [Description("Finance Officer")]
-            FinanceOfficer = 5,
-            Coordinator = 6
+            Customer = 4
         }
 
         public enum MartialStatusEnum

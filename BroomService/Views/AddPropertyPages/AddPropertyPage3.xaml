@@ -16,56 +16,88 @@
 
             <Image HorizontalOptions="Center" Aspect="AspectFit" Source="ic_logo.png" WidthRequest="200" HeightRequest="150"/>
 
-            <Label Text="Other Details" Style="{StaticResource Black1BoldLabel}" FontSize="{StaticResource FontSize20}"/>
-            <Label Text="Enter Property Address" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize15}"/>
+            <Label Text="Add Property" Style="{StaticResource Black1BoldLabel}" FontSize="{StaticResource FontSize20}"/>
+            <Label Text="Other Details" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize15}"/>
 
 
 
             <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
                 <Label Text="Doorman" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center"/>
-                <Image Style="{StaticResource Image60H}" Source="ic_on.png" HorizontalOptions="End"/>
+                <Image Style="{StaticResource Image60H}" Source="{Binding DoormanImage}" HorizontalOptions="End">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding DoormanCommand}" NumberOfTapsRequired="1"/>
+                    </Image.GestureRecognizers>
+                </Image>
             </StackLayout>
 
 
             <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
                 <Label Text="Parking" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center"/>
-                <Image Style="{StaticResource Image60H}" Source="ic_off.png" HorizontalOptions="End"/>
+                <Image Style="{StaticResource Image60H}" Source="{Binding ParkingImage}" HorizontalOptions="End">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ParkingCommand}" NumberOfTapsRequired="1"/>
+                    </Image.GestureRecognizers>
+                </Image>
             </StackLayout>
 
 
             <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
                 <Label Text="Balcony" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center"/>
-                <Image Style="{StaticResource Image60H}" Source="ic_off.png" HorizontalOptions="End"/>
+                <Image Style="{StaticResource Image60H}" Source="{Binding BalconyImage}" HorizontalOptions="End">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BalconyCommand}" NumberOfTapsRequired="1"/>
+                    </Image.GestureRecognizers>
+                </Image>
             </StackLayout>
 
 
             <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
                 <Label Text="Dishwasher" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center"/>
-                <Image Style="{StaticResource Image60H}" Source="ic_off.png" HorizontalOptions="End"/>
+                <Image Style="{StaticResource Image60H}" Source="{Binding DishwasherImage}" HorizontalOptions="End">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding DishwasherCommand}" NumberOfTapsRequired="1"/>
+                    </Image.GestureRecognizers>
+                </Image>
             </StackLayout>
 
 
             <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
                 <Label Text="Pool" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center"/>
-                <Image Style="{StaticResource Image60H}" Source="ic_off.png" HorizontalOptions="End"/>
+                <Image Style="{StaticResource Image60H}" Source="{Binding PoolImage}" HorizontalOptions="End">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding PoolCommand}" NumberOfTapsRequired="1"/>
+                    </Image.GestureRecognizers>
+                </Image>
             </StackLayout>
 
 
             <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
                 <Label Text="Garden" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center"/>
-                <Image Style="{StaticResource Image60H}" Source="ic_off.png" HorizontalOptions="End"/>
+                <Image Style="{StaticResource Image60H}" Source="{Binding GardenImage}" HorizontalOptions="End">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GardenCommand}" NumberOfTapsRequired="1"/>
+                    </Image.GestureRecognizers>
+                </Image>
             </StackLayout>
 
 
             <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
                 <Label Text="Elevator" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center"/>
-                <Image Style="{StaticResource Image60H}" Source="ic_off.png" HorizontalOptions="End"/>
+                <Image Style="{StaticResource Image60H}" Source="{Binding ElevatorImage}" HorizontalOptions="End">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ElevatorCommand}" NumberOfTapsRequired="1"/>
+                    </Image.GestureRecognizers>
+                </Image>
             </StackLayout>
 
 
             <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
                 <Label Text="Coffee Machine" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center"/>
-                <Image Style="{StaticResource Image60H}" Source="ic_off.png" HorizontalOptions="End"/>
+                <Image Style="{StaticResource Image60H}" Source="{Binding CoffeeImage}" HorizontalOptions="End">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CoffeeCommand}" NumberOfTapsRequired="1"/>
+                    </Image.GestureRecognizers>
+                </Image>
             </StackLayout>
 
             <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" Margin="0,0">

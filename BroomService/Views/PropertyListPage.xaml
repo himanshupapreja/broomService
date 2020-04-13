@@ -16,7 +16,11 @@
                         <Label Text="Property Listing" Style="{StaticResource Black1BoldCenterLabel}" FontSize="{StaticResource FontSize20}"/>
                         <Label Text="Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum " Style="{StaticResource Black1MediumCenterLabel}" FontSize="{StaticResource FontSize15}"/>
                     </StackLayout>
-                    <Image Style="{StaticResource Image40HW}" Source="ic_add_property.png"/>
+                    <Image Style="{StaticResource Image40HW}" Source="ic_add_property.png">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding AddPropertyCommand}" NumberOfTapsRequired="1"/>
+                        </Image.GestureRecognizers>
+                    </Image>
                 </StackLayout>
 
 
@@ -37,12 +41,13 @@
                                         </Grid.RowDefinitions>
                                         <Image Grid.Row="0" Source="image1.jpg" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="Fill"/>
                                         <StackLayout Grid.Row="1" HorizontalOptions="FillAndExpand" Spacing="10" VerticalOptions="FillAndExpand" Padding="10,10">
-                                            <Label Text="{Binding category_service_name}" Style="{StaticResource Black1BoldLabel}" FontSize="{StaticResource FontSize18}"/>
+                                            <Label Text="{Binding Name}" Style="{StaticResource Black1BoldLabel}" FontSize="{StaticResource FontSize18}"/>
                                             <StackLayout Orientation="Horizontal" Spacing="10" VerticalOptions="FillAndExpand">
-                                                <Label Text="Type of Property:" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize15}"/>
-                                                <Label Text="House\Apartment" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize15}"/>
+                                                <Label Text="Type of Property:" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize15}" HorizontalOptions="Start" />
+                                                <Label Text="{Binding Type}" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize15}"/>
                                             </StackLayout>
-                                            <Label Text="Short Term Airbnb Apartment" Style="{StaticResource BlueMediumLabel}" FontSize="{StaticResource FontSize15}"/>
+                                            <Label Text="Short Term Airbnb Apartment" Style="{StaticResource BlueMediumLabel}" FontSize="{StaticResource FontSize15}" IsVisible="{Binding ShortTermApartment}"/>
+                                            <Label Text="" Style="{StaticResource BlueMediumLabel}" FontSize="{StaticResource FontSize15}" IsVisible="{Binding ShortTermApartment, Converter={StaticResource BoolToNotBoolConverter}}"/>
 
                                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="10">
                                                 <Image Style="{StaticResource Image25HW}" Source="ic_small_lock.png"/>

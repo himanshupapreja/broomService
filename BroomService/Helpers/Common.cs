@@ -94,84 +94,84 @@ namespace BroomService.Helpers
         /// </summary>
         /// <param name="theDate"></param>
         /// <returns></returns>
-        public static string RelativeDate(DateTime dtEvent)
-        {
+        //public static string RelativeDate(DateTime dtEvent)
+        //{
 
-            const int SECOND = 1;
-            const int MINUTE = 60 * SECOND;
-            const int HOUR = 60 * MINUTE;
-            const int DAY = 24 * HOUR;
-            const int MONTH = 30 * DAY;
+        //    const int SECOND = 1;
+        //    const int MINUTE = 60 * SECOND;
+        //    const int HOUR = 60 * MINUTE;
+        //    const int DAY = 24 * HOUR;
+        //    const int MONTH = 30 * DAY;
 
-            var ts = new TimeSpan(DateTime.UtcNow.Ticks - dtEvent.Ticks);
-            double delta = Math.Abs(ts.TotalSeconds);
+        //    var ts = new TimeSpan(DateTime.UtcNow.Ticks - dtEvent.Ticks);
+        //    double delta = Math.Abs(ts.TotalSeconds);
 
-            if (delta < 1 * MINUTE)
-                return ts.Seconds == 1 ? "one second ago" : ts.Seconds + " seconds ago";
+        //    if (delta < 1 * MINUTE)
+        //        return ts.Seconds == 1 ? "one second ago" : ts.Seconds + " seconds ago";
 
-            if (delta < 2 * MINUTE)
-                return "a minute ago";
+        //    if (delta < 2 * MINUTE)
+        //        return "a minute ago";
 
-            if (delta < 45 * MINUTE)
-                return ts.Minutes + " minutes ago";
+        //    if (delta < 45 * MINUTE)
+        //        return ts.Minutes + " minutes ago";
 
-            if (delta < 90 * MINUTE)
-                return "an hour ago";
+        //    if (delta < 90 * MINUTE)
+        //        return "an hour ago";
 
-            if (delta < 24 * HOUR)
-                return ts.Hours + " hours ago";
+        //    if (delta < 24 * HOUR)
+        //        return ts.Hours + " hours ago";
 
-            if (delta < 48 * HOUR)
-                return "yesterday";
+        //    if (delta < 48 * HOUR)
+        //        return "yesterday";
 
-            if (delta < 30 * DAY)
-                return ts.Days + " days ago";
+        //    if (delta < 30 * DAY)
+        //        return ts.Days + " days ago";
 
-            if (delta < 12 * MONTH)
-            {
-                int months = Convert.ToInt32(Math.Floor((double)ts.Days / 30));
-                return String.Format("{0} {1} " + AppResource.ago, months, (months == 1) ? AppResource.month : AppResource.months);
-            }
-            else
-            {
-                int years = Convert.ToInt32(Math.Floor((double)ts.Days / 365));
-                return String.Format("{0} {1} " + AppResource.ago, years, (years == 1) ? AppResource.year : AppResource.years);
-            }
+        //    if (delta < 12 * MONTH)
+        //    {
+        //        int months = Convert.ToInt32(Math.Floor((double)ts.Days / 30));
+        //        return String.Format("{0} {1} " + AppResource.ago, months, (months == 1) ? AppResource.month : AppResource.months);
+        //    }
+        //    else
+        //    {
+        //        int years = Convert.ToInt32(Math.Floor((double)ts.Days / 365));
+        //        return String.Format("{0} {1} " + AppResource.ago, years, (years == 1) ? AppResource.year : AppResource.years);
+        //    }
 
-            //TimeSpan TS = DateTime.Now - dtEvent;
-            //Debug.WriteLine(TS);
-            //if (TS.Days > 0)
-            //{
-            //    if (TS.Days >= 365)
-            //    {
-            //        var intYears = TS.Days / 365;
-            //        return String.Format("{0} {1} " + AppResource.ago, intYears, (intYears == 1) ? AppResource.year : AppResource.years);
-            //    }
-            //    else if(TS.Days < 365 && TS.Days >= 30)
-            //    {
-            //        var intMonths = TS.Days / 30;
-            //        return String.Format("{0} {1} " + AppResource.ago, intMonths, (intMonths == 1) ? AppResource.month : AppResource.months);
-            //    }
-            //    else
-            //    {
-            //        return String.Format("{0} {1} " + AppResource.ago, TS.Days, (TS.Days == 1) ? AppResource.day : AppResource.days);
-            //    }
-            //}
-            //else if(TS.Hours > 0)
-            //{
-            //    return String.Format("{0} {1} " + AppResource.ago, TS.Hours, (TS.Hours == 1) ? AppResource.hour : AppResource.hours);
-            //}
-            //else if(TS.Minutes > 0)
-            //{
-            //    return String.Format("{0} {1} " + AppResource.ago, TS.Minutes, (TS.Minutes == 1) ? AppResource.minute : AppResource.minutes);
-            //}
-            //else
-            //{
-            //    return String.Format("{0} {1} " + AppResource.ago, TS.Seconds, (TS.Seconds == 1) ? AppResource.second : AppResource.seconds);
-            //}
-        }
+        //    //TimeSpan TS = DateTime.Now - dtEvent;
+        //    //Debug.WriteLine(TS);
+        //    //if (TS.Days > 0)
+        //    //{
+        //    //    if (TS.Days >= 365)
+        //    //    {
+        //    //        var intYears = TS.Days / 365;
+        //    //        return String.Format("{0} {1} " + AppResource.ago, intYears, (intYears == 1) ? AppResource.year : AppResource.years);
+        //    //    }
+        //    //    else if(TS.Days < 365 && TS.Days >= 30)
+        //    //    {
+        //    //        var intMonths = TS.Days / 30;
+        //    //        return String.Format("{0} {1} " + AppResource.ago, intMonths, (intMonths == 1) ? AppResource.month : AppResource.months);
+        //    //    }
+        //    //    else
+        //    //    {
+        //    //        return String.Format("{0} {1} " + AppResource.ago, TS.Days, (TS.Days == 1) ? AppResource.day : AppResource.days);
+        //    //    }
+        //    //}
+        //    //else if(TS.Hours > 0)
+        //    //{
+        //    //    return String.Format("{0} {1} " + AppResource.ago, TS.Hours, (TS.Hours == 1) ? AppResource.hour : AppResource.hours);
+        //    //}
+        //    //else if(TS.Minutes > 0)
+        //    //{
+        //    //    return String.Format("{0} {1} " + AppResource.ago, TS.Minutes, (TS.Minutes == 1) ? AppResource.minute : AppResource.minutes);
+        //    //}
+        //    //else
+        //    //{
+        //    //    return String.Format("{0} {1} " + AppResource.ago, TS.Seconds, (TS.Seconds == 1) ? AppResource.second : AppResource.seconds);
+        //    //}
+        //}
 
-        public static string IsImagesValid(string input, string apiImageBaseUrl=ApiUrl.BaseUrl)
+        public static string IsImagesValid(string input, string apiImageBaseUrl="")
         {
             if (!string.IsNullOrEmpty(input) && !string.IsNullOrWhiteSpace(input))
             {

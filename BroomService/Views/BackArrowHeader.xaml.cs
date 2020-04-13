@@ -37,6 +37,13 @@ namespace BroomService.Views
             set { SetValue(IsBackVisibleProperty, value); }
         }
 
+        public static readonly BindableProperty IsNotificationVisibleProperty = BindableProperty.Create("IsNotificationVisible", typeof(bool), typeof(Image), true);
+        public bool IsNotificationVisible
+        {
+            get { return (bool)GetValue(IsNotificationVisibleProperty); }
+            set { SetValue(IsNotificationVisibleProperty, value); }
+        }
+
         public static readonly BindableProperty RightIconImageProperty = BindableProperty.Create("RightIconImage", typeof(string), typeof(Image), null);
         public string RightIconImage
         {

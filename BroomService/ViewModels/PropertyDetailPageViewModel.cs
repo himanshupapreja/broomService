@@ -12,9 +12,15 @@ using Xamarin.Forms;
 
 namespace BroomService.ViewModels
 {
-    public class PropertyDetailPageViewModel : BaseViewModel
+    public class PropertyDetailPageViewModel : BaseViewModel, INavigationAware
     {
         private readonly INavigationService NavigationService;
+        private PropertyModel _SelectedProperty = new PropertyModel();
+        public PropertyModel SelectedProperty
+        {
+            get { return _SelectedProperty; }
+            set { SetProperty(ref _SelectedProperty, value); }
+        }
 
         #region IsPropertyPopupVisible
         private bool _IsPropertyPopupVisible;
@@ -108,6 +114,18 @@ namespace BroomService.ViewModels
                 {
                     await NavigationService.NavigateAsync(nameof(ChooseServicePage));
                 });
+            }
+        }
+
+        public void OnNavigatedFrom(INavigationParameters parameters)
+        {
+        }
+
+        public void OnNavigatedTo(INavigationParameters parameters)
+        {
+            if (parameters.ContainsKey("SelectedPropertyDetail"))
+            {
+                SelectedProperty = (PropertyModel)parameters["SelectedPropertyDetail"];
             }
         }
         #endregion

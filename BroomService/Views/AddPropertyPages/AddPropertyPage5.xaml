@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:cc="clr-namespace:BroomService.CustomControls" xmlns:roxv="clr-namespace:Rox;assembly=Rox.Xamarin.Video.Portable"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{StaticResource WhiteColor}"
+             x:Class="BroomService.Views.AddPropertyPage5">
+    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <StackLayout Padding="20,10" Spacing="20" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Image Style="{StaticResource PageBackarrowImage}" HeightRequest="20" WidthRequest="20">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BackIconCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
+
+            <Image HorizontalOptions="Center" Aspect="AspectFit" Source="ic_logo.png" WidthRequest="200" HeightRequest="150"/>
+
+            <Label Text="Add Property" Style="{StaticResource Black1BoldLabel}" FontSize="{StaticResource FontSize20}"/>
+            <Label Text="Other Details" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center" FontSize="{StaticResource FontSize15}"/>
+
+
+            
+            <Frame Style="{StaticResource ShadowFrame150h}" BackgroundColor="{StaticResource WhiteColor}">
+                <Label Text="Upload Property Images/Videos" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" FontSize="{StaticResource FontSize25}"/>
+
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding UploadImageVideoCommand}" NumberOfTapsRequired="1"/>
+                </Frame.GestureRecognizers>
+            </Frame>
+
+            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                <CollectionView x:Name="propertyImageList" ItemsSource="{Binding PropertyImageList}" SelectionMode="None" VerticalOptions="FillAndExpand">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Span="2" HorizontalItemSpacing="2" Orientation="Vertical"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid x:Name="propertyImageListItem" Padding="0,2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Frame Grid.Row="0" Padding="0,0,0,10" CornerRadius="5" HasShadow="False" BackgroundColor="{StaticResource WhiteColor}" IsClippedToBounds="True" BorderColor="Gray">
+                                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="5">
+                                        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                            <Image Style="{StaticResource Image150H}" Source="{Binding upload_Image}" Aspect="AspectFill"/>
+                                            <Image Style="{StaticResource Image40HW}" Source="ic_play.png" IsVisible="{Binding is_video}"/>
+
+                                            <Grid.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Path=BindingContext.PlayCommand, Source={x:Reference propertyImageList}}" CommandParameter="{Binding Source={x:Reference propertyImageListItem}, Path=BindingContext}"/>
+                                            </Grid.GestureRecognizers>
+                                        </Grid>
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Padding="10,0">
+                                            <Image Style="{StaticResource Image20H}" Source="ic_edit" HorizontalOptions="StartAndExpand">
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.EditCommand, Source={x:Reference propertyImageList}}" CommandParameter="{Binding Source={x:Reference propertyImageListItem}, Path=BindingContext}"/>
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                            <Image Style="{StaticResource Image20H}" Source="ic_delete" HorizontalOptions="EndAndExpand">
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.DeleteCommand, Source={x:Reference propertyImageList}}" CommandParameter="{Binding Source={x:Reference propertyImageListItem}, Path=BindingContext}"/>
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Image Style="{StaticResource Image50HW}" Source="ic_login_btn.png  " HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NextIconButton}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </Grid>
+
+            <!--<StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" Margin="0,0">
+
+                
+            </StackLayout>-->
+        </StackLayout>
+
+        <BoxView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource Black1Color}" Opacity="0.7" IsVisible="{Binding IsPropertyPopupVisible}"/>
+        <StackLayout HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding IsPropertyPopupVisible}" Margin="30,0">
+            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Frame HasShadow="False" IsClippedToBounds="True" Padding="20" CornerRadius="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="15">
+                        <Image Style="{StaticResource Image90HW}" HorizontalOptions="Center" Source="ic_fonrim.png"/>
+
+                        <Label Text="Property Added Successfully" Style="{StaticResource Black1BoldLabel}" FontSize="{StaticResource FontSize20}" HorizontalOptions="Center"/>
+                        <Label Text="Sub-Users Login Details As Below" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center" FontSize="{StaticResource FontSize16}" HorizontalOptions="Center"/>
+
+                        <StackLayout HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource LightGrayColor}" Padding="30">
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" BackgroundColor="Transparent">
+                                <Label Text="Username :" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center" FontSize="{StaticResource FontSize16}"/>
+                                <Label Text="luxaryvilla" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center" FontSize="{StaticResource FontSize16}"/>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" BackgroundColor="Transparent">
+                                <Label Text="Password :" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center" FontSize="{StaticResource FontSize16}"/>
+                                <Label Text="luxaryvillabnb" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center" FontSize="{StaticResource FontSize16}"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <Image Source="ic_close_blue.png" Style="{StaticResource Image30HW}" HorizontalOptions="End" VerticalOptions="Start" Margin="0,-12,-12,0">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding PropertyCompleteCommand}" NumberOfTapsRequired="1"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </Grid>
+        </StackLayout>
+
+        
+    </Grid>
+</ContentPage>

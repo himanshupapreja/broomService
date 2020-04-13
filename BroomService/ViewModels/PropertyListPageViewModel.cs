@@ -11,14 +11,14 @@ using Xamarin.Forms;
 
 namespace BroomService.ViewModels
 {
-    public class PropertyListPageViewModel : BaseViewModel
+    public class PropertyListPageViewModel : BaseViewModel, INavigationAware
     {
         private readonly INavigationService NavigationService;
 
         #region PropertyList
-        public ObservableCollection<NotificationModel> AllPropertyList = new ObservableCollection<NotificationModel>();
-        private ObservableCollection<NotificationModel> _PropertyList = new ObservableCollection<NotificationModel>();
-        public ObservableCollection<NotificationModel> PropertyList
+        public ObservableCollection<PropertyModel> AllPropertyList = new ObservableCollection<PropertyModel>();
+        private ObservableCollection<PropertyModel> _PropertyList = new ObservableCollection<PropertyModel>();
+        public ObservableCollection<PropertyModel> PropertyList
         {
             get { return _PropertyList; }
             set { SetProperty(ref _PropertyList, value); }
@@ -26,8 +26,8 @@ namespace BroomService.ViewModels
         #endregion
 
         #region SelectedPropertyList
-        private NotificationModel _SelectedPropertyList;
-        public NotificationModel SelectedPropertyList
+        private PropertyModel _SelectedPropertyList;
+        public PropertyModel SelectedPropertyList
         {
             get { return _SelectedPropertyList; }
             set 
@@ -35,9 +35,11 @@ namespace BroomService.ViewModels
                 SetProperty(ref _SelectedPropertyList, value);
                 if (SelectedPropertyList != null)
                 {
+                    var param = new NavigationParameters();
+                    param.Add("SelectedPropertyDetail", SelectedPropertyList);
                     Device.BeginInvokeOnMainThread(async () =>
                     {
-                        await NavigationService.NavigateAsync(nameof(PropertyDetailPage));
+                        await NavigationService.NavigateAsync(nameof(PropertyDetailPage),param);
                     });
                 }
             }
@@ -48,17 +50,19 @@ namespace BroomService.ViewModels
         public PropertyListPageViewModel(INavigationService navigationService)
         {
             NavigationService = navigationService;
+        }
+        #endregion
 
-            var propertyItem = new NotificationModel()
+        #region AddPropertyCommand
+        public Command AddPropertyCommand
+        {
+            get
             {
-                category_service_name = "Luxary Apartment"
-            };
-            for (int i = 0; i < 5; i++)
-            {
-                AllPropertyList.Add(propertyItem);
+                return new Command(async () =>
+                {
+                    await NavigationService.NavigateAsync(nameof(AddPropertyPage));
+                });
             }
-
-            PropertyList = AllPropertyList;
         }
         #endregion
 
@@ -84,6 +88,21 @@ namespace BroomService.ViewModels
                 {
                     await NavigationService.NavigateAsync(nameof(NotificationPage));
                 });
+            }
+        }
+
+        #endregion
+
+        #region InavigationAware
+        public void OnNavigatedFrom(INavigationParameters parameters)
+        {
+        }
+
+        public void OnNavigatedTo(INavigationParameters parameters)
+        {
+            if (parameters.ContainsKey("PropertyList"))
+            {
+                PropertyList = (ObservableCollection<PropertyModel>)parameters["PropertyList"];
             }
         }
         #endregion
