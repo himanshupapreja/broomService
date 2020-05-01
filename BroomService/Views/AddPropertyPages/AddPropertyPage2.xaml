@@ -24,7 +24,7 @@
                     <Label Text="Floor *" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
 
                     <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
-                        <Entry Text="{Binding FloorNumber}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Placeholder="Enter Floor Number" FontSize="{StaticResource FontSize15}" Keyboard="Numeric"/>
+                        <Entry Text="{Binding FloorNumber}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Placeholder="Enter Floor Number" FontSize="{StaticResource FontSize15}" Keyboard="Numeric" ReturnType="Next"/>
                     </StackLayout>
                 </StackLayout>
             </Frame>
@@ -34,7 +34,7 @@
                     <Label Text="Apartment Number *" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
 
                     <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
-                        <Entry Text="{Binding ApartmentNumber}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Placeholder="Enter Apartment Number" FontSize="{StaticResource FontSize15}" Keyboard="Numeric"/>
+                        <Entry Text="{Binding ApartmentNumber}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Placeholder="Enter Apartment Number" FontSize="{StaticResource FontSize15}" Keyboard="Numeric" ReturnType="Next"/>
                     </StackLayout>
                 </StackLayout>
             </Frame>
@@ -44,7 +44,7 @@
                     <Label Text="Building Code *" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
 
                     <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
-                        <Entry Text="{Binding BuildingCode}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Placeholder="Enter Building Code" FontSize="{StaticResource FontSize15}"/>
+                        <Entry Text="{Binding BuildingCode}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Placeholder="Enter Building Code" FontSize="{StaticResource FontSize15}" ReturnType="Next"/>
                     </StackLayout>
                 </StackLayout>
             </Frame>
@@ -64,7 +64,17 @@
                     <Label Text="Wifi Login" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
 
                     <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
-                        <Entry Text="{Binding WifiLoginKey}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Placeholder="Wifi Login Key" FontSize="{StaticResource FontSize15}"/>
+                        <Entry Text="{Binding WifiLoginKey}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Placeholder="Wifi Login Key" FontSize="{StaticResource FontSize15}" ReturnType="Next"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+
+            <Frame Style="{StaticResource ShadowFrame50h}" CornerRadius="7" Padding="15,5">
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="5">
+                    <Label Text="Location of Key" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+
+                    <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
+                        <Entry Text="{Binding LocationKey}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Placeholder="Wifi Login Key" FontSize="{StaticResource FontSize15}" ReturnType="Done"/>
                     </StackLayout>
                 </StackLayout>
             </Frame>

@@ -16,6 +16,7 @@ namespace BroomService.ViewModels
     {
         private readonly INavigationService NavigationService;
         AddPropertyModel AddPropertyModel;
+        PropertyModel SelectedProperty;
 
         #region FloorNumber
         private string _FloorNumber;
@@ -62,6 +63,15 @@ namespace BroomService.ViewModels
         }
         #endregion
 
+        #region LocationKey
+        private string _LocationKey;
+        public string LocationKey
+        {
+            get { return _LocationKey; }
+            set { SetProperty(ref _LocationKey, value); }
+        }
+        #endregion
+
         #region Constructor
         public AddPropertyPage2ViewModel(INavigationService navigationService)
         {
@@ -96,9 +106,14 @@ namespace BroomService.ViewModels
                         AddPropertyModel.ApartmentNumber = ApartmentNumber;
                         AddPropertyModel.AccessToProperty = AccessProperty;
                         AddPropertyModel.WifiLogin = WifiLoginKey;
+                        AddPropertyModel.LocationKey = LocationKey;
 
                         var param = new NavigationParameters();
                         param.Add("TransferData", AddPropertyModel);
+                        if(SelectedProperty != null)
+                        {
+                            param.Add("PropertyDetail", SelectedProperty);
+                        }
                         await NavigationService.NavigateAsync(nameof(AddPropertyPage3), param);
                     }
                     else
@@ -119,6 +134,17 @@ namespace BroomService.ViewModels
             if (parameters.ContainsKey("TransferData"))
             {
                 AddPropertyModel = (AddPropertyModel)parameters["TransferData"];
+            }
+            if (parameters.ContainsKey("PropertyDetail"))
+            {
+                SelectedProperty = (PropertyModel)parameters["PropertyDetail"];
+
+                FloorNumber = SelectedProperty.FloorNumber.HasValue ? SelectedProperty.FloorNumber.Value.ToString() : string.Empty;
+                ApartmentNumber = SelectedProperty.ApartmentNumber.HasValue ? SelectedProperty.ApartmentNumber.Value.ToString() : string.Empty;
+                BuildingCode = SelectedProperty.BuildingCode;
+                AccessProperty = SelectedProperty.AccessToProperty;
+                WifiLoginKey = SelectedProperty.WifiLogin;
+                LocationKey = SelectedProperty.LocationOfKey;
             }
         }
     }

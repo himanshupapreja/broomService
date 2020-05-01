@@ -21,12 +21,32 @@ namespace BroomService.ViewModels
 {
     public class AddPropertyPage5ViewModel : BaseViewModel, INavigationAware
     {
+        int propertyResponse;
         private readonly INavigationService NavigationService;
+        PropertyModel SelectedProperty;
         bool isVideoPageOpen = false;
         AddPropertyModel AddPropertyModel;
         byte[] thumbnailstream;
         IConverterVideoThumbnails videoThumbnails;
         byte[] myfile;
+
+        #region PropertyUsername
+        private string _PropertyUsername;
+        public string PropertyUsername
+        {
+            get { return _PropertyUsername; }
+            set { SetProperty(ref _PropertyUsername, value); }
+        }
+        #endregion
+
+        #region PropertyPassword
+        private string _PropertyPassword;
+        public string PropertyPassword
+        {
+            get { return _PropertyPassword; }
+            set { SetProperty(ref _PropertyPassword, value); }
+        }
+        #endregion
 
         #region IsPropertyPopupVisible
         private bool _IsPropertyPopupVisible = false;
@@ -48,8 +68,10 @@ namespace BroomService.ViewModels
         #endregion
 
         #region Constructor
-        public AddPropertyPage5ViewModel()
+        public AddPropertyPage5ViewModel(INavigationService navigationService)
         {
+            NavigationService = navigationService;
+            propertyResponse = 0;
             videoThumbnails = DependencyService.Get<IConverterVideoThumbnails>();
         }
         #endregion
@@ -154,23 +176,26 @@ namespace BroomService.ViewModels
             {
                 return new Command(async(e) =>
                 {
-                    if (!isVideoPageOpen)
+                    var item = (PropertyUploadFileModel)e;
+                    if (item.is_video)
                     {
-                        try
+                        if (!isVideoPageOpen)
                         {
-                            isVideoPageOpen = true;
-                            var item = (PropertyUploadFileModel)e;
-                            var param = new NavigationParameters();
-                            param.Add("VideoPath", item.upload_Image_path);
-                            await NavigationService.NavigateAsync(nameof(VideoPlayerPage));
-                        }
-                        catch (Exception ex)
-                        {
-                        }
-                        finally
-                        {
-                            isVideoPageOpen = false;
-                        }
+                            try
+                            {
+                                isVideoPageOpen = true;
+                                var param = new NavigationParameters();
+                                param.Add("VideoPath", item.upload_Image_path);
+                                await NavigationService.NavigateAsync(nameof(VideoPlayerPage), param);
+                            }
+                            catch (Exception ex)
+                            {
+                            }
+                            finally
+                            {
+                                isVideoPageOpen = false;
+                            }
+                        } 
                     }                   
                 });
             }
@@ -254,17 +279,17 @@ namespace BroomService.ViewModels
                                 //    is_video = IsVideo,
                                 //    upload_Image_stream = file.GetStream()
                                 //};
-                                var index = AllPropertyImageList.IndexOf(item);
-                                AllPropertyImageList[index].upload_Image = IsVideo ? ImageSource.FromStream(() => new MemoryStream(thumbnailstream)) : ImageSource.FromStream(() => new MemoryStream(myfile));
-                                AllPropertyImageList[index].upload_Image_array = myfile;
-                                AllPropertyImageList[index].upload_Image_path = file.Path;
-                                AllPropertyImageList[index].is_video = IsVideo;
-                                AllPropertyImageList[index].upload_Image_stream = file.GetStream();
+                                var index = PropertyImageList.IndexOf(item);
+                                PropertyImageList[index].upload_Image = IsVideo ? ImageSource.FromStream(() => new MemoryStream(thumbnailstream)) : ImageSource.FromStream(() => new MemoryStream(myfile));
+                                PropertyImageList[index].upload_Image_array = myfile;
+                                PropertyImageList[index].upload_Image_path = file.Path;
+                                PropertyImageList[index].is_video = IsVideo;
+                                PropertyImageList[index].upload_Image_stream = file.GetStream();
                             }
                             catch (Exception ex)
                             {
                             }
-                            PropertyImageList = AllPropertyImageList;
+                            //PropertyImageList = AllPropertyImageList;
                             file.Dispose();
                         }
                     }
@@ -326,8 +351,13 @@ namespace BroomService.ViewModels
                         UserDialogs.Instance.ShowLoading();
                         string boundary = "---8d0f01e6b3b5dafaaadaad";
                         MultipartFormDataContent multipartContent = new MultipartFormDataContent(boundary);
+                        if(SelectedProperty != null)
+                        {
+                            multipartContent.Add(new StringContent(SelectedProperty.Id.Value.ToString()), "Id");
+                        }
                         multipartContent.Add(new StringContent(AddPropertyModel.Name), "Name");
                         multipartContent.Add(new StringContent(AddPropertyModel.AccesstoCode.ToString()), "AccesstoCode");
+                        multipartContent.Add(new StringContent(AddPropertyModel.BuildingCode), "BuildingCode");
                         if (!string.IsNullOrEmpty(AddPropertyModel.AccessToProperty) && !string.IsNullOrWhiteSpace(AddPropertyModel.AccessToProperty))
                         {
                             multipartContent.Add(new StringContent(AddPropertyModel.AccessToProperty), "AccessToProperty");
@@ -363,10 +393,14 @@ namespace BroomService.ViewModels
                         {
                             multipartContent.Add(new StringContent(AddPropertyModel.WifiLogin), "WifiLogin");
                         }
+                        if (!string.IsNullOrEmpty(AddPropertyModel.LocationKey) && !string.IsNullOrWhiteSpace(AddPropertyModel.LocationKey))
+                        {
+                            multipartContent.Add(new StringContent(AddPropertyModel.LocationKey), "LocationOfKey");
+                        }
                         multipartContent.Add(new StringContent(AddPropertyModel.Type), "Type");
                         if (PropertyImageList != null && PropertyImageList.Count > 0)
                         {
-                            multipartContent.Add(new StringContent(JsonConvert.SerializeObject(PropertyImageList)), "Image");
+                            //multipartContent.Add(new StringContent(JsonConvert.SerializeObject(PropertyImageList)), "Image");
 
                             foreach (var item in PropertyImageList)
                             {
@@ -391,10 +425,10 @@ namespace BroomService.ViewModels
                         }
 
 
-                        BaseModels response;
+                        AddPropertyResponseModel response;
                         try
                         {
-                            response = await webApiRestClient.PostAsync<MultipartFormDataContent, BaseModels>(ApiUrl.AddUpdateProperty, multipartContent);
+                            response = await webApiRestClient.PostAsync<MultipartFormDataContent, AddPropertyResponseModel>(ApiUrl.AddUpdateProperty, multipartContent);
                         }
                         catch (Exception ex)
                         {
@@ -404,7 +438,10 @@ namespace BroomService.ViewModels
                         {
                             if (response.status)
                             {
-                                await NavigationService.NavigateAsync(new Uri("/NavigationPage/WelcomePage", UriKind.Absolute));
+                                propertyResponse = response.property_id;
+                                PropertyUsername = AddPropertyModel.Name.Replace(" ", "");
+                                PropertyPassword = AddPropertyModel.Name.Replace(" ", "") + "bnb";
+                                IsPropertyPopupVisible = true;
                                 //await NavigationService.GoBackAsync();
                             }
                             else
@@ -433,7 +470,25 @@ namespace BroomService.ViewModels
             {
                 return new Command(async () =>
                 {
-                    //await NavigationService.NavigateAsync(nameof(NotificationPage));
+                    var result = await App.Current.MainPage.DisplayAlert("", "Do you want to request service for this Property.", "YES", "NO");
+                    if (result)
+                    {
+                        AddJobDataModel addJobDataModel = new AddJobDataModel()
+                        {
+                            propertyId = propertyResponse,
+                            propertyName = AddPropertyModel.Name,
+                            propertyAddress = AddPropertyModel.Address,
+                            ShortTermApartment = AddPropertyModel.ShortTermApartment
+                        };
+
+                        var param = new NavigationParameters();
+                        param.Add("AddJobDataModel", addJobDataModel);
+                        await NavigationService.NavigateAsync(nameof(ChooseServicePage), param);
+                    }
+                    else
+                    {
+                        await NavigationService.NavigateAsync(new Uri("/NavigationPage/WelcomePage", UriKind.Absolute));
+                    }
                 });
             }
         }
@@ -450,6 +505,29 @@ namespace BroomService.ViewModels
             if (parameters.ContainsKey("TransferData"))
             {
                 AddPropertyModel = (AddPropertyModel)parameters["TransferData"];
+            }
+            if (parameters.ContainsKey("PropertyDetail"))
+            {
+                SelectedProperty = (PropertyModel)parameters["PropertyDetail"];
+
+
+                foreach (var item in SelectedProperty.PropertyImages)
+                {
+                    try
+                    {
+                        AllPropertyImageList.Add(new PropertyUploadFileModel
+                        {
+                            upload_Image = item.IsVideo.HasValue && item.IsVideo.Value ? ImageSource.FromStream(() => new MemoryStream(videoThumbnails.Getthumbnails(Common.IsImagesValid(item.VideoUrl, ApiUrl.ImageBaseUrl)))) : ImageSource.FromStream(() => new MemoryStream(Common.getImageFromUrl(Common.IsImagesValid(item.ImageUrl, ApiUrl.ImageBaseUrl)))),
+                            upload_Image_array = item.IsVideo.HasValue && item.IsVideo.Value ? Common.getImageFromUrl(Common.IsImagesValid(item.VideoUrl, ApiUrl.ImageBaseUrl)) : Common.getImageFromUrl(Common.IsImagesValid(item.ImageUrl, ApiUrl.ImageBaseUrl)),
+                            upload_Image_path = item.IsVideo.HasValue && item.IsVideo.Value ? item.VideoUrl : item.ImageUrl,
+                            is_video = item.IsVideo.HasValue && item.IsVideo.Value ? true : false,
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                    } 
+                }
+                PropertyImageList = AllPropertyImageList;
             }
         }
         #endregion

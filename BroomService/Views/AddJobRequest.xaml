@@ -4,186 +4,375 @@
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              NavigationPage.HasNavigationBar="False"
-             xmlns:views="clr-namespace:BroomService.Views" xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:views="clr-namespace:BroomService.Views" 
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" 
+             xmlns:cc="clr-namespace:BroomService.CustomControls"
              BackgroundColor="{StaticResource TransparentColor}"
              x:Class="BroomService.Views.AddJobRequest">
-    <StackLayout BackgroundColor="{StaticResource BlueColor}" Spacing="20" >
-        <views:BackArrowHeader TitleText="Welcome" UserNameText="Emma Wilson" IsBackVisible="True" Margin="0,15"/>
+    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <StackLayout BackgroundColor="{StaticResource BlueColor}" Spacing="20" >
+            <views:BackArrowHeader TitleText="Welcome" UserNameText="{Binding UserName}" IsBackVisible="True" Margin="0,15"/>
 
-        <yummy:PancakeView BackgroundColor="{StaticResource WhiteColor}" CornerRadius="60,60,0,0" IsClippedToBounds="True" HasShadow="False" HorizontalOptions="FillAndExpand" Padding="0" VerticalOptions="FillAndExpand">
-            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="20" Spacing="10">
-                <ScrollView Margin="-20,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="20" Padding="20" >
-                        <Label Text="Job Request" Style="{StaticResource Black1BoldCenterLabel}" FontSize="{StaticResource FontSize20}"/>
-                        <Label Text="Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum " Style="{StaticResource Black1MediumCenterLabel}" FontSize="{StaticResource FontSize15}"/>
+            <yummy:PancakeView BackgroundColor="{StaticResource WhiteColor}" CornerRadius="60,60,0,0" IsClippedToBounds="True" HasShadow="False" HorizontalOptions="FillAndExpand" Padding="0" VerticalOptions="FillAndExpand">
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="20" Spacing="10">
+                    <ScrollView Margin="-20,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="20" Padding="20" >
+                            <Label Text="Job Request" Style="{StaticResource Black1BoldCenterLabel}" FontSize="{StaticResource FontSize20}"/>
+                            <Label Text="Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum " Style="{StaticResource Black1MediumCenterLabel}" FontSize="{StaticResource FontSize15}"/>
 
-                        <Frame Padding="10,5" Style="{StaticResource ShadowFrame50h}" BackgroundColor="{StaticResource WhiteColor}">
-                            <Grid>
-                                <StackLayout HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
-                                    <Label Text="Service Name" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
-                                    <Label Text="Regular Room Cleaning" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}"/>
-                                </StackLayout>
-                            </Grid>
-                        </Frame>
+                            <!--#region Service Fields-->
+                            <!--<Frame Padding="10,5" Style="{StaticResource ShadowFrame50h}" BackgroundColor="{StaticResource WhiteColor}">
+                                <Grid>
+                                    <StackLayout HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
+                                        <Label Text="Service Name" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                                        <Label Text="{Binding ServiceName}" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}" LineBreakMode="TailTruncation"/>
+                                    </StackLayout>
+                                </Grid>
+                            </Frame>-->
+                            <Label Text="Property Name and Address" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
+                            <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
+                                <ListView ItemsSource="{Binding SelectedPropertyList}" RowHeight="50" HeightRequest="{Binding PropertyListHeight}" SeparatorVisibility="None" SelectionMode="None">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ViewCell>
+                                                <Frame CornerRadius="25" Padding="20,0" HorizontalOptions="FillAndExpand" IsClippedToBounds="True" HasShadow="True" IsVisible="{Binding IsCheckList}" Margin="4" HeightRequest="40">
+                                                    <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal" VerticalOptions="Center">
+                                                        <Label Text="{Binding PropertyNameAddress}" HorizontalOptions="StartAndExpand" VerticalOptions="Center" LineBreakMode="WordWrap"/>
+                                                    </StackLayout>
+                                                </Frame>
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackLayout>
+                            <!--#endregion-->
+                            
+                            <!--#region SubService Field-->
+                            <!--<Frame Padding="10,5" Style="{StaticResource ShadowFrame50h}" BackgroundColor="{StaticResource WhiteColor}">
+                                <Grid>
+                                    <StackLayout HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
+                                        <Label Text="SubService Name" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                                        <Label Text="{Binding SubServiceName}" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}" LineBreakMode="TailTruncation"/>
+                                    </StackLayout>
+                                </Grid>
+                            </Frame>-->
 
-                        <Frame Padding="10,5" Style="{StaticResource ShadowFrame50h}" BackgroundColor="{StaticResource WhiteColor}">
-                            <Grid>
-                                <StackLayout HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
-                                    <Label Text="Property Name" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
-                                    <Label Text="Luxary Villa" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}"/>
-                                </StackLayout>
-                            </Grid>
-                        </Frame>
+                            <Label Text="Service Name" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}" />
+                            <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" >
+                                <ListView ItemsSource="{Binding SelectedServiceList}" RowHeight="50" HeightRequest="{Binding ServiceListHeight}" SeparatorVisibility="None" SelectionMode="None">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ViewCell>
+                                                <Frame CornerRadius="25" Padding="20,0" HorizontalOptions="FillAndExpand" IsClippedToBounds="True" HasShadow="True" Margin="4" HeightRequest="40">
+                                                    <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal" VerticalOptions="Center">
+                                                        <Label Text="{Binding ServiceName}" HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
+                                                    </StackLayout>
+                                                </Frame>
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackLayout>
+                            <!--#endregion-->
 
-                        <Frame Padding="10,5" Style="{StaticResource ShadowFrame50h}" BackgroundColor="{StaticResource WhiteColor}">
-                            <Grid>
-                                <StackLayout HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
-                                    <Label Text="Full Address of Property" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
-                                    <Label Text="Luxary Villa" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}"/>
-                                </StackLayout>
-                            </Grid>
-                        </Frame>
+                            <!--#region  Packagelist-->
+                            <!--<Frame Padding="10,5" Style="{StaticResource ShadowFrame50h}" BackgroundColor="{StaticResource WhiteColor}">
+                                <Grid>
+                                    <StackLayout HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
+                                        <Label Text="Property Name" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                                        <Label Text="{Binding PropertyName}" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}" LineBreakMode="TailTruncation"/>
+                                    </StackLayout>
+                                </Grid>
+                            </Frame>-->
 
-                        <Frame Padding="10,5" Style="{StaticResource ShadowFrame50h}" BackgroundColor="{StaticResource WhiteColor}">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="50"/>
-                                </Grid.ColumnDefinitions>
-                                <StackLayout Grid.Column="0" HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
-                                    <Label Text="Start Date / Time" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
-                                    <Label Text="12-Feb-2020 11:43 am" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}"/>
-                                </StackLayout>
+                            <!--<Label Text="Package Name" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}" IsVisible="{Binding IsPackageListVisible}"/>
+                            <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsPackageListVisible}">
+                                <ListView ItemsSource="{Binding SelectedPackageList}" RowHeight="50" HeightRequest="{Binding PackageListHeight}" SeparatorVisibility="None" SelectionMode="None">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ViewCell>
+                                                <Frame CornerRadius="25" Padding="20,0" HorizontalOptions="FillAndExpand" IsClippedToBounds="True" HasShadow="True" Margin="4" HeightRequest="40">
+                                                    <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal" VerticalOptions="Center">
+                                                        <Label Text="{Binding PackageName}" HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
+                                                    </StackLayout>
+                                                </Frame>
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackLayout>-->
+                            <!--#endregion-->
 
-                                <Image Grid.Column="1"  Style="{StaticResource Image20HW}" Source="ic_footer_calendar.png" HorizontalOptions="Center" VerticalOptions="Center"/>
-                            </Grid>
-                        </Frame>
+                            <!--<Frame Padding="10,5" Style="{StaticResource ShadowFrame50h}" BackgroundColor="{StaticResource WhiteColor}">
+                                <Grid>
+                                    <StackLayout HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
+                                        <Label Text="Full Address of Property" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                                        <Label Text="{Binding PropertyAddress}" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}" LineBreakMode="TailTruncation"/>
+                                    </StackLayout>
+                                </Grid>
+                            </Frame>-->
 
-                        <Label Text="Would You Like To Add End Date / Time?" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
 
-                        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="50">
-                            <Image Style="{StaticResource Image60H}" Source="ic_on.png"/>
-                            <Frame CornerRadius="25" HeightRequest="20" Padding="20,0" HorizontalOptions="FillAndExpand" IsClippedToBounds="True" HasShadow="True">
+                            <!--#region Start DateTime-->
+                            <Label Text="Start Date / Time " Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
+                            <Frame CornerRadius="25" Padding="20,0" HorizontalOptions="FillAndExpand" IsClippedToBounds="True" HasShadow="True" Margin="4" HeightRequest="50">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="50"/>
                                     </Grid.ColumnDefinitions>
-                                    <Label Grid.Column="0" Text="Enter End Date/Time" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" VerticalOptions="Center" VerticalTextAlignment="Center"/>
-                                    <Image Grid.Column="1"  Style="{StaticResource Image20HW}" Source="ic_footer_calendar.png" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                    <StackLayout Grid.Column="0" HorizontalOptions="FillAndExpand" Orientation="Horizontal" VerticalOptions="Center">
+                                        <Label Text="{Binding StartDate}" HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
+                                        <DatePicker x:Name="startDate_picker" IsVisible="False" Unfocused="startDate_picker_Unfocused"/>
+                                    </StackLayout>
+                                    <Image Grid.Column="1" Style="{StaticResource Image20HW}" Source="ic_footer_calendar.png" HorizontalOptions="Center" VerticalOptions="Center"/>
                                 </Grid>
                             </Frame>
-                        </StackLayout>
+                            <!--#endregion-->
+                            
+                            <!--<Frame Padding="10,5" Style="{StaticResource ShadowFrame50h}" BackgroundColor="{StaticResource WhiteColor}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="50"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackLayout Grid.Column="0" HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
+                                        <Label Text="Start Date / Time" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                                        <Label Text="{Binding StartDate}" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}"/>
+                                        <DatePicker x:Name="startDate_picker" IsVisible="False" Unfocused="startDate_picker_Unfocused"/>
+                                    </StackLayout>
 
-                        <Label Text="Would You Like To Add Checklist?" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
+                                    
+                                </Grid>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding StartDatePickerCommand}" NumberOfTapsRequired="1"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>-->
 
-                        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="50">
-                            <Image Style="{StaticResource Image60H}" Source="ic_on.png"/>
-                            <Frame CornerRadius="25" HeightRequest="20" Padding="20,0" HorizontalOptions="FillAndExpand" IsClippedToBounds="True" HasShadow="True">
+                            <Label Text="Would You Like To Add End Date / Time?" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
+
+                            <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                                <Image Style="{StaticResource Image40H}" Source="{Binding EndDateImage}">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding EndDateCommand}" NumberOfTapsRequired="1"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                <Frame CornerRadius="25" Padding="20,0" HorizontalOptions="FillAndExpand" IsClippedToBounds="True" HasShadow="True" IsVisible="{Binding IsEndTime}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="50"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Grid.Column="0" Text="{Binding EndTime}" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" VerticalOptions="Center" VerticalTextAlignment="Center"/>
+                                        <Image Grid.Column="1"  Style="{StaticResource Image20HW}" Source="ic_footer_calendar.png" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                    </Grid>
+
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding EndTimePickerCommand}" NumberOfTapsRequired="1"/>
+                                    </Frame.GestureRecognizers>
+                                </Frame>
+                                <TimePicker x:Name="endTime_picker" IsVisible="False" Unfocused="endTime_picker_Unfocused"/>
+                            </StackLayout>
+
+                            <Label Text="Would You Like To Add Checklist?" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
+
+                            <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                                <Image Style="{StaticResource Image40H}" Source="{Binding CheckListImage}">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding ChecklistCommand}" NumberOfTapsRequired="1"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+
+                                <Frame CornerRadius="25" Padding="20,0" HorizontalOptions="FillAndExpand" IsClippedToBounds="True" HasShadow="True"  IsVisible="{Binding IsCheckList}">
+                                    <Entry Text="{Binding CheckListEntry}" Placeholder="Enter Checklist" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}"/>
+                                </Frame>
+                                <Image Style="{StaticResource Image60H}" Source="ic_add_btn_blue.png" IsVisible="{Binding IsCheckList}">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding AddCheckListCommand}" NumberOfTapsRequired="1"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsCheckList}">
+                                <ListView x:Name="workerworklist" ItemsSource="{Binding CheckList}" RowHeight="50" HeightRequest="{Binding CheckListHeight}" IsVisible="{Binding IsCheckList}" SeparatorVisibility="None" SelectionMode="None">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ViewCell>
+                                                <Frame CornerRadius="25" Padding="20,0" HorizontalOptions="FillAndExpand" IsClippedToBounds="True" HasShadow="True" IsVisible="{Binding IsCheckList}" Margin="4" HeightRequest="40">
+                                                    <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal" VerticalOptions="Center">
+                                                        <Label Text="{Binding CheckListValue}" HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
+                                                        <Image Style="{StaticResource Image20HW}" Source="ic_close.png" HorizontalOptions="End" VerticalOptions="Center">
+                                                            <Image.GestureRecognizers>
+                                                                <TapGestureRecognizer Command="{Binding Path=BindingContext.CloseCheckListCommand, Source={x:Reference workerworklist}}" CommandParameter="{Binding .}"/>
+                                                            </Image.GestureRecognizers>
+                                                        </Image>
+                                                    </StackLayout>
+                                                </Frame>
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+
+                                <!--<Frame CornerRadius="25" Padding="20,0" HorizontalOptions="FillAndExpand" IsClippedToBounds="True" HasShadow="True" IsVisible="{Binding IsCheckList}">
+                                -->
                                 <!--<Entry Text="{Binding Name}" Placeholder="Enter your name" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}"/>-->
-                                <Label Text="Checklist 1" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" VerticalOptions="Center" VerticalTextAlignment="Center"/>
-                            </Frame>
-                        </StackLayout>
-
-                        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="50">
-                            <Frame CornerRadius="25" HeightRequest="20" Padding="20,0" HorizontalOptions="FillAndExpand" IsClippedToBounds="True" HasShadow="True">
-                                <Entry Text="Checklist 2" Placeholder="Enter Checklist" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}"/>
-                            </Frame>
-                            <Image Style="{StaticResource Image60H}" Source="ic_add_btn_blue.png"/>
-                        </StackLayout>
-
-                        <Label Text="Would You Like To Add Order Inventory?" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
-
-                        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="50">
-                            <Image Style="{StaticResource Image60H}" Source="ic_on.png"/>
-                            <Frame CornerRadius="25" HeightRequest="20" Padding="20,0" HorizontalOptions="FillAndExpand" IsClippedToBounds="True" HasShadow="True">
-                                <Entry Text="Inventory 1" Placeholder="Enter Inventory" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}"/>
-                                <!--<Label Text="Checklist 1" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" VerticalOptions="Center" VerticalTextAlignment="Center"/>-->
-                            </Frame>
-                            <Image Style="{StaticResource Image60H}" Source="ic_add_btn_blue.png" HorizontalOptions="End"/>
-                        </StackLayout>
-                        
-                        <Label Text="Would You Like To Add Another Job on Same Time?" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
-
-                        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="50">
-                            <Image Style="{StaticResource Image60H}" Source="ic_on.png"/>
-                            <Frame CornerRadius="25" HeightRequest="20" Padding="20,0" HorizontalOptions="FillAndExpand" IsClippedToBounds="True" HasShadow="True">
-                                <Entry Text="{Binding Name}" Placeholder="Enter your name" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}"/>
-                            </Frame>
-                        </StackLayout>
-                        
-                        <Label Text="Would You Like To Add Job Description?" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
-
-                        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="50">
-                            <Image Style="{StaticResource Image60H}" Source="ic_off.png"/>
-                            <!--<Frame CornerRadius="25" HeightRequest="20" Padding="20,0" HorizontalOptions="FillAndExpand" IsClippedToBounds="True" HasShadow="True">
-                                <Entry Text="{Binding Name}" Placeholder="Enter your name" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}"/>
+                                <!--
                                 <Label Text="Checklist 1" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" VerticalOptions="Center" VerticalTextAlignment="Center"/>
                             </Frame>-->
+                            </StackLayout>
+
+                            <Label Text="Would You Like To Add Order Inventory?" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}" IsVisible="{Binding IsInventoryShows}"/>
+
+                            <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40" IsVisible="{Binding IsInventoryShows}">
+                                <Image Style="{StaticResource Image40H}" Source="{Binding InventoryImage}">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding InventoryCommand}" NumberOfTapsRequired="1"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                <Frame CornerRadius="25" Padding="20,0" HorizontalOptions="FillAndExpand" IsClippedToBounds="True" HasShadow="True" IsVisible="{Binding IsInventory}">
+                                    <Label Text="Add Inventory" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" VerticalOptions="Center" VerticalTextAlignment="Center"/>
+
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding AddInventryCommand}" NumberOfTapsRequired="1"/>
+                                    </Frame.GestureRecognizers>
+                                </Frame>
+                            </StackLayout>
+
+                            <Label Text="Would You Like To Add Another Job on Same Time?" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
+
+                            <StackLayout HorizontalOptions="FillAndExpand" Spacing="10">
+                                <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                                    <Image Style="{StaticResource Image40H}" Source="{Binding AnotherServiceImage}">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding AnotherServiceCommand}" NumberOfTapsRequired="1"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+
+                                    <Frame CornerRadius="25" Padding="20,0" HorizontalOptions="FillAndExpand" IsClippedToBounds="True" HasShadow="True" IsVisible="{Binding IsAnotherService}">
+                                        <Label Text="Add Another Service" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" VerticalOptions="Center" VerticalTextAlignment="Center"/>
+
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding AddServiceCommand}" NumberOfTapsRequired="1"/>
+                                        </Frame.GestureRecognizers>
+                                    </Frame>
+                                </StackLayout>
+
+                            </StackLayout>
+
+                            <Label Text="Would You Like To Add Job Description?" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
+
+                            <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" >
+                                <Image Style="{StaticResource Image40H}" VerticalOptions="Start" Source="{Binding DescriptionImage}">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding DescriptionCommand}" NumberOfTapsRequired="1"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                <Frame CornerRadius="25" HeightRequest="80" Padding="15" HorizontalOptions="FillAndExpand" IsClippedToBounds="True" HasShadow="True" IsVisible="{Binding IsDescription}">
+                                    <Editor Text="{Binding Description}" Placeholder="Enter your Description" HorizontalOptions="FillAndExpand" FontSize="{StaticResource FontSize15}"/>
+                                </Frame>
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="End">
+                                <Image Style="{StaticResource Image60HW}" Source="ic_btn_back.png" HorizontalOptions="End" VerticalOptions="End">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding BackIconCommand}"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                <Image Style="{StaticResource Image60HW}" Source="ic_login_btn.png" HorizontalOptions="End" VerticalOptions="End">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding NextIconButton}"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                            </StackLayout>
+
                         </StackLayout>
-                        
-                        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="End">
-                            <Image Style="{StaticResource Image60HW}" Source="ic_btn_back.png" HorizontalOptions="End" VerticalOptions="End">
+                    </ScrollView>
+
+
+
+                    <!--#region Bottom Tab Page-->
+                    <Frame Style="{StaticResource ShadowFrame60h}" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" CornerRadius="20" Padding="10" BackgroundColor="{StaticResource WhiteColor}" Margin="0">
+                        <Grid HorizontalOptions="FillAndExpand" ColumnSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Style="{StaticResource Image30HW}" Source="ic_footer_home_select.png" HorizontalOptions="Center">
                                 <Image.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding BackIconCommand}"/>
+                                    <TapGestureRecognizer Command="{Binding HomeCommand}"/>
                                 </Image.GestureRecognizers>
                             </Image>
-                            <Image Style="{StaticResource Image60HW}" Source="ic_login_btn.png" HorizontalOptions="End" VerticalOptions="End">
+
+                            <Image Grid.Column="1" Style="{StaticResource Image30HW}" Source="ic_footer_buildin.png" HorizontalOptions="Center">
                                 <Image.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding NextIconButton}"/>
+                                    <TapGestureRecognizer Command="{Binding HomeCommand}"/>
                                 </Image.GestureRecognizers>
                             </Image>
-                        </StackLayout>
+
+                            <Image Grid.Column="2" Style="{StaticResource Image50HW}" Source="ic_search.png" HorizontalOptions="Center">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+
+                            <Image Grid.Column="3" Style="{StaticResource Image30HW}" Source="ic_footer_calendar.png" HorizontalOptions="Center">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+
+                            <Image Grid.Column="4" Style="{StaticResource Image30HW}" Source="ic_footer_profile.png" HorizontalOptions="Center">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </Grid>
+                    </Frame>
+                    <!--#endregion-->
+                </StackLayout>
+            </yummy:PancakeView>
+        </StackLayout>
+        
+        <!--#region Another Service Popup-->
+        <BoxView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource Black1Color}" Opacity="0.7" IsVisible="{Binding IsAnotherServicePopup}"/>
+        <StackLayout HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding IsAnotherServicePopup}" Padding="0">
+            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Frame HasShadow="False" IsClippedToBounds="True" Padding="0,0,0,30" CornerRadius="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="15,15,15,30">
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Spacing="15" Padding="10">
+                        <Label Text="Choose Another Service" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Margin="0,10,0,0"/>
                         
+                        <Frame Style="{StaticResource ShadowFrame40h}" CornerRadius="25" Padding="15,5">
+                            <cc:CustomPicker Icon="ic_drop.png" Title="Select your service" ItemsSource="{Binding ServiceList}" SelectedItem="{Binding ServiceListSelected}" HorizontalOptions="FillAndExpand" ItemDisplayBinding="{Binding display_Name}" IsBorderDisplay="False" />
+                        </Frame>
+
+                        <Frame Style="{StaticResource ShadowFrame40h}" CornerRadius="25" Padding="15,5" IsVisible="{Binding IsSubserviceAvailable}">
+                            <cc:CustomPicker Icon="ic_drop.png" Title="Select your sub-service" ItemsSource="{Binding SubServiceList}" SelectedItem="{Binding SubServiceListSelected}" HorizontalOptions="FillAndExpand" ItemDisplayBinding="{Binding display_Name}" IsBorderDisplay="False" />
+                        </Frame>
+
+
+                        <Frame Style="{StaticResource ShadowFrame40h}" CornerRadius="25" Padding="15,5" IsVisible="{Binding IsPackageAvailable}">
+                            <cc:CustomPicker Icon="ic_drop.png" Title="Choose your package" ItemsSource="{Binding SubSubServiceList}" SelectedItem="{Binding SubSubServiceListSelected}" HorizontalOptions="FillAndExpand" ItemDisplayBinding="{Binding display_Name}" IsBorderDisplay="False" />
+                        </Frame>
                     </StackLayout>
-                </ScrollView>
-
-
-
-                <!--#region Bottom Tab Page-->
-                <Frame Style="{StaticResource ShadowFrame60h}" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" CornerRadius="20" Padding="10" BackgroundColor="{StaticResource WhiteColor}" Margin="0">
-                    <Grid HorizontalOptions="FillAndExpand" ColumnSpacing="10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Column="0" Style="{StaticResource Image30HW}" Source="ic_footer_home_select.png" HorizontalOptions="Center">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
-                            </Image.GestureRecognizers>
-                        </Image>
-
-                        <Image Grid.Column="1" Style="{StaticResource Image30HW}" Source="ic_footer_buildin.png" HorizontalOptions="Center">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
-                            </Image.GestureRecognizers>
-                        </Image>
-
-                        <Image Grid.Column="2" Style="{StaticResource Image50HW}" Source="ic_search.png" HorizontalOptions="Center">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
-                            </Image.GestureRecognizers>
-                        </Image>
-
-                        <Image Grid.Column="3" Style="{StaticResource Image30HW}" Source="ic_footer_calendar.png" HorizontalOptions="Center">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
-                            </Image.GestureRecognizers>
-                        </Image>
-
-                        <Image Grid.Column="4" Style="{StaticResource Image30HW}" Source="ic_footer_profile.png" HorizontalOptions="Center">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding HomeCommand}"/>
-                            </Image.GestureRecognizers>
-                        </Image>
-                    </Grid>
                 </Frame>
-                <!--#endregion-->
-            </StackLayout>
-        </yummy:PancakeView>
-    </StackLayout>
+
+                <Image Source="ic_close_blue.png" Style="{StaticResource Image30HW}" HorizontalOptions="End" VerticalOptions="Start">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ServiceCloseCommand}" NumberOfTapsRequired="1"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Image Source="ic_login_btn.png" Style="{StaticResource Image60HW}" HorizontalOptions="Center" VerticalOptions="End">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AddServiceButton}" NumberOfTapsRequired="1"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </Grid>
+        </StackLayout>
+        <!--#endregion-->
+    </Grid>
 </ContentPage>

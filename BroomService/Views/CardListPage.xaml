@@ -8,7 +8,7 @@
              BackgroundColor="{StaticResource TransparentColor}"
              x:Class="BroomService.Views.CardListPage">
     <StackLayout BackgroundColor="{StaticResource BlueColor}" Spacing="20" >
-        <views:BackArrowHeader TitleText="Welcome" UserNameText="Emma Wilson" IsBackVisible="True" Margin="0,15"/>
+        <views:BackArrowHeader TitleText="Welcome" UserNameText="{Binding UserName}" IsBackVisible="True" Margin="0,15"/>
 
         <yummy:PancakeView BackgroundColor="{StaticResource WhiteColor}" CornerRadius="60,60,0,0" IsClippedToBounds="True" HasShadow="False" HorizontalOptions="FillAndExpand" Padding="0" VerticalOptions="FillAndExpand">
             <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="20" Spacing="10">

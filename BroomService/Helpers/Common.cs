@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
@@ -306,5 +307,32 @@ namespace BroomService.Helpers
                 return "ar-AE";
             }
         }
+
+
+        public static byte[] getImageFromUrl(string url)
+        {
+            System.Net.HttpWebRequest request = null;
+            System.Net.HttpWebResponse response = null;
+            byte[] b = null;
+
+            request = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(url);
+            response = (System.Net.HttpWebResponse)request.GetResponse();
+
+            if (request.HaveResponse)
+            {
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    Stream receiveStream = response.GetResponseStream();
+                    using (BinaryReader br = new BinaryReader(receiveStream))
+                    {
+                        b = br.ReadBytes(500000);
+                        br.Close();
+                    }
+                }
+            }
+
+            return b;
+        }
+
     }
 }

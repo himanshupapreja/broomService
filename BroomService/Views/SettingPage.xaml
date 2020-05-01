@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com" xmlns:views="clr-namespace:BroomService.Views" xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{StaticResource TransparentColor}"
+             x:Class="BroomService.Views.SettingPage">
+    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <StackLayout BackgroundColor="{StaticResource BlueColor}" Spacing="20" >
+            <views:BackArrowHeader TitleText="Welcome" UserNameText="{Binding UserName}" IsBackVisible="True" Margin="0,15"/>
+
+            <yummy:PancakeView BackgroundColor="{StaticResource WhiteColor}" CornerRadius="60,60,0,0" IsClippedToBounds="True" HasShadow="False" HorizontalOptions="FillAndExpand" Padding="0" VerticalOptions="FillAndExpand">
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10" Padding="10,20">
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="15" Padding="20,30" BackgroundColor="{StaticResource TransparentColor}">
+                        <!--#region About Us Field-->
+                        <StackLayout Spacing="0" HorizontalOptions="FillAndExpand">
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0,15,0,0">
+                                <Label Text="About Us" Style="{StaticResource Black1MediumLabel}" FontSize="15"/>
+                            </StackLayout>
+                            <BoxView Style="{StaticResource HorizontalBoxViewStyle}" Margin="0,15,0,0"/>
+
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SettingCommand}" CommandParameter="aboutus" NumberOfTapsRequired="1"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                        <!--#endregion-->
+
+                        <!--#region Terms Field-->
+                        <StackLayout Spacing="0" HorizontalOptions="FillAndExpand">
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0,15,0,0">
+                                <Label Text="Term Condition" Style="{StaticResource Black1MediumLabel}" FontSize="15"/>
+                            </StackLayout>
+                            <BoxView Style="{StaticResource HorizontalBoxViewStyle}" Margin="0,15,0,0"/>
+
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SettingCommand}" CommandParameter="terms" NumberOfTapsRequired="1"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                        <!--#endregion-->
+
+                        <!--#region FAQ Field-->
+                        <StackLayout Spacing="0" HorizontalOptions="FillAndExpand">
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0,15,0,0">
+                                <Label Text="Privacy Policy" Style="{StaticResource Black1MediumLabel}" FontSize="15"/>
+                            </StackLayout>
+                            <BoxView Style="{StaticResource HorizontalBoxViewStyle}" Margin="0,15,0,0"/>
+
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SettingCommand}" CommandParameter="privacypolicy" NumberOfTapsRequired="1"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                        <!--#endregion-->
+
+                        <!--#region ContactUs Field-->
+                        <StackLayout Spacing="0" HorizontalOptions="FillAndExpand">
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0,15,0,0">
+                                <Label Text="ContactUs" Style="{StaticResource Black1MediumLabel}" FontSize="15"/>
+                                <!--<ffimageloadingsvg:SvgCachedImage Style="{StaticResource MenuRightArrowImageStyle}" HorizontalOptions="Center" Source="resource://Khadamat_CustomerApp.SvgImages.ic_next.svg"/>-->
+                            </StackLayout>
+                            <BoxView Style="{StaticResource HorizontalBoxViewStyle}" Margin="0,15,0,0"/>
+
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SettingCommand}" CommandParameter="contactus" NumberOfTapsRequired="1"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                        <!--#endregion-->
+                    </StackLayout>
+                </StackLayout>
+            </yummy:PancakeView>
+        </StackLayout>
+    </Grid>  
+</ContentPage>

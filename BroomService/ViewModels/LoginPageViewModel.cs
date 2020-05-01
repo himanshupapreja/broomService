@@ -108,7 +108,8 @@ namespace BroomService.ViewModels
                                         await SecureStorage.SetAsync("LoginData", loginData);
 
                                         userId = response.userData.UserId;
-                                        await NavigationService.NavigateAsync(nameof(WelcomePage));
+                                        userName = response.userData.FullName;
+                                        await NavigationService.NavigateAsync(new Uri("/NavigationPage/WelcomePage", UriKind.Absolute));
                                     }
                                     else
                                     {

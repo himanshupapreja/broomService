@@ -30,9 +30,9 @@ namespace BroomService.ViewModels
 
         public void OnNavigatedTo(INavigationParameters parameters)
         {
-            if (parameters.ContainsKey("TransferData"))
+            if (parameters.ContainsKey("VideoPath"))
             {
-                VideoSource = (string)parameters["TransferData"];
+                VideoSource = (string)parameters["VideoPath"];
             }
         }
         #endregion

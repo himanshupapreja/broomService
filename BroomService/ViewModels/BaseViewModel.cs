@@ -10,9 +10,19 @@ namespace BroomService.ViewModels
     {
         protected readonly WebApiRestClient webApiRestClient;
         public static long userId;
+        public static string userName;
+
+        private string _UserName;
+        public string UserName
+        {
+            get { return _UserName; }
+            set { SetProperty(ref _UserName, value); }
+        }
         public BaseViewModel()
         {
             webApiRestClient = new WebApiRestClient();
+
+            UserName = userName;
         }
     }
 }

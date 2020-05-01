@@ -24,7 +24,7 @@
                     <Label Text="Name of Property *" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
 
                     <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
-                        <Entry Text="{Binding PropertyName}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Placeholder="Enter name of property" FontSize="{StaticResource FontSize15}"/>
+                        <Entry Text="{Binding PropertyName}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Placeholder="Enter name of property" FontSize="{StaticResource FontSize15}" ReturnType="Next"/>
                     </StackLayout>
                 </StackLayout>
             </Frame>
@@ -34,7 +34,7 @@
                     <Label Text="Type of Property *" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
 
                     <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
-                        <cc:CustomPicker Icon="ic_drop.png" Title="Select your property type" ItemsSource="{Binding PropertyTypeList}" SelectedItem="{Binding PropertyTypeListSelected}" HorizontalOptions="FillAndExpand" IsBorderDisplay="False"/>
+                        <cc:CustomPicker Icon="ic_drop.png" Title="Select your property type" ItemsSource="{Binding PropertyTypeList}" SelectedItem="{Binding PropertyTypeListSelected}" HorizontalOptions="FillAndExpand" IsBorderDisplay="False" SelectedIndex="{Binding PropertyTypeSelectionIndex}"/>
                         <!--<Image Style="{StaticResource Image15HW}" Source="ic_drop.png" HorizontalOptions="End"/>-->
                     </StackLayout>
                 </StackLayout>
@@ -45,7 +45,7 @@
                     <Label Text="Full Address *" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
 
                     <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
-                        <Entry Text="{Binding Address}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Placeholder="Enter Your Address Here" FontSize="{StaticResource FontSize15}"/>
+                        <Entry Text="{Binding Address}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Placeholder="Enter Your Address Here" FontSize="{StaticResource FontSize15}" ReturnType="Done"/>
                     </StackLayout>
                 </StackLayout>
             </Frame>

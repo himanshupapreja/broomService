@@ -36,6 +36,7 @@ namespace BroomService
                     if (loginData.status)
                     {
                         BaseViewModel.userId = loginData.userData.UserId;
+                        BaseViewModel.userName = loginData.userData.FullName;
                         await NavigationService.NavigateAsync("NavigationPage/WelcomePage");
                     }
                     else
@@ -82,6 +83,7 @@ namespace BroomService
             containerRegistry.RegisterForNavigation<PrivacyPolicy, PrivacyPolicyViewModel>();
             containerRegistry.RegisterForNavigation<AddPropertyPage5, AddPropertyPage5ViewModel>();
             containerRegistry.RegisterForNavigation<VideoPlayerPage, VideoPlayerPageViewModel>();
+            containerRegistry.RegisterForNavigation<SettingPage, SettingPageViewModel>();
         }
     }
 }

@@ -12,52 +12,88 @@ using Xamarin.Forms;
 
 namespace BroomService.ViewModels
 {
-    public class ChooseSubServicePageViewModel : BaseViewModel
+    public class ChooseSubServicePageViewModel : BaseViewModel, INavigationAware
     {
         private readonly INavigationService NavigationService;
+        AddJobDataModel AddJobDataModel = new AddJobDataModel();
 
-        #region ServiceList
-        public ObservableCollection<ServiceModel> AllServiceList = new ObservableCollection<ServiceModel>();
-        private ObservableCollection<ServiceModel> _ServiceList = new ObservableCollection<ServiceModel>();
-        public ObservableCollection<ServiceModel> ServiceList
+        #region ServiceDescription
+        private string _ServiceDescription;
+        public string ServiceDescription
         {
-            get { return _ServiceList; }
-            set { SetProperty(ref _ServiceList, value); }
+            get { return _ServiceDescription; }
+            set { SetProperty(ref _ServiceDescription, value); }
         }
         #endregion
 
-        #region SelectedServiceList
-        private ServiceModel _SelectedServiceList;
-        public ServiceModel SelectedServiceList
+        #region ServiceName
+        private string _ServiceName;
+        public string ServiceName
         {
-            get { return _SelectedServiceList; }
+            get { return _ServiceName; }
+            set { SetProperty(ref _ServiceName, value); }
+        }
+        #endregion
+
+        #region SubServiceList
+        public ObservableCollection<SubCategory> AllSubServiceList = new ObservableCollection<SubCategory>();
+        private ObservableCollection<SubCategory> _SubServiceList = new ObservableCollection<SubCategory>();
+        public ObservableCollection<SubCategory> SubServiceList
+        {
+            get { return _SubServiceList; }
+            set { SetProperty(ref _SubServiceList, value); }
+        }
+        #endregion
+
+        #region SelectedSubServiceList
+        private SubCategory _SelectedSubServiceList;
+        public SubCategory SelectedSubServiceList
+        {
+            get { return _SelectedSubServiceList; }
             set
             {
-                SetProperty(ref _SelectedServiceList, value);
-                if (SelectedServiceList != null)
+                SetProperty(ref _SelectedSubServiceList, value);
+                if (SelectedSubServiceList != null)
                 {
-                    //var item = ServiceList.Where(x => x.ServiceShadow == true).FirstOrDefault();
-
-                    //if (item != null)
-                    //{
-                    //    var itemIndex = ServiceList.IndexOf(item);
-                    //    ServiceList[itemIndex].ServiceShadow = false;
-                    //    ServiceList[itemIndex].ServiceSelectedColor = ColorHelpers.LightGrayColor;
-                    //    var image = ServiceList[itemIndex].service_image.Replace("_select.png", ".png");
-                    //    ServiceList[itemIndex].service_image = image;
-                    //}
-
-                    //var selectedIndex = ServiceList.IndexOf(SelectedServiceList);
-                    //ServiceList[selectedIndex].ServiceShadow = true;
-                    //ServiceList[selectedIndex].ServiceSelectedColor = ColorHelpers.WhiteColor;
-                    //var selectedimage = ServiceList[selectedIndex].service_image.Replace(".png", "_select.png");
-                    //ServiceList[selectedIndex].service_image = selectedimage;
+                    var subsubitem = SelectedSubServiceList.SubSubCategories;
+                    var item = SubServiceList.Where(x => x.SelectedColor == ColorHelpers.BlueColor).FirstOrDefault();
 
 
-                    Device.BeginInvokeOnMainThread(async () =>
+                    if (item != null)
                     {
-                        await NavigationService.NavigateAsync(nameof(ChoosePackagePage));
-                    });
+                        var itemIndex = SubServiceList.IndexOf(item);
+                        SubServiceList[itemIndex].SelectedColor = ColorHelpers.GrayColor;
+                    }
+
+                    var selectedIndex = SubServiceList.IndexOf(SelectedSubServiceList);
+                    SubServiceList[selectedIndex].SelectedColor = ColorHelpers.BlueColor;
+
+                    AddJobDataModel.DisplaySubServiceName = SelectedSubServiceList.display_Name;
+                    AddJobDataModel.DisplaySubServiceDescription = SelectedSubServiceList.display_Description;
+
+                    if (subsubitem != null && subsubitem.Count >0)
+                    {
+                        Device.BeginInvokeOnMainThread(async() =>
+                        {
+                            var param = new NavigationParameters();
+                            param.Add("SubSubServiceData", subsubitem);
+                            param.Add("AddJobDataModel", AddJobDataModel);
+                            await NavigationService.NavigateAsync(nameof(ChoosePackagePage), param);
+                        });
+                    }
+                    else
+                    {
+                        AddJobDataModel.SelectedService = SelectedSubServiceList.display_Name;
+                        AddJobDataModel.SelectedServiceDescription = SelectedSubServiceList.display_Description;
+                        AddJobDataModel.SelectedServiceId = SelectedSubServiceList.Id;
+                        Device.BeginInvokeOnMainThread(async () =>
+                        {
+                            var param = new NavigationParameters();
+                            param.Add("SubSubServiceData", subsubitem);
+                            param.Add("AddJobDataModel", AddJobDataModel);
+                            await NavigationService.NavigateAsync(nameof(AddJobRequest), param);
+                        });
+                    }
                 }
             }
         }
@@ -67,44 +103,6 @@ namespace BroomService.ViewModels
         public ChooseSubServicePageViewModel(INavigationService navigationService)
         {
             NavigationService = navigationService;
-
-            AllServiceList.Add(new ServiceModel()
-            {
-                category_service_name = "Cleaning Serices",
-                ServiceSelectedColor = ColorHelpers.WhiteColor,
-                ServiceShadow = true,
-                service_image = "ic_cat_bnb_select.png"
-            });
-            AllServiceList.Add(new ServiceModel()
-            {
-                category_service_name = "Cleaning Serices",
-                ServiceSelectedColor = ColorHelpers.LightGrayColor,
-                ServiceShadow = false,
-                service_image = "ic_cat_cleen.png"
-            });
-            AllServiceList.Add(new ServiceModel()
-            {
-                category_service_name = "Cleaning Serices",
-                ServiceSelectedColor = ColorHelpers.LightGrayColor,
-                ServiceShadow = false,
-                service_image = "ic_cat_fix.png"
-            });
-            AllServiceList.Add(new ServiceModel()
-            {
-                category_service_name = "Cleaning Serices",
-                ServiceSelectedColor = ColorHelpers.LightGrayColor,
-                ServiceShadow = false,
-                service_image = "ic_cat_hosting.png"
-            });
-            AllServiceList.Add(new ServiceModel()
-            {
-                category_service_name = "Cleaning Serices",
-                ServiceSelectedColor = ColorHelpers.LightGrayColor,
-                ServiceShadow = false,
-                service_image = "ic_cat_inside.png"
-            });
-
-            ServiceList = AllServiceList;
         }
         #endregion
 
@@ -131,6 +129,42 @@ namespace BroomService.ViewModels
                     await NavigationService.NavigateAsync(nameof(NotificationPage));
                 });
             }
+        }
+        #endregion
+
+        #region INavigation Aware
+        public void OnNavigatedFrom(INavigationParameters parameters)
+        {
+        }
+
+        public void OnNavigatedTo(INavigationParameters parameters)
+        {
+            if (parameters.ContainsKey("SubServiceData"))
+            {
+                var data = (List<SubCategory>)parameters["SubServiceData"];
+
+                if(data != null && data.Count > 0)
+                {
+                    foreach(var item in data)
+                    {
+                        item.display_Name = item.Name;
+                        item.display_Description = item.Description;
+                        item.display_Icon = Common.IsImagesValid(item.Icon, ApiUrl.SubCategoryImageBaseUrl);
+                        item.display_Picture = Common.IsImagesValid(item.Picture, ApiUrl.SubCategoryImageBaseUrl);
+                        item.SelectedColor = ColorHelpers.GrayColor;
+                        AllSubServiceList.Add(item);
+                    }
+
+                    SubServiceList = AllSubServiceList;
+                }
+            }
+            if (parameters.ContainsKey("AddJobDataModel"))
+            {
+                AddJobDataModel = (AddJobDataModel)parameters["AddJobDataModel"];
+            }
+
+            ServiceName = AddJobDataModel.DisplayServiceName;
+            ServiceDescription = AddJobDataModel.DisplayServiceDescription;
         }
         #endregion
     }

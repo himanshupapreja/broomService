@@ -85,17 +85,22 @@
     <PackageReference Include="Xamarin.Android.Support.v7.CardView" Version="28.0.0.3" />
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="28.0.0.3" />
     <PackageReference Include="Prism.DryIoc.Forms" Version="7.2.0.1422" />
+    <PackageReference Include="Xamarin.Plugin.FilePicker">
+      <Version>2.1.34</Version>
+    </PackageReference>
     <PackageReference Include="XF.Material">
       <Version>1.5.8</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomRenderers\CustomLabelRenderer.cs" />
     <Compile Include="CustomRenderers\CustomPickerRenderer.cs" />
     <Compile Include="CustomRenderers\CustomTypefaceSpan.cs" />
     <Compile Include="CustomRenderers\FontButtonRenderer_Droid.cs" />
     <Compile Include="CustomRenderers\FontEditorRenderer_Droid.cs" />
     <Compile Include="CustomRenderers\FontEntryRenderer_Droid.cs" />
     <Compile Include="CustomRenderers\FontLabelRenderer_Droid.cs" />
+    <Compile Include="CustomRenderers\MarqueTextLabelRenderer.cs" />
     <Compile Include="Dependancy\ConverterVideoThumbnails.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -365,6 +370,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\ic_play.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_setting.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

@@ -7,6 +7,7 @@ namespace BroomService.Models
     public class PropertyModel
     {
         public int? Id { get; set; }
+        public string property_Image_display { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }
         public bool? ShortTermApartment { get; set; }
@@ -14,6 +15,7 @@ namespace BroomService.Models
         public int? ApartmentNumber { get; set; }
         public string BuildingCode { get; set; }
         public string AccessToProperty { get; set; }
+        public string LocationOfKey { get; set; }
         public int? NoOfBathrooms { get; set; }
         public int? NoOfQueenBeds { get; set; }
         public int? NoOfDoubleBeds { get; set; }
@@ -28,7 +30,7 @@ namespace BroomService.Models
         public bool? Garden { get; set; }
         public bool? Elevator { get; set; }
         public int? CreatedBy { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public DateTime? CreatedDate { get; set; }
         public object IsActive { get; set; }
         public object ModifiedDate { get; set; }
         public string Address { get; set; }
@@ -45,6 +47,9 @@ namespace BroomService.Models
         public bool? IsKingBed { get; set; }
         public bool? IsSofaBed { get; set; }
         public bool? AccesstoCode { get; set; }
+
+
+        public List<PropertyImage> PropertyImages { get; set; }
     }
     public class PropertyImage
     {

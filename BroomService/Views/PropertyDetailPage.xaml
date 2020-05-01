@@ -6,11 +6,11 @@
              NavigationPage.HasNavigationBar="False"
              BackgroundColor="{StaticResource TransparentColor}"
              xmlns:views="clr-namespace:BroomService.Views" 
-             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" xmlns:roxv="clr-namespace:Rox;assembly=Rox.Xamarin.Video.Portable"
              x:Class="BroomService.Views.PropertyDetailPage">
     <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
         <StackLayout BackgroundColor="{StaticResource BlueColor}" Spacing="20" >
-            <views:BackArrowHeader TitleText="Welcome" UserNameText="Emma Wilson" IsBackVisible="True" Margin="0,15"/>
+            <views:BackArrowHeader TitleText="Welcome" UserNameText="{Binding UserName}" IsBackVisible="True" Margin="0,15"/>
 
             <yummy:PancakeView BackgroundColor="{StaticResource WhiteColor}" CornerRadius="60,60,0,0" IsClippedToBounds="True" HasShadow="False" HorizontalOptions="FillAndExpand" Padding="0">
                 <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="10,20">
@@ -21,6 +21,12 @@
                                     <Label Text="Property Details" Style="{StaticResource Black1BoldCenterLabel}" FontSize="{StaticResource FontSize20}"/>
                                     <Label Text="Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum " Style="{StaticResource Black1MediumCenterLabel}" FontSize="{StaticResource FontSize15}"/>
                                 </StackLayout>
+
+                                <Image Style="{StaticResource Image20HW}" Source="ic_edit.png" HorizontalOptions="End" VerticalOptions="Start">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding EditPropertyCommand}" NumberOfTapsRequired="1"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
                             </StackLayout>
 
 
@@ -29,7 +35,16 @@
                                     <RowDefinition Height="130"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                <Image Grid.Row="0" Source="image1.jpg" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="Fill"/>
+                                <CarouselView ItemsSource="{Binding PropertyImagesList}" >
+                                    <CarouselView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Image Source="{Binding ImageUrl}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="Fill" IsVisible="{Binding IsImage}"/>
+                                                <roxv:VideoView AutoPlay="True" FullScreen="True" ShowController="True" Muted="False" Source="{Binding VideoUrl}" IsVisible="{Binding IsVideo}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CarouselView.ItemTemplate>
+                                </CarouselView>
                                 <StackLayout Grid.Row="1" HorizontalOptions="FillAndExpand" Spacing="20" VerticalOptions="FillAndExpand" Padding="10,10">
                                     <StackLayout Orientation="Horizontal" Spacing="10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                                         <Label Text="{Binding SelectedProperty.Name}" Style="{StaticResource Black1BoldLabel}" FontSize="{StaticResource FontSize18}"/>
@@ -62,13 +77,13 @@
                                         </Grid>
                                     </Frame>
 
-                                    <Frame Padding="10,5" BackgroundColor="{StaticResource TransparentColor}" BorderColor="{StaticResource Black2Color}">
+                                    <Frame Padding="10,5" BackgroundColor="{StaticResource TransparentColor}" BorderColor="{StaticResource Black2Color}" IsVisible="{Binding IsAccessToProperty}">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="6*"/>
                                                 <ColumnDefinition Width="4*"/>
                                             </Grid.ColumnDefinitions>
-                                            <StackLayout Grid.Column="0" HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand">
+                                            <StackLayout Grid.Column="0" HorizontalOptions="FillAndExpand" Spacing="5" VerticalOptions="CenterAndExpand" >
                                                 <Label Text="Access To Property(With Details)" Style="{StaticResource Black1MediumLabel}" FontSize="{StaticResource FontSize16}"/>
                                                 <Label Text="{Binding SelectedProperty.AccessToProperty}" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
                                             </StackLayout>
@@ -185,18 +200,21 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
                                         <StackLayout Grid.Column="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="10" VerticalOptions="CenterAndExpand">
-                                            <Image Style="{StaticResource Image20HW}" Source="ic_online.png" IsVisible="{Binding SelectedProperty.Doorman}"/>
-                                            <Image Style="{StaticResource Image20HW}" Source="ic_offline.png" IsVisible="{Binding SelectedProperty.Doorman, Converter={StaticResource BoolToNotBoolConverter}}"/>
+                                            <Image Style="{StaticResource Image20HW}" Source="{Binding Doorman}"/>
+                                            <!--<Image Style="{StaticResource Image20HW}" Source="ic_online.png" IsVisible="{Binding SelectedProperty.Doorman}"/>
+                                            <Image Style="{StaticResource Image20HW}" Source="ic_offline.png" IsVisible="{Binding SelectedProperty.Doorman, Converter={StaticResource BoolToNotBoolConverter}}"/>-->
                                             <Label Text="Doorman" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
                                         </StackLayout>
                                         <StackLayout Grid.Column="1" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="10" VerticalOptions="CenterAndExpand">
-                                            <Image Style="{StaticResource Image20HW}" Source="ic_online.png" IsVisible="{Binding SelectedProperty.Parking}"/>
-                                            <Image Style="{StaticResource Image20HW}" Source="ic_offline.png" IsVisible="{Binding SelectedProperty.Parking, Converter={StaticResource BoolToNotBoolConverter}}"/>
+                                            <Image Style="{StaticResource Image20HW}" Source="{Binding Parking}"/>
+                                            <!--<Image Style="{StaticResource Image20HW}" Source="ic_online.png" IsVisible="{Binding SelectedProperty.Parking}"/>
+                                            <Image Style="{StaticResource Image20HW}" Source="ic_offline.png" IsVisible="{Binding SelectedProperty.Parking, Converter={StaticResource BoolToNotBoolConverter}}"/>-->
                                             <Label Text="Parking" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
                                         </StackLayout>
                                         <StackLayout Grid.Column="2" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="10" VerticalOptions="CenterAndExpand">
-                                            <Image Style="{StaticResource Image20HW}" Source="ic_online.png" IsVisible="{Binding SelectedProperty.Balcony}"/>
-                                            <Image Style="{StaticResource Image20HW}" Source="ic_offline.png" IsVisible="{Binding SelectedProperty.Balcony, Converter={StaticResource BoolToNotBoolConverter}}"/>
+                                            <Image Style="{StaticResource Image20HW}" Source="{Binding Balcony}"/>
+                                            <!--<Image Style="{StaticResource Image20HW}" Source="ic_online.png" IsVisible="{Binding SelectedProperty.Balcony}"/>
+                                            <Image Style="{StaticResource Image20HW}" Source="ic_offline.png" IsVisible="{Binding SelectedProperty.Balcony, Converter={StaticResource BoolToNotBoolConverter}}"/>-->
                                             <Label Text="Balcony" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
                                         </StackLayout>
                                     </Grid>
@@ -208,18 +226,21 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
                                         <StackLayout Grid.Column="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="10" VerticalOptions="CenterAndExpand">
-                                            <Image Style="{StaticResource Image20HW}" Source="ic_online.png" IsVisible="{Binding SelectedProperty.Garden}"/>
-                                            <Image Style="{StaticResource Image20HW}" Source="ic_offline.png" IsVisible="{Binding SelectedProperty.Garden, Converter={StaticResource BoolToNotBoolConverter}}"/>
+                                            <Image Style="{StaticResource Image20HW}" Source="{Binding Garden}"/>
+                                            <!--<Image Style="{StaticResource Image20HW}" Source="ic_online.png" IsVisible="{Binding SelectedProperty.Garden}"/>
+                                            <Image Style="{StaticResource Image20HW}" Source="ic_offline.png" IsVisible="{Binding SelectedProperty.Garden, Converter={StaticResource BoolToNotBoolConverter}}"/>-->
                                             <Label Text="Garden" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
                                         </StackLayout>
                                         <StackLayout Grid.Column="1" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="10" VerticalOptions="CenterAndExpand">
-                                            <Image Style="{StaticResource Image20HW}" Source="ic_online.png" IsVisible="{Binding SelectedProperty.Pool}"/>
-                                            <Image Style="{StaticResource Image20HW}" Source="ic_offline.png" IsVisible="{Binding SelectedProperty.Pool, Converter={StaticResource BoolToNotBoolConverter}}"/>
+                                            <Image Style="{StaticResource Image20HW}" Source="{Binding Pool}"/>
+                                            <!--<Image Style="{StaticResource Image20HW}" Source="ic_online.png" IsVisible="{Binding SelectedProperty.Pool}"/>
+                                            <Image Style="{StaticResource Image20HW}" Source="ic_offline.png" IsVisible="{Binding SelectedProperty.Pool, Converter={StaticResource BoolToNotBoolConverter}}"/>-->
                                             <Label Text="Pool" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
                                         </StackLayout>
                                         <StackLayout Grid.Column="2" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="10" VerticalOptions="CenterAndExpand">
-                                            <Image Style="{StaticResource Image20HW}" Source="ic_online.png" IsVisible="{Binding SelectedProperty.Dishwasher}"/>
-                                            <Image Style="{StaticResource Image20HW}" Source="ic_offline.png" IsVisible="{Binding SelectedProperty.Dishwasher, Converter={StaticResource BoolToNotBoolConverter}}"/>
+                                            <Image Style="{StaticResource Image20HW}" Source="{Binding Dishwasher}"/>
+                                            <!--<Image Style="{StaticResource Image20HW}" Source="ic_online.png" IsVisible="{Binding SelectedProperty.Dishwasher}"/>-->
+                                            <!--<Image Style="{StaticResource Image20HW}" Source="ic_offline.png" IsVisible="{Binding SelectedProperty.Dishwasher, Converter={StaticResource BoolToNotBoolConverter}}"/>-->
                                             <Label Text="Dishwasher" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
                                         </StackLayout>
                                     </Grid>
@@ -231,13 +252,15 @@
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
                                         <StackLayout Grid.Column="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="10" VerticalOptions="CenterAndExpand">
-                                            <Image Style="{StaticResource Image20HW}" Source="ic_online.png" IsVisible="{Binding SelectedProperty.Elevator}"/>
-                                            <Image Style="{StaticResource Image20HW}" Source="ic_offline.png" IsVisible="{Binding SelectedProperty.Elevator, Converter={StaticResource BoolToNotBoolConverter}}"/>
+                                            <Image Style="{StaticResource Image20HW}" Source="{Binding Elevator}"/>
+                                            <!--<Image Style="{StaticResource Image20HW}" Source="ic_online.png" IsVisible="{Binding SelectedProperty.Elevator}"/>
+                                            <Image Style="{StaticResource Image20HW}" Source="ic_offline.png" IsVisible="{Binding SelectedProperty.Elevator, Converter={StaticResource BoolToNotBoolConverter}}"/>-->
                                             <Label Text="Elevator" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
                                         </StackLayout>
                                         <StackLayout Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="10" VerticalOptions="CenterAndExpand">
-                                            <Image Style="{StaticResource Image20HW}" Source="ic_online.png" IsVisible="{Binding SelectedProperty.CoffeeMachine}"/>
-                                            <Image Style="{StaticResource Image20HW}" Source="ic_offline.png" IsVisible="{Binding SelectedProperty.CoffeeMachine, Converter={StaticResource BoolToNotBoolConverter}}"/>
+                                            <Image Style="{StaticResource Image20HW}" Source="{Binding CoffeeMachine}"/>
+                                            <!--<Image Style="{StaticResource Image20HW}" Source="ic_online.png" IsVisible="{Binding SelectedProperty.CoffeeMachine}"/>-->
+                                            <!--<Image Style="{StaticResource Image20HW}" Source="ic_offline.png" IsVisible="{Binding SelectedProperty.CoffeeMachine, Converter={StaticResource BoolToNotBoolConverter}}"/>-->
                                             <Label Text="Coffee Machine" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
                                         </StackLayout>
                                     </Grid>
@@ -305,8 +328,8 @@
             </yummy:PancakeView>
         </StackLayout>
 
-        <BoxView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource Black1Color}" Opacity="0.7" IsVisible="{Binding IsPropertyPopupVisible}"/>
-        <StackLayout HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding IsPropertyPopupVisible}" Margin="20,0">
+        <BoxView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource Black1Color}" Opacity="0.7" IsVisible="{Binding IsChangePopup}"/>
+        <StackLayout HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding IsChangePopup}" Margin="20,0">
             <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <Frame HasShadow="False" IsClippedToBounds="True" Padding="0" CornerRadius="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="15,15,15,30" >
                     <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="15" Padding="20">
@@ -318,7 +341,17 @@
                                 <Label Text="Building Code" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
 
                                 <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
-                                    <Label Text="GFT88697" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}"/>
+                                    <Entry Text="{Binding BuildingCode}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" Placeholder="Enter building code" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                        
+                        <Frame Style="{StaticResource ShadowFrame50h}" CornerRadius="7" Padding="15,5" Margin="0,0,0,40">
+                            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0">
+                                <Label Text="Access To Property" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+
+                                <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
+                                    <Entry Text="{Binding AccessToProperty}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" Placeholder="Ex. Doorman, Elock, Keybox, Key, other"/>
                                 </StackLayout>
                             </StackLayout>
                         </Frame>

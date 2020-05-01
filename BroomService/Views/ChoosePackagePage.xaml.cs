@@ -9,7 +9,7 @@ namespace BroomService.Views
             InitializeComponent();
         }
 
-        private void serviceList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void subsubserviceList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             packageList.SelectedItem = null;
         }

@@ -12,49 +12,67 @@ using Xamarin.Forms;
 
 namespace BroomService.ViewModels
 {
-    public class ChoosePackagePageViewModel : BaseViewModel
+    public class ChoosePackagePageViewModel : BaseViewModel, INavigationAware
     {
         private readonly INavigationService NavigationService;
+        AddJobDataModel AddJobDataModel = new AddJobDataModel();
 
-        #region ServiceList
-        public ObservableCollection<ServiceModel> AllServiceList = new ObservableCollection<ServiceModel>();
-        private ObservableCollection<ServiceModel> _ServiceList = new ObservableCollection<ServiceModel>();
-        public ObservableCollection<ServiceModel> ServiceList
+        #region SubServiceDescription
+        private string _SubServiceDescription;
+        public string SubServiceDescription
         {
-            get { return _ServiceList; }
-            set { SetProperty(ref _ServiceList, value); }
+            get { return _SubServiceDescription; }
+            set { SetProperty(ref _SubServiceDescription, value); }
         }
         #endregion
 
-        #region SelectedServiceList
-        private ServiceModel _SelectedServiceList;
-        public ServiceModel SelectedServiceList
+        #region SubServiceName
+        private string _SubServiceName;
+        public string SubServiceName
         {
-            get { return _SelectedServiceList; }
+            get { return _SubServiceName; }
+            set { SetProperty(ref _SubServiceName, value); }
+        }
+        #endregion
+
+        #region SubSubServiceList
+        public ObservableCollection<SubSubCategory> AllSubSubServiceList = new ObservableCollection<SubSubCategory>();
+        private ObservableCollection<SubSubCategory> _SubSubServiceList = new ObservableCollection<SubSubCategory>();
+        public ObservableCollection<SubSubCategory> SubSubServiceList
+        {
+            get { return _SubSubServiceList; }
+            set { SetProperty(ref _SubSubServiceList, value); }
+        }
+        #endregion
+
+        #region SelectedSubSubServiceList
+        private SubSubCategory _SelectedSubSubServiceList;
+        public SubSubCategory SelectedSubSubServiceList
+        {
+            get { return _SelectedSubSubServiceList; }
             set
             {
-                SetProperty(ref _SelectedServiceList, value);
-                if (SelectedServiceList != null)
+                SetProperty(ref _SelectedSubSubServiceList, value);
+                if (SelectedSubSubServiceList != null)
                 {
-                    //var item = ServiceList.Where(x => x.ServiceShadow == true).FirstOrDefault();
+                    var item = SubSubServiceList.Where(x => x.SelectedColor == ColorHelpers.BlueColor).FirstOrDefault();
+                    if (item != null)
+                    {
+                        var itemIndex = SubSubServiceList.IndexOf(item);
+                        SubSubServiceList[itemIndex].SelectedColor = ColorHelpers.GrayColor;
+                    }
 
-                    //if (item != null)
-                    //{
-                    //    var itemIndex = ServiceList.IndexOf(item);
-                    //    ServiceList[itemIndex].ServiceShadow = false;
-                    //    ServiceList[itemIndex].ServiceSelectedColor = ColorHelpers.LightGrayColor;
-                    //    var image = ServiceList[itemIndex].service_image.Replace("_select.png", ".png");
-                    //    ServiceList[itemIndex].service_image = image;
-                    //}
+                    AddJobDataModel.SelectedService = SelectedSubSubServiceList.display_Name;
+                    AddJobDataModel.SelectedServiceDescription = SelectedSubSubServiceList.display_Description;
+                    AddJobDataModel.SelectedServiceId = SelectedSubSubServiceList.Id;
 
-                    //var selectedIndex = ServiceList.IndexOf(SelectedServiceList);
-                    //ServiceList[selectedIndex].ServiceShadow = true;
-                    //ServiceList[selectedIndex].ServiceSelectedColor = ColorHelpers.WhiteColor;
-                    //var selectedimage = ServiceList[selectedIndex].service_image.Replace(".png", "_select.png");
-                    //ServiceList[selectedIndex].service_image = selectedimage;
+                    var selectedIndex = SubSubServiceList.IndexOf(SelectedSubSubServiceList);
+                    SubSubServiceList[selectedIndex].SelectedColor = ColorHelpers.BlueColor;
                     Device.BeginInvokeOnMainThread(async () =>
                     {
-                        await NavigationService.NavigateAsync(nameof(AddJobRequest));
+                        var param = new NavigationParameters();
+                        param.Add("AddJobDataModel", AddJobDataModel);
+                        await NavigationService.NavigateAsync(nameof(AddJobRequest),param);
                     });
 
                 }
@@ -66,44 +84,6 @@ namespace BroomService.ViewModels
         public ChoosePackagePageViewModel(INavigationService navigationService)
         {
             NavigationService = navigationService;
-
-            AllServiceList.Add(new ServiceModel()
-            {
-                category_service_name = "Cleaning Serices",
-                ServiceSelectedColor = ColorHelpers.WhiteColor,
-                ServiceShadow = true,
-                service_image = "ic_cat_bnb_select.png"
-            });
-            AllServiceList.Add(new ServiceModel()
-            {
-                category_service_name = "Cleaning Serices",
-                ServiceSelectedColor = ColorHelpers.LightGrayColor,
-                ServiceShadow = false,
-                service_image = "ic_cat_cleen.png"
-            });
-            AllServiceList.Add(new ServiceModel()
-            {
-                category_service_name = "Cleaning Serices",
-                ServiceSelectedColor = ColorHelpers.LightGrayColor,
-                ServiceShadow = false,
-                service_image = "ic_cat_fix.png"
-            });
-            AllServiceList.Add(new ServiceModel()
-            {
-                category_service_name = "Cleaning Serices",
-                ServiceSelectedColor = ColorHelpers.LightGrayColor,
-                ServiceShadow = false,
-                service_image = "ic_cat_hosting.png"
-            });
-            AllServiceList.Add(new ServiceModel()
-            {
-                category_service_name = "Cleaning Serices",
-                ServiceSelectedColor = ColorHelpers.LightGrayColor,
-                ServiceShadow = false,
-                service_image = "ic_cat_inside.png"
-            });
-
-            ServiceList = AllServiceList;
         }
         #endregion
 
@@ -130,6 +110,42 @@ namespace BroomService.ViewModels
                     await NavigationService.NavigateAsync(nameof(NotificationPage));
                 });
             }
+        }
+        #endregion
+
+        #region INavigation Aware
+        public void OnNavigatedFrom(INavigationParameters parameters)
+        {
+        }
+
+        public void OnNavigatedTo(INavigationParameters parameters)
+        {
+            if (parameters.ContainsKey("SubSubServiceData"))
+            {
+                var data = (List<SubSubCategory>)parameters["SubSubServiceData"];
+
+                if (data != null && data.Count > 0)
+                {
+                    foreach (var item in data)
+                    {
+                        item.display_Name = item.Name;
+                        item.display_Description = item.Description;
+                        item.display_Icon = Common.IsImagesValid(item.Icon, ApiUrl.SubSubCategoryImageBaseUrl);
+                        item.display_Picture = Common.IsImagesValid(item.Picture, ApiUrl.SubSubCategoryImageBaseUrl);
+                        item.SelectedColor = ColorHelpers.GrayColor;
+                        AllSubSubServiceList.Add(item);
+                    }
+
+                    SubSubServiceList = AllSubSubServiceList;
+                }
+            }
+            if (parameters.ContainsKey("AddJobDataModel"))
+            {
+                AddJobDataModel = (AddJobDataModel)parameters["AddJobDataModel"];
+            }
+
+            SubServiceDescription = AddJobDataModel.DisplaySubServiceDescription;
+            SubServiceName = AddJobDataModel.DisplaySubServiceName;
         }
         #endregion
     }

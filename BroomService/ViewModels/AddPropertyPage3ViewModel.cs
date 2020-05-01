@@ -16,6 +16,7 @@ namespace BroomService.ViewModels
     {
         private readonly INavigationService NavigationService;
         AddPropertyModel AddPropertyModel;
+        PropertyModel SelectedProperty;
         bool IsDoorman;
         bool IsParking;
         bool IsBalcony;
@@ -320,6 +321,10 @@ namespace BroomService.ViewModels
 
                     var param = new NavigationParameters();
                     param.Add("TransferData", AddPropertyModel);
+                    if(SelectedProperty != null)
+                    {
+                        param.Add("PropertyDetail", SelectedProperty);
+                    }
                     await NavigationService.NavigateAsync(nameof(AddPropertyPage4), param);
                 });
             }
@@ -335,6 +340,34 @@ namespace BroomService.ViewModels
             if (parameters.ContainsKey("TransferData"))
             {
                 AddPropertyModel = (AddPropertyModel)parameters["TransferData"];
+            }
+            if (parameters.ContainsKey("PropertyDetail"))
+            {
+                SelectedProperty = (PropertyModel)parameters["PropertyDetail"];
+
+                DoormanImage = SelectedProperty.Doorman.HasValue && SelectedProperty.Doorman.Value ? ImageHelpers.ic_on : ImageHelpers.ic_off;
+                IsDoorman = DoormanImage == ImageHelpers.ic_on ? true : false;
+
+                BalconyImage = SelectedProperty.Balcony.HasValue && SelectedProperty.Balcony.Value ? ImageHelpers.ic_on : ImageHelpers.ic_off;
+                IsBalcony = BalconyImage == ImageHelpers.ic_on ? true : false;
+
+                ParkingImage = SelectedProperty.Parking.HasValue && SelectedProperty.Parking.Value ? ImageHelpers.ic_on : ImageHelpers.ic_off;
+                IsParking = ParkingImage == ImageHelpers.ic_on ? true : false;
+
+                GardenImage = SelectedProperty.Garden.HasValue && SelectedProperty.Garden.Value ? ImageHelpers.ic_on : ImageHelpers.ic_off;
+                IsGarden = GardenImage == ImageHelpers.ic_on ? true : false;
+
+                PoolImage = SelectedProperty.Pool.HasValue && SelectedProperty.Pool.Value ? ImageHelpers.ic_on : ImageHelpers.ic_off;
+                IsPool = PoolImage == ImageHelpers.ic_on ? true : false;
+
+                DishwasherImage = SelectedProperty.Dishwasher.HasValue && SelectedProperty.Dishwasher.Value ? ImageHelpers.ic_on : ImageHelpers.ic_off;
+                IsDishwasher = DishwasherImage == ImageHelpers.ic_on ? true : false;
+
+                ElevatorImage = SelectedProperty.Elevator.HasValue && SelectedProperty.Elevator.Value ? ImageHelpers.ic_on : ImageHelpers.ic_off;
+                IsElevator = ElevatorImage == ImageHelpers.ic_on ? true : false;
+
+                CoffeeImage = SelectedProperty.CoffeeMachine.HasValue && SelectedProperty.CoffeeMachine.Value ? ImageHelpers.ic_on : ImageHelpers.ic_off;
+                IsCoffee = CoffeeImage == ImageHelpers.ic_on ? true : false;
             }
         }
     }

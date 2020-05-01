@@ -2,9 +2,9 @@
 
 namespace BroomService.Views
 {
-    public partial class VideoPlayerPage : ContentPage
+    public partial class SettingPage : ContentPage
     {
-        public VideoPlayerPage()
+        public SettingPage()
         {
 			try
 			{

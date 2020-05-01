@@ -96,11 +96,11 @@
                         <StackLayout HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource LightGrayColor}" Padding="30">
                             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" BackgroundColor="Transparent">
                                 <Label Text="Username :" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center" FontSize="{StaticResource FontSize16}"/>
-                                <Label Text="luxaryvilla" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center" FontSize="{StaticResource FontSize16}"/>
+                                <Label Text="{Binding PropertyUsername}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center" FontSize="{StaticResource FontSize16}"/>
                             </StackLayout>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" BackgroundColor="Transparent">
                                 <Label Text="Password :" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center" FontSize="{StaticResource FontSize16}"/>
-                                <Label Text="luxaryvillabnb" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center" FontSize="{StaticResource FontSize16}"/>
+                                <Label Text="{Binding PropertyPassword}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center" FontSize="{StaticResource FontSize16}"/>
                             </StackLayout>
                         </StackLayout>
                     </StackLayout>

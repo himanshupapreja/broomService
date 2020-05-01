@@ -8,7 +8,7 @@
              BackgroundColor="{StaticResource TransparentColor}"
              x:Class="BroomService.Views.ChooseServicePage">
     <StackLayout BackgroundColor="{StaticResource BlueColor}" Spacing="20" >
-        <views:BackArrowHeader TitleText="Welcome" UserNameText="Emma Wilson" IsBackVisible="True" Margin="0,15"/>
+        <views:BackArrowHeader TitleText="Welcome" UserNameText="{Binding UserName}" IsBackVisible="True" Margin="0,15"/>
 
         <yummy:PancakeView BackgroundColor="{StaticResource WhiteColor}" CornerRadius="60,60,0,0" IsClippedToBounds="True" HasShadow="False" HorizontalOptions="FillAndExpand" Padding="0">
             <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10" Padding="20">
@@ -28,8 +28,8 @@
                                         <Grid>
                                             <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                                                 <StackLayout Orientation="Vertical" Spacing="8" VerticalOptions="FillAndExpand">
-                                                    <Label Text="{Binding category_service_name}" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
-                                                    <Label Text="Lorem Ipsum is simply Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged." Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                                                    <Label Text="{Binding display_Name}" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
+                                                    <Label Text="{Binding display_Description}" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
                                                 </StackLayout>
                                             </StackLayout>
                                         </Grid>
@@ -40,7 +40,11 @@
 
                                 <Grid BackgroundColor="{StaticResource TransparentColor}" Padding="0,10" VerticalOptions="Start" HorizontalOptions="Start" TranslationX="-30">
                                     <!--<img:CircleImage Source="{Binding UserPic}" HorizontalOptions="Center" VerticalOptions="Start" HeightRequest="80" WidthRequest="80" BorderColor="{StaticResource YellowColor}" BorderThickness="2.5"/>-->
-                                    <Image Style="{StaticResource Image70HW}" Source="{Binding service_image}"/>
+                                    <Frame Style="{StaticResource Frame60hw}" Padding="5" CornerRadius="40" BackgroundColor="{StaticResource LightGrayColor}">
+                                        <Frame Style="{StaticResource Frame50hw}" Padding="5" CornerRadius="35" BackgroundColor="{Binding SelectedColor}" HorizontalOptions="Center" VerticalOptions="Center">
+                                            <Image Style="{StaticResource Image40HW}" Source="{Binding display_Icon}" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                        </Frame>
+                                    </Frame>
                                 </Grid>
                             </Grid>
                         </DataTemplate>

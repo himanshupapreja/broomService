@@ -13,9 +13,10 @@ using XF.Material.Forms.UI.Dialogs;
 
 namespace BroomService.ViewModels
 {
-    public class AddPropertyPageViewModel : BaseViewModel
+    public class AddPropertyPageViewModel : BaseViewModel, INavigationAware
     {
         private readonly INavigationService NavigationService;
+        public PropertyModel SelectedProperty;
 
         #region PropertyName
         private string _PropertyName;
@@ -78,6 +79,15 @@ namespace BroomService.ViewModels
         }
         #endregion
 
+        #region PropertyTypeSelectionIndex property
+        private int _PropertyTypeSelectionIndex = -1;
+        public int PropertyTypeSelectionIndex
+        {
+            get => _PropertyTypeSelectionIndex;
+            set { SetProperty(ref _PropertyTypeSelectionIndex, value); }
+        }
+        #endregion
+
         #region Constructor
         public AddPropertyPageViewModel(INavigationService navigationService)
         {
@@ -120,6 +130,10 @@ namespace BroomService.ViewModels
 
                         var param = new NavigationParameters();
                         param.Add("TransferData", dataModel);
+                        if(SelectedProperty != null)
+                        {
+                            param.Add("PropertyDetail", SelectedProperty);
+                        }
                         await NavigationService.NavigateAsync(nameof(AddPropertyPage2), param);
                     }
                     else
@@ -169,6 +183,29 @@ namespace BroomService.ViewModels
                         AccessPropertyAccessImage = ImageHelpers.ic_off;
                     }
                 });
+            }
+        }
+        #endregion
+
+        #region InavigationAware
+        public void OnNavigatedFrom(INavigationParameters parameters)
+        {
+        }
+
+        public void OnNavigatedTo(INavigationParameters parameters)
+        {
+            if (parameters.ContainsKey("PropertyDetail"))
+            {
+                SelectedProperty = (PropertyModel)parameters["PropertyDetail"];
+
+                PropertyName = SelectedProperty.Name;
+                Address = SelectedProperty.Address;
+                var selectedType = PropertyTypeList.Where(x => x.ToLower().Equals(SelectedProperty.Type.ToLower())).ToList().FirstOrDefault();
+                var index = PropertyTypeList.IndexOf(selectedType);
+                PropertyTypeSelectionIndex = index;
+                ShortAirBnbImage = SelectedProperty.ShortTermApartment.HasValue && SelectedProperty.ShortTermApartment.Value ? ImageHelpers.ic_on : ImageHelpers.ic_off;
+                IsAccessPropertyAccessVisible = ShortAirBnbImage == ImageHelpers.ic_off ? false : true;
+                AccessPropertyAccessImage = SelectedProperty.AccesstoCode.HasValue && SelectedProperty.AccesstoCode.Value ? ImageHelpers.ic_on : ImageHelpers.ic_off;
             }
         }
         #endregion

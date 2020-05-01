@@ -23,6 +23,7 @@ namespace BroomService.Droid.CustomRenderers
             element = (CustomPicker)this.Element;
             if (Control != null && this.Element != null && !string.IsNullOrEmpty(element.Icon))
             {
+                Control.TextSize = 12;
                 Control.Background = AddPickerStyles(element.Icon, element.IsBorderDisplay);
                 //Control.SetHintTextColor(Android.Graphics.Color.#533f95); 
             }

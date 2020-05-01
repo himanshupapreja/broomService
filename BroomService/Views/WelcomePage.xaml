@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="http://prismlibrary.com" xmlns:views="clr-namespace:BroomService.Views" xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:prism="http://prismlibrary.com" xmlns:views="clr-namespace:BroomService.Views" xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" xmlns:cc="clr-namespace:BroomService.CustomControls"
              prism:ViewModelLocator.AutowireViewModel="True"
              NavigationPage.HasNavigationBar="False"
              BackgroundColor="{StaticResource TransparentColor}"
              x:Class="BroomService.Views.WelcomePage">
     <StackLayout BackgroundColor="{StaticResource BlueColor}" Spacing="20" >
-        <views:BackArrowHeader TitleText="Welcome" UserNameText="Emma Wilson" IsBackVisible="False" Margin="0,15"/>
+        <views:BackArrowHeader TitleText="Welcome" UserNameText="{Binding UserName}" IsBackVisible="False" Margin="0,15"/>
 
         <yummy:PancakeView BackgroundColor="{StaticResource WhiteColor}" CornerRadius="60,60,0,0" IsClippedToBounds="True" HasShadow="False" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0">
             <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="10">
@@ -36,7 +36,7 @@
                                                     <RowDefinition Height="100"/>
                                                     <RowDefinition Height="Auto"/>
                                                 </Grid.RowDefinitions>
-                                                <Image Grid.Row="0" Source="image1.jpg" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="Fill"/>
+                                                <Image Grid.Row="0" Source="{Binding property_Image_display}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="Fill"/>
                                                 <StackLayout Grid.Row="1" HorizontalOptions="FillAndExpand" Spacing="10" VerticalOptions="FillAndExpand" Padding="10,10">
                                                     <StackLayout Orientation="Horizontal" Spacing="10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                                                         <Label Text="{Binding Name}" Style="{StaticResource Black1BoldLabel}" FontSize="{StaticResource FontSize18}"/>
@@ -60,7 +60,11 @@
                                             </Grid>
                                         </Frame>
 
-                                        <Image Style="{StaticResource Image30HW}" Source="ic_drop_btn.png" VerticalOptions="End" HorizontalOptions="Center" Margin="0,0,0,-12"/>
+                                        <Image Style="{StaticResource Image30HW}" Source="ic_drop_btn.png" VerticalOptions="End" HorizontalOptions="Center" Margin="0,0,0,-12">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Path=BindingContext.PropertyDetailCommand, Source={x:Reference propertyList}}" CommandParameter="{Binding Source={x:Reference propertyListItem}, Path=BindingContext}"/>
+                                            </Image.GestureRecognizers>
+                                        </Image>
                                     </Grid>
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
@@ -92,28 +96,32 @@
                             </StackLayout>
                         </StackLayout>
 
-                        <CollectionView x:Name="propertyAreaList" HeightRequest="250" ItemsSource="{Binding PropertyList}" SelectedItem="{Binding NotificationSelected}" SelectionMode="None" ItemsLayout="HorizontalList" Margin="-10,0"
+                        <CollectionView x:Name="serviceList" HeightRequest="250" ItemsSource="{Binding ServiceList}" SelectionMode="None" ItemsLayout="HorizontalList" Margin="-10,0"
                                 VerticalOptions="FillAndExpand">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid x:Name="propertyAreaListItem" Padding="10,15" WidthRequest="250">
+                                    <Grid x:Name="serviceListItem" Padding="10,15" WidthRequest="250">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
-                                        <Image Grid.Row="0" Source="image1.jpg" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="Fill" Opacity="0.1"/>
+                                        <Image Grid.Row="0" Source="{Binding display_Picture}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="Fill" Opacity="0.1"/>
                                         <Frame CornerRadius="0" Margin="10" OutlineColor="{StaticResource BlueColor}" IsClippedToBounds="True" HasShadow="False" Padding="0,0,0,15" BackgroundColor="{StaticResource TransparentColor}" BorderColor="{StaticResource BlueColor}">
                                             <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="0">
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="Auto"/>
                                                 </Grid.RowDefinitions>
                                                 <StackLayout Grid.Row="0" HorizontalOptions="FillAndExpand" Spacing="10" VerticalOptions="FillAndExpand" Padding="10,10">
-                                                    <Label Text="{Binding category_service_name}" Style="{StaticResource BlueBoldLabel}" FontSize="{StaticResource FontSize20}"/>
+                                                    <cc:MarqueTextlabel Text="{Binding display_Name}" Style="{StaticResource BlueBoldLabel}" FontSize="{StaticResource FontSize20}" MaxLines="1"/>
 
-                                                    <Label Text="Lorem Ipsum is a simple dummy text generatorLorem Ipsum is a simple dummy text generatorLorem Ipsum is a simple dummy text generatorLorem Ipsum is a simple dummy text generatorLorem Ipsum is a simple dummy text generator" HorizontalOptions="Start" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize15}" MaxLines="3" LineBreakMode="WordWrap"/>
+                                                    <cc:CustomLabel Text="{Binding display_Description}" HorizontalOptions="Start" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize15}" MaxLines="3" LineBreakMode="WordWrap"/>
 
 
                                                     <Frame HorizontalOptions="Start" Padding="0" Style="{StaticResource Frame50h}" WidthRequest="80" BackgroundColor="{StaticResource BlueColor}" CornerRadius="3" Margin="0,10,0,0">
                                                         <Image Style="{StaticResource Image20HW}" Source="ic_arrow_next_white.png" HorizontalOptions="Center" VerticalOptions="Center"/>
+
+                                                        <!--<Frame.GestureRecognizers>
+                                                            <TapGestureRecognizer/>
+                                                        </Frame.GestureRecognizers>-->
                                                     </Frame>
                                                 </StackLayout>
                                             </Grid>
@@ -160,6 +168,11 @@
                                 <TapGestureRecognizer Command="{Binding HomeCommand}"/>
                             </Image.GestureRecognizers>
                         </Image>
+                        <!--<Image Grid.Column="3" Style="{StaticResource Image30HW}" Source="ic_setting.png" HorizontalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SettingCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>-->
 
                         <Image Grid.Column="4" Style="{StaticResource Image30HW}" Source="ic_footer_profile.png" HorizontalOptions="Center">
                             <Image.GestureRecognizers>

@@ -17,6 +17,16 @@ namespace BroomService.ViewModels
     {
         private readonly INavigationService NavigationService;
 
+        #region ServiceList
+        public ObservableCollection<CategoryData> AllServiceList = new ObservableCollection<CategoryData>();
+        private ObservableCollection<CategoryData> _ServiceList = new ObservableCollection<CategoryData>();
+        public ObservableCollection<CategoryData> ServiceList
+        {
+            get { return _ServiceList; }
+            set { SetProperty(ref _ServiceList, value); }
+        }
+        #endregion
+
         #region PropertyList
         public ObservableCollection<PropertyModel> AllPropertyList = new ObservableCollection<PropertyModel>();
         private ObservableCollection<PropertyModel> _PropertyList = new ObservableCollection<PropertyModel>();
@@ -33,6 +43,11 @@ namespace BroomService.ViewModels
             NavigationService = navigationService;
 
             GetPropertyList();
+
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                GetServicesList();
+            });
         }
         #endregion
 
@@ -56,6 +71,8 @@ namespace BroomService.ViewModels
                     {
                         foreach(var item in response.data)
                         {
+                            item.PropertyModel.PropertyImages = item.PropertyImages;
+                            item.PropertyModel.property_Image_display = "image1.png";
                             AllPropertyList.Add(item.PropertyModel);
                         }
 
@@ -69,6 +86,79 @@ namespace BroomService.ViewModels
             finally
             {
 
+            }
+        }
+        #endregion
+
+        #region GetServicesList
+        private async void GetServicesList()
+        {
+            try
+            {
+                CategoryResponseModel response;
+                try
+                {
+                    response = await webApiRestClient.GetAsync<CategoryResponseModel>(ApiUrl.GetCategories);
+                }
+                catch(Exception ex)
+                {
+                    response = null;
+                }
+                if(response != null)
+                {
+                    if (response.status)
+                    {
+                        foreach(var item in response.categoryData)
+                        {
+                            item.display_Description = item.Description;
+                            item.display_Name = item.Name;
+                            item.display_Icon = Common.IsImagesValid(item.Icon, ApiUrl.CategoryImageBaseUrl);
+                            item.display_Picture = Common.IsImagesValid(item.Picture, ApiUrl.CategoryImageBaseUrl);
+                            AllServiceList.Add(item);
+                        }
+
+                        ServiceList = AllServiceList;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+            finally
+            {
+
+            }
+        }
+        #endregion
+
+        #region PropertyDetailCommand
+        public Command PropertyDetailCommand
+        {
+            get
+            {
+                return new Command((e) =>
+                {
+                    var item = (PropertyModel)e;
+                    var param = new NavigationParameters();
+                    param.Add("SelectedPropertyDetail", item);
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        await NavigationService.NavigateAsync(nameof(PropertyDetailPage), param);
+                    });
+                });
+            }
+        }
+        #endregion
+
+        #region SettingCommand
+        public Command SettingCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await NavigationService.NavigateAsync(nameof(SettingPage));
+                });
             }
         }
         #endregion

@@ -4,19 +4,19 @@
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              NavigationPage.HasNavigationBar="False"
-             xmlns:views="clr-namespace:BroomService.Views" xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:views="clr-namespace:BroomService.Views" xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" xmlns:cc="clr-namespace:BroomService.CustomControls"
              BackgroundColor="{StaticResource TransparentColor}"
              x:Class="BroomService.Views.ChoosePackagePage">
     <StackLayout BackgroundColor="{StaticResource BlueColor}" Spacing="20" >
-        <views:BackArrowHeader TitleText="Welcome" UserNameText="Emma Wilson" IsBackVisible="True" Margin="0,15"/>
+        <views:BackArrowHeader TitleText="Welcome" UserNameText="{Binding UserName}" IsBackVisible="True" Margin="0,15"/>
 
         <yummy:PancakeView BackgroundColor="{StaticResource WhiteColor}" CornerRadius="60,60,0,0" IsClippedToBounds="True" HasShadow="False" HorizontalOptions="FillAndExpand" Padding="0">
             <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10" Padding="20">
-                <Label Text="Choose Package" Style="{StaticResource Black1BoldCenterLabel}" FontSize="{StaticResource FontSize20}"/>
-                <Label Text="Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum " Style="{StaticResource Black1MediumCenterLabel}" FontSize="{StaticResource FontSize15}"/>
+                <Label Text="{Binding SubServiceName}" Style="{StaticResource Black1BoldCenterLabel}" FontSize="{StaticResource FontSize20}"/>
+                <cc:MarqueTextlabel Text="{Binding SubServiceDescription}" Style="{StaticResource Black1MediumCenterLabel}" FontSize="{StaticResource FontSize15}"/>
 
                 <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                    <CollectionView x:Name="packageList" ItemsSource="{Binding ServiceList}" SelectedItem="{Binding SelectedServiceList}" SelectionMode="Single" SelectionChanged="serviceList_SelectionChanged" ItemsLayout="VerticalList" Margin="-20,0"
+                    <CollectionView x:Name="packageList" ItemsSource="{Binding SubSubServiceList}" SelectedItem="{Binding SelectedSubSubServiceList}" SelectionMode="Single" SelectionChanged="subsubserviceList_SelectionChanged" ItemsLayout="VerticalList" Margin="-20,0"
                                 VerticalOptions="FillAndExpand">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
@@ -29,8 +29,8 @@
                                             <Grid>
                                                 <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                                                     <StackLayout Orientation="Vertical" Spacing="8" VerticalOptions="FillAndExpand">
-                                                        <Label Text="{Binding category_service_name}" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
-                                                        <Label Text="Lorem Ipsum is simply ke a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged." Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
+                                                        <Label Text="{Binding display_Name}" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
+                                                        <Label Text="{Binding display_Description}" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}"/>
                                                     </StackLayout>
                                                 </StackLayout>
                                             </Grid>
@@ -41,7 +41,11 @@
 
                                     <Grid BackgroundColor="{StaticResource TransparentColor}" Padding="0,10" VerticalOptions="Start" HorizontalOptions="Start" TranslationX="-30">
                                         <!--<img:CircleImage Source="{Binding UserPic}" HorizontalOptions="Center" VerticalOptions="Start" HeightRequest="80" WidthRequest="80" BorderColor="{StaticResource YellowColor}" BorderThickness="2.5"/>-->
-                                        <Image Style="{StaticResource Image70HW}" Source="{Binding service_image}"/>
+                                        <Frame Style="{StaticResource Frame60hw}" Padding="5" CornerRadius="40" BackgroundColor="{StaticResource LightGrayColor}">
+                                            <Frame Style="{StaticResource Frame50hw}" Padding="5" CornerRadius="35" BackgroundColor="{Binding SelectedColor}" HorizontalOptions="Center" VerticalOptions="Center">
+                                                <Image Style="{StaticResource Image40HW}" Source="{Binding display_Icon}" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                            </Frame>
+                                        </Frame>
                                     </Grid>
                                 </Grid>
                             </DataTemplate>

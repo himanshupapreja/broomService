@@ -16,6 +16,7 @@ namespace BroomService.ViewModels
     {
         private readonly INavigationService NavigationService;
         AddPropertyModel AddPropertyModel;
+        PropertyModel SelectedProperty;
         string Size;
         string Bedroom;
         string Bathroom;
@@ -81,8 +82,8 @@ namespace BroomService.ViewModels
             get => _BathroomSelected;
             set 
             { 
-                SetProperty(ref _BathroomSelected, value); 
-                if(BathroomSelected != null)
+                SetProperty(ref _BathroomSelected, value);
+                if (BathroomSelected != null && IsMoreBathroomVisible)
                 {
                     Bathroom = BathroomSelected;
                 }
@@ -161,8 +162,8 @@ namespace BroomService.ViewModels
             get => _ToiletSelected;
             set 
             { 
-                SetProperty(ref _ToiletSelected, value); 
-                if(ToiletSelected != null)
+                SetProperty(ref _ToiletSelected, value);
+                if (ToiletSelected != null && IsMoreToiletVisible)
                 {
                     Toilets = ToiletSelected;
                 }
@@ -241,8 +242,8 @@ namespace BroomService.ViewModels
             get => _BedroomSelected;
             set 
             { 
-                SetProperty(ref _BedroomSelected, value); 
-                if(BedroomSelected != null)
+                SetProperty(ref _BedroomSelected, value);
+                if (BedroomSelected != null && IsMoreBedroomVisible)
                 {
                     Bedroom = BedroomSelected;
                 }
@@ -320,8 +321,8 @@ namespace BroomService.ViewModels
             get => _SizeListSelected;
             set 
             { 
-                SetProperty(ref _SizeListSelected, value); 
-                if(SizeListSelected != null)
+                SetProperty(ref _SizeListSelected, value);
+                if (SizeListSelected != null && IsMoreSizeVisible)
                 {
                     Size = SizeListSelected;
                 }
@@ -502,6 +503,9 @@ namespace BroomService.ViewModels
             IsPropertyPopupVisible = false;
 
             Size = "20-40";
+            Bedroom = "1";
+            Bathroom = "1";
+            Toilets = "1";
         }
         #endregion
 
@@ -1057,6 +1061,11 @@ namespace BroomService.ViewModels
 
                     var param = new NavigationParameters();
                     param.Add("TransferData", AddPropertyModel);
+
+                    if(SelectedProperty != null)
+                    {
+                        param.Add("PropertyDetail", SelectedProperty);
+                    }
                     await NavigationService.NavigateAsync(nameof(AddPropertyPage5), param);
                     //await NavigationService.NavigateAsync(nameof(AddPropertyPage4));
                 });
@@ -1088,6 +1097,178 @@ namespace BroomService.ViewModels
             if (parameters.ContainsKey("TransferData"))
             {
                 AddPropertyModel = (AddPropertyModel)parameters["TransferData"];
+            }
+            if (parameters.ContainsKey("PropertyDetail"))
+            {
+                SelectedProperty = (PropertyModel)parameters["PropertyDetail"];
+
+                if (SelectedProperty.Size.Equals("20-40"))
+                {
+                    IsMoreSizeVisible = false;
+                    Size1RadioButtonImage = ImageHelpers.ic_radio_select;
+                    Size2RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                    Size3RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                    Size4RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                }
+                else if (SelectedProperty.Size.Equals("45-60"))
+                {
+                    IsMoreSizeVisible = false;
+                    Size1RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                    Size2RadioButtonImage = ImageHelpers.ic_radio_select;
+                    Size3RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                    Size4RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                }
+                else if (SelectedProperty.Size.Equals("65-90"))
+                {
+                    IsMoreSizeVisible = false;
+                    Size1RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                    Size2RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                    Size3RadioButtonImage = ImageHelpers.ic_radio_select;
+                    Size4RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                }
+                else
+                {
+                    IsMoreSizeVisible = true;
+                    Size1RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                    Size2RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                    Size3RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                    Size4RadioButtonImage = ImageHelpers.ic_radio_select;
+
+                    var index = SizeList.IndexOf(SelectedProperty.Size);
+                    SizeListIndexSelected = index;
+                }
+
+                Size = SelectedProperty.Size;
+
+                if (SelectedProperty.NoOfBedRooms.Equals(1))
+                {
+                    IsMoreBedroomVisible = false;
+                    Bedroom1RadioButtonImage = ImageHelpers.ic_radio_select;
+                    Bedroom2RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                    Bedroom3RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                    BedroomMoreRadioButtonImage = ImageHelpers.ic_radio_unselect;
+                }
+                else if (SelectedProperty.NoOfBedRooms.Equals(2))
+                {
+                    IsMoreBedroomVisible = false;
+                    Bedroom1RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                    Bedroom2RadioButtonImage = ImageHelpers.ic_radio_select;
+                    Bedroom3RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                    BedroomMoreRadioButtonImage = ImageHelpers.ic_radio_unselect;
+                }
+                else if (SelectedProperty.NoOfBedRooms.Equals(3))
+                {
+                    IsMoreBedroomVisible = false;
+                    Bedroom1RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                    Bedroom2RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                    Bedroom3RadioButtonImage = ImageHelpers.ic_radio_select;
+                    BedroomMoreRadioButtonImage = ImageHelpers.ic_radio_unselect;
+                }
+                else
+                {
+                    IsMoreBedroomVisible = true;
+                    Bedroom1RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                    Bedroom2RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                    Bedroom3RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                    BedroomMoreRadioButtonImage = ImageHelpers.ic_radio_select;
+
+                    var index = BedroomList.IndexOf(SelectedProperty.NoOfBedRooms.Value.ToString());
+                    BedroomIndexSelected = index;
+                }
+
+                Bedroom = SelectedProperty.NoOfBedRooms.Value.ToString();
+
+                if (SelectedProperty.NoOfBathrooms.Equals(1))
+                {
+                    IsMoreBathroomVisible = false;
+                    Bathroom1RadioButtonImage = ImageHelpers.ic_radio_select;
+                    Bathroom2RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                    Bathroom3RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                    BathroomMoreRadioButtonImage = ImageHelpers.ic_radio_unselect;
+                }
+                else if (SelectedProperty.NoOfBathrooms.Equals(2))
+                {
+                    IsMoreBathroomVisible = false;
+                    Bathroom1RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                    Bathroom2RadioButtonImage = ImageHelpers.ic_radio_select;
+                    Bathroom3RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                    BathroomMoreRadioButtonImage = ImageHelpers.ic_radio_unselect;
+                }
+                else if (SelectedProperty.NoOfBathrooms.Equals(3))
+                {
+                    IsMoreBathroomVisible = false;
+                    Bathroom1RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                    Bathroom2RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                    Bathroom3RadioButtonImage = ImageHelpers.ic_radio_select;
+                    BathroomMoreRadioButtonImage = ImageHelpers.ic_radio_unselect;
+                }
+                else
+                {
+                    IsMoreBathroomVisible = true;
+                    Bathroom1RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                    Bathroom2RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                    Bathroom3RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                    BathroomMoreRadioButtonImage = ImageHelpers.ic_radio_select;
+
+                    var index = BathroomList.IndexOf(SelectedProperty.NoOfBathrooms.Value.ToString());
+                    BathroomIndexSelected = index;
+                }
+
+                Bathroom = SelectedProperty.NoOfBathrooms.Value.ToString();
+
+                if (SelectedProperty.NoOfToilets.Equals(1))
+                {
+                    IsMoreToiletVisible = false;
+                    Toilets1RadioButtonImage = ImageHelpers.ic_radio_select;
+                    Toilets2RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                    Toilets3RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                    ToiletsMoreRadioButtonImage = ImageHelpers.ic_radio_unselect;
+                }
+                else if (SelectedProperty.NoOfToilets.Equals(2))
+                {
+                    IsMoreToiletVisible = false;
+                    Toilets1RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                    Toilets2RadioButtonImage = ImageHelpers.ic_radio_select;
+                    Toilets3RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                    ToiletsMoreRadioButtonImage = ImageHelpers.ic_radio_unselect;
+                }
+                else if (SelectedProperty.NoOfToilets.Equals(3))
+                {
+                    IsMoreToiletVisible = false;
+                    Toilets1RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                    Toilets2RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                    Toilets3RadioButtonImage = ImageHelpers.ic_radio_select;
+                    ToiletsMoreRadioButtonImage = ImageHelpers.ic_radio_unselect;
+                }
+                else
+                {
+                    IsMoreToiletVisible = true;
+                    Toilets1RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                    Toilets2RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                    Toilets3RadioButtonImage = ImageHelpers.ic_radio_unselect;
+                    ToiletsMoreRadioButtonImage = ImageHelpers.ic_radio_select;
+
+                    var index = ToiletList.IndexOf(SelectedProperty.NoOfToilets.Value.ToString());
+                    ToiletIndexSelected = index;
+                }
+
+                Toilets = SelectedProperty.NoOfToilets.Value.ToString();
+
+
+                DoubleBedImage = SelectedProperty.NoOfDoubleBeds.HasValue && SelectedProperty.NoOfDoubleBeds.Value > 0 ? ImageHelpers.ic_on : ImageHelpers.ic_off;
+                DoubleBedCount = SelectedProperty.NoOfDoubleBeds.HasValue && SelectedProperty.NoOfDoubleBeds.Value > 0 ? SelectedProperty.NoOfDoubleBeds.Value : 0;
+
+                KingBedImage = SelectedProperty.IsKingBed.HasValue && SelectedProperty.IsKingBed.Value ? ImageHelpers.ic_on : ImageHelpers.ic_off;
+                IsKingBedVisible = SelectedProperty.IsKingBed.HasValue ? SelectedProperty.IsKingBed.Value : false;
+
+                SingleBedImage = SelectedProperty.IsSingleBed.HasValue && SelectedProperty.IsSingleBed.Value ? ImageHelpers.ic_on : ImageHelpers.ic_off;
+                SingleBedCount = SelectedProperty.NoOfSingleBeds.HasValue && SelectedProperty.NoOfSingleBeds.Value > 0 ? SelectedProperty.NoOfSingleBeds.Value : 0;
+                IsSingleBedCountVisible = SelectedProperty.IsSingleBed.HasValue ? SelectedProperty.IsSingleBed.Value : false;
+
+                SofaBedImage = SelectedProperty.IsSofaBed.HasValue && SelectedProperty.IsSofaBed.Value ? ImageHelpers.ic_on : ImageHelpers.ic_off;
+                SingleSofaBedCount = SelectedProperty.NoOfSingleSofaBeds.HasValue && SelectedProperty.NoOfSingleSofaBeds.Value > 0 ? SelectedProperty.NoOfSingleSofaBeds.Value : 0;
+                DoubleSofaBedCount = SelectedProperty.NoOfDoubleSofaBeds.HasValue && SelectedProperty.NoOfDoubleSofaBeds.Value > 0 ? SelectedProperty.NoOfDoubleSofaBeds.Value : 0;
+                IsSofaBedCountVisible = SelectedProperty.IsSofaBed.HasValue ? SelectedProperty.IsSofaBed.Value : false;
             }
         } 
         #endregion
