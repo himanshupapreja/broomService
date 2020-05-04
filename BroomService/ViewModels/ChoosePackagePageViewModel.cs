@@ -64,7 +64,7 @@ namespace BroomService.ViewModels
 
                     AddJobDataModel.SelectedService = SelectedSubSubServiceList.display_Name;
                     AddJobDataModel.SelectedServiceDescription = SelectedSubSubServiceList.display_Description;
-                    AddJobDataModel.SelectedServiceId = SelectedSubSubServiceList.Id;
+                    AddJobDataModel.SelectedSubSubServiceId = SelectedSubSubServiceList.Id;
 
                     var selectedIndex = SubSubServiceList.IndexOf(SelectedSubSubServiceList);
                     SubSubServiceList[selectedIndex].SelectedColor = ColorHelpers.BlueColor;

@@ -19,8 +19,8 @@ namespace BroomService.Models
         //public string SelectedSubService { get; set; }
         //public string SelectedSubSubService { get; set; }
         public long SelectedServiceId { get; set; }
-        //public long SelectedSubServiceId { get; set; }
-        //public long SelectedSubSubServiceId { get; set; }
+        public long SelectedSubServiceId { get; set; }
+        public long SelectedSubSubServiceId { get; set; }
 
 
 

@@ -4,12 +4,14 @@ using BroomService.Models;
 using BroomService.Views;
 using Prism.Commands;
 using Prism.Mvvm;
+using Xamarin.Essentials;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Xamarin.Forms;
+using Newtonsoft.Json;
 
 namespace BroomService.ViewModels
 {
@@ -77,6 +79,10 @@ namespace BroomService.ViewModels
                         }
 
                         PropertyList = AllPropertyList;
+
+
+                        var propertyListJson = JsonConvert.SerializeObject(response);
+                        await SecureStorage.SetAsync("PropertyList", propertyListJson);
                     }
                 }
             }

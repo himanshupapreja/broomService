@@ -13,6 +13,7 @@ namespace BroomService.Helpers
         public const string ApiBaseUrl = BaseUrl + "/api/";
         public const string ImageBaseUrl = BaseUrl + "/Images/Property/";
         public static readonly string ReferenceImageBaseUrl = BaseUrl + "/Images/JobRequest/";
+        public static readonly string InventoryImageBaseUrl = BaseUrl + "/Images/Inventory/";
         public static readonly string CategoryImageBaseUrl = ImageUrl + "/Images/Category/";
         public static readonly string SubCategoryImageBaseUrl = ImageUrl + "/Images/SubCategory/";
         public static readonly string SubSubCategoryImageBaseUrl = ImageUrl + "/Images/SubSubCategory/";

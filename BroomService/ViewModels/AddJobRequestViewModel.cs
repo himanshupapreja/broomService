@@ -2,6 +2,7 @@
 using BroomService.Helpers;
 using BroomService.Models;
 using BroomService.Views;
+using ImTools;
 using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -11,6 +12,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using XF.Material.Forms.Dialogs;
 using XF.Material.Forms.UI.Dialogs;
@@ -21,6 +23,29 @@ namespace BroomService.ViewModels
     {
         private readonly INavigationService NavigationService;
         AddJobDataModel AddJobDataModel = new AddJobDataModel();
+        bool IsFastOrder;
+        List<InventoryDataModel> inventoryData;
+
+        List<PropertyModel> AllPropertyList = new List<PropertyModel>();
+
+        #region InventoryAddedList
+        private ObservableCollection<InventoryAddedListModel> _InventoryAddedList = new ObservableCollection<InventoryAddedListModel>();
+        public ObservableCollection<InventoryAddedListModel> InventoryAddedList
+        {
+            get { return _InventoryAddedList; }
+            set { SetProperty(ref _InventoryAddedList, value); }
+        }
+        #endregion
+
+        #region InventoryAddedListHeight Property
+        private double _InventoryAddedListHeight;
+
+        public double InventoryAddedListHeight
+        {
+            get { return _InventoryAddedListHeight; }
+            set { SetProperty(ref _InventoryAddedListHeight, value); }
+        }
+        #endregion
 
         #region InventoryList
         private ObservableCollection<InventoryDataModel> AllInventoryList = new ObservableCollection<InventoryDataModel>();
@@ -35,6 +60,51 @@ namespace BroomService.ViewModels
         /// <summary>
         /// IsVisible
         /// </summary>
+
+        #region IsAddedInventoryProperty
+        private bool _IsAddedInventoryProperty = false;
+        public bool IsAddedInventoryProperty
+        {
+            get { return _IsAddedInventoryProperty; }
+            set { SetProperty(ref _IsAddedInventoryProperty, value); }
+        }
+        #endregion
+
+        #region IsSearchProperty
+        private bool _IsSearchProperty = false;
+        public bool IsSearchProperty
+        {
+            get { return _IsSearchProperty; }
+            set { SetProperty(ref _IsSearchProperty, value); }
+        }
+        #endregion
+
+        #region IsFastorderPopup
+        private bool _IsFastorderPopup = false;
+        public bool IsFastorderPopup
+        {
+            get { return _IsFastorderPopup; }
+            set { SetProperty(ref _IsFastorderPopup, value); }
+        }
+        #endregion
+
+        #region IsPropertyPopup
+        private bool _IsPropertyPopup = false;
+        public bool IsPropertyPopup
+        {
+            get { return _IsPropertyPopup; }
+            set { SetProperty(ref _IsPropertyPopup, value); }
+        }
+        #endregion
+
+        #region IsInventoryPopup
+        private bool _IsInventoryPopup = false;
+        public bool IsInventoryPopup
+        {
+            get { return _IsInventoryPopup; }
+            set { SetProperty(ref _IsInventoryPopup, value); }
+        }
+        #endregion
 
         #region IsPackageListVisible
         private bool _IsPackageListVisible = false;
@@ -88,6 +158,15 @@ namespace BroomService.ViewModels
             get { return _IsAnotherService; }
             set { SetProperty(ref _IsAnotherService, value); }
         }
+        #endregion
+
+        #region IsProperty
+        private bool _IsProperty;
+        public bool IsProperty
+        {
+            get { return _IsProperty; }
+            set { SetProperty(ref _IsProperty, value); }
+        } 
         #endregion
 
         #region IsInventory
@@ -145,7 +224,7 @@ namespace BroomService.ViewModels
             get { return _CheckListHeight; }
             set { SetProperty(ref _CheckListHeight, value); }
         }
-        #endregion
+        # endregion
 
 
 
@@ -171,8 +250,84 @@ namespace BroomService.ViewModels
 
 
 
+        #region InventoryPropertySelected
+        private SelectedPropertyListModel _InventoryPropertySelected;
+        public SelectedPropertyListModel InventoryPropertySelected
+        {
+            get { return _InventoryPropertySelected; }
+            set { SetProperty(ref _InventoryPropertySelected, value); }
+        }
+        #endregion
+
+        #region InventoryPropertyList
+        private ObservableCollection<SelectedPropertyListModel> _InventoryPropertyList = new ObservableCollection<SelectedPropertyListModel>();
+        public ObservableCollection<SelectedPropertyListModel> InventoryPropertyList
+        {
+            get { return _InventoryPropertyList; }
+            set { SetProperty(ref _InventoryPropertyList, value); }
+        }
+
+        #endregion
+
+        #region Another ProeprtyList
+        private ObservableCollection<PropertyModel> _AnotherPropertyList = new ObservableCollection<PropertyModel>();
+        public ObservableCollection<PropertyModel> AnotherPropertyList
+        {
+            get { return _AnotherPropertyList; }
+            set { SetProperty(ref _AnotherPropertyList, value); }
+        }
+
+        
+        private PropertyModel _SelectedAnotherProperty;
+        public PropertyModel SelectedAnotherProperty
+        {
+            get { return _SelectedAnotherProperty; }
+            set 
+            { 
+                SetProperty(ref _SelectedAnotherProperty, value); 
+                if(SelectedAnotherProperty != null)
+                {
+                    var existData = SelectedPropertyList.Where(x => x.property_id == SelectedAnotherProperty.Id.Value).ToList().FirstOrDefault();
+                    if (existData == null)
+                    {
+                        SelectedPropertyList.Add(new SelectedPropertyListModel
+                        {
+                            PropertyName = SelectedAnotherProperty.Name,
+                            PropertyAddress = SelectedAnotherProperty.Address,
+                            PropertyNameAddress = SelectedAnotherProperty.Name + ", " + SelectedAnotherProperty.Address,
+                            property_id = SelectedAnotherProperty.Id.Value,
+                            IsShortTermAirBnb = SelectedAnotherProperty.ShortTermApartment.HasValue ? SelectedAnotherProperty.ShortTermApartment.Value : false,
+                            IsInventoryAdded = false
+                        });
+                        var shortTermPropertydata = SelectedPropertyList.Where(x => x.IsShortTermAirBnb).ToList();
+                        if (shortTermPropertydata != null && shortTermPropertydata.Count > 0)
+                        {
+                            IsInventoryShows = true;
+                        }
+                        else
+                        {
+                            IsInventoryShows = false;
+                        }
+                        AddedPropertyList.Add(SelectedAnotherProperty.Id.Value);
+                        PropertyListHeight = (55 * SelectedPropertyList.Count) + 10;
+
+                        IsPropertyPopup = false;
+                        PropertyName = string.Empty;
+                    }
+                    else
+                    {
+                        MaterialDialog.Instance.SnackbarAsync("Property Already added.", 1000);
+                    }
+                }
+            }
+        }
+
+
+        #endregion
+
+
         #region SelectedPropertyList
-        private List<string> AddedPropertyList = new List<string>();
+        private List<long> AddedPropertyList = new List<long>();
         private ObservableCollection<SelectedPropertyListModel> _SelectedPropertyList = new ObservableCollection<SelectedPropertyListModel>();
         public ObservableCollection<SelectedPropertyListModel> SelectedPropertyList
         {
@@ -194,7 +349,6 @@ namespace BroomService.ViewModels
 
 
         #region SelectedServiceList
-        private List<string> AddedServiceList = new List<string>();
         private ObservableCollection<SelectedServiceListModel> _SelectedServiceList = new ObservableCollection<SelectedServiceListModel>();
         public ObservableCollection<SelectedServiceListModel> SelectedServiceList
         {
@@ -219,6 +373,15 @@ namespace BroomService.ViewModels
         /// <summary>
         /// Label/Entry 
         /// </summary>
+
+        #region FastOrderName
+        private string _FastOrderName;
+        public string FastOrderName
+        {
+            get { return _FastOrderName; }
+            set { SetProperty(ref _FastOrderName, value); }
+        } 
+        #endregion
 
         #region Description
         private string _Description;
@@ -279,7 +442,33 @@ namespace BroomService.ViewModels
         public string PropertyName
         {
             get { return _PropertyName; }
-            set { SetProperty(ref _PropertyName, value); }
+            set 
+            { 
+                SetProperty(ref _PropertyName, value); 
+                if(!string.IsNullOrEmpty(PropertyName) && !string.IsNullOrWhiteSpace(PropertyName))
+                {
+                    if (AllPropertyList != null && AllPropertyList.Count > 0)
+                    {
+                        try
+                        {
+                            IsSearchProperty = true;
+                            AnotherPropertyList = new ObservableCollection<PropertyModel>(AllPropertyList.Where(x => !string.IsNullOrEmpty(x.Name) && x.Name.ToLower().StartsWith(PropertyName)).ToList());
+                        }
+                        catch (Exception ex)
+                        {
+                        }
+                        
+                    }
+                    else
+                    {
+                        MaterialDialog.Instance.SnackbarAsync("Currently there is no property available", 1000);
+                    }
+                }
+                else
+                {
+                    IsSearchProperty = false;
+                }
+            }
         }
         #endregion
 
@@ -407,6 +596,8 @@ namespace BroomService.ViewModels
 
 
 
+
+
         /// <summary>
         /// Images
         /// </summary>
@@ -417,6 +608,15 @@ namespace BroomService.ViewModels
         {
             get { return _AnotherPropertyImage; }
             set { SetProperty(ref _AnotherPropertyImage, value); }
+        }
+        #endregion
+
+        #region TotalPrice
+        private double _TotalPrice = 0;
+        public double TotalPrice
+        {
+            get { return _TotalPrice; }
+            set { SetProperty(ref _TotalPrice, value); }
         } 
         #endregion
 
@@ -435,6 +635,15 @@ namespace BroomService.ViewModels
         {
             get { return _CheckListImage; }
             set { SetProperty(ref _CheckListImage, value); }
+        }
+        #endregion
+
+        #region PropertyImage
+        private string _PropertyImage = ImageHelpers.ic_off;
+        public string PropertyImage
+        {
+            get { return _PropertyImage; }
+            set { SetProperty(ref _PropertyImage, value); }
         } 
         #endregion
 
@@ -453,6 +662,15 @@ namespace BroomService.ViewModels
         {
             get { return _AnotherServiceImage; }
             set { SetProperty(ref _AnotherServiceImage, value); }
+        }
+        #endregion
+
+        #region RepeatServiceImage
+        private string _RepeatServiceImage = ImageHelpers.ic_off;
+        public string RepeatServiceImage
+        {
+            get { return _RepeatServiceImage; }
+            set { SetProperty(ref _RepeatServiceImage, value); }
         } 
         #endregion
 
@@ -462,6 +680,15 @@ namespace BroomService.ViewModels
         {
             get { return _DescriptionImage; }
             set { SetProperty(ref _DescriptionImage, value); }
+        }
+        #endregion
+
+        #region FastOrderImage
+        private string _FastOrderImage = ImageHelpers.ic_checkbox_uncheck;
+        public string FastOrderImage
+        {
+            get { return _FastOrderImage; }
+            set { SetProperty(ref _FastOrderImage, value); }
         } 
         #endregion
 
@@ -469,6 +696,7 @@ namespace BroomService.ViewModels
         public AddJobRequestViewModel(INavigationService navigationService)
         {
             NavigationService = navigationService;
+            IsFastOrder = false;
         }
         #endregion
 
@@ -524,6 +752,19 @@ namespace BroomService.ViewModels
         }
         #endregion
 
+        #region AddPropertyCommand
+        public Command AddPropertyCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    IsPropertyPopup = true;
+                });
+            }
+        }
+        #endregion
+
         #region AddInventryCommand
         public Command AddInventryCommand
         {
@@ -531,15 +772,29 @@ namespace BroomService.ViewModels
             {
                 return new Command(() =>
                 {
-                    if (InventoryImage.Equals(ImageHelpers.ic_off))
+                    InventoryPropertyList = new ObservableCollection<SelectedPropertyListModel>(SelectedPropertyList.Where(x => x.IsShortTermAirBnb && !x.IsInventoryAdded).ToList());
+
+                    if (InventoryPropertyList != null && InventoryPropertyList.Count > 0)
                     {
-                        InventoryImage = ImageHelpers.ic_on;
-                        IsInventory = true;
+                        if (inventoryData != null && inventoryData.Count > 0)
+                        {
+                            AllInventoryList.Clear();
+                            foreach (var item in inventoryData)
+                            {
+                                item.display_Image = Common.IsImagesValid(item.Image, ApiUrl.InventoryImageBaseUrl);
+                                item.InventoryOrderCount = 0;
+
+                                AllInventoryList.Add(item);
+                            }
+
+                            InventoryList = AllInventoryList;
+                        }
+                        IsInventoryPopup = true;
                     }
                     else
                     {
-                        InventoryImage = ImageHelpers.ic_off;
-                        IsInventory = false;
+                        IsInventoryPopup = false;
+                        MaterialDialog.Instance.SnackbarAsync("There is no more property to add inventory.", 1000);
                     }
                 });
             }
@@ -586,7 +841,9 @@ namespace BroomService.ViewModels
                             SelectedServiceList.Add(new SelectedServiceListModel
                             {
                                 ServiceName = SubSubServiceListSelected.display_Name,
-                                service_id = SubSubServiceListSelected.Id
+                                SubSubCategoryyId = SubSubServiceListSelected.Id,
+                                CategoryId = ServiceListSelected.Id,
+                                SubCategoryId = SubServiceListSelected.Id
                             });
                             ServiceListHeight = (55 * SelectedServiceList.Count) + 10;
 
@@ -603,7 +860,9 @@ namespace BroomService.ViewModels
                             SelectedServiceList.Add(new SelectedServiceListModel
                             {
                                 ServiceName = SubServiceListSelected.display_Name,
-                                service_id = SubServiceListSelected.Id
+                                CategoryId = ServiceListSelected.Id,
+                                SubCategoryId = SubServiceListSelected.Id,
+                                SubSubCategoryyId = 0
                             });
                             ServiceListHeight = (55 * SelectedServiceList.Count) + 10;
 
@@ -611,6 +870,28 @@ namespace BroomService.ViewModels
                             ServiceListSelected = null;
                             SubServiceListSelected = null;
                         }
+                    }
+                });
+            }
+        }
+        #endregion
+
+        #region PropertyCommand
+        public Command PropertyCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    if (PropertyImage.Equals(ImageHelpers.ic_off))
+                    {
+                        PropertyImage = ImageHelpers.ic_on;
+                        IsProperty = true;
+                    }
+                    else
+                    {
+                        PropertyImage = ImageHelpers.ic_off;
+                        IsProperty = false;
                     }
                 });
             }
@@ -639,6 +920,159 @@ namespace BroomService.ViewModels
         }
         #endregion
 
+        #region InventoryCountMinusCommand
+        public Command InventoryCountMinusCommand
+        {
+            get
+            {
+                return new Command((e) =>
+                {
+                    var item = (InventoryDataModel)e;
+                    try
+                    {
+                        if (item.InventoryOrderCount > 0)
+                        {
+                            item.InventoryOrderCount = item.InventoryOrderCount - 1;
+                            TotalPrice = TotalPrice - item.Price.Value;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                    }
+                });
+            }
+        }
+        #endregion
+
+        #region InventoryCountPlusCommand
+        public Command InventoryCountPlusCommand
+        {
+            get
+            {
+                return new Command(async(e) =>
+                {
+                    var item = (InventoryDataModel)e;
+                    try
+                    {
+                        if (item.Stock.HasValue)
+                        {
+                            if (item.InventoryOrderCount < item.Stock.Value)
+                            {
+                                TotalPrice = TotalPrice + item.Price.Value;
+                                item.InventoryOrderCount = item.InventoryOrderCount + 1;
+                            }
+                        }
+                        else
+                        {
+                            await MaterialDialog.Instance.SnackbarAsync("Currently there is no item in the stock. Please try again after some time.", 3000);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                    }
+                });
+            }
+        }
+        #endregion
+
+        #region AnotherPropertyCloseCommand
+        public Command AnotherPropertyCloseCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    IsPropertyPopup = false;
+                    PropertyName = string.Empty;
+                });
+            }
+        }
+        #endregion
+
+        #region InventoryPopupCloseCommand
+        public Command InventoryPopupCloseCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    IsInventoryPopup = false;
+                    InventoryList = AllInventoryList;
+                });
+            }
+        }
+        #endregion
+
+        #region AddInventoryButton
+        public Command AddInventoryButton
+        {
+            get
+            {
+                return new Command(async() =>
+                {
+                    if (InventoryPropertySelected != null)
+                    {
+                        IsInventoryPopup = false;
+
+                        foreach (var item in InventoryList)
+                        {
+                            if (item.InventoryOrderCount > 0)
+                            {
+                                InventoryAddedList.Add(new InventoryAddedListModel
+                                {
+                                    InventoryId = item.InventoryId,
+                                    InventoryName = item.Name,
+                                    PropertyName = InventoryPropertySelected.PropertyName,
+                                    PropertyId = InventoryPropertySelected.property_id,
+                                    Qty = item.InventoryOrderCount
+                                });
+                            }
+                            else
+                            {
+
+                            }
+                        }
+
+                        
+
+                        InventoryAddedListHeight = (55 * InventoryAddedList.Count) + 10;
+
+                        if (inventoryData != null && inventoryData.Count > 0)
+                        {
+                            AllInventoryList.Clear();
+                            foreach (var item in inventoryData)
+                            {
+                                item.display_Image = Common.IsImagesValid(item.Image, ApiUrl.InventoryImageBaseUrl);
+                                item.InventoryOrderCount = 0;
+
+                                AllInventoryList.Add(item);
+                            }
+
+                            InventoryList = AllInventoryList;
+                        }
+
+                        if (InventoryAddedList != null && InventoryAddedList.Count > 0)
+                        {
+                            var propertyListData = SelectedPropertyList.Where(x => x.property_id == InventoryPropertySelected.property_id).ToList().FirstOrDefault();
+                            var propertyDataIndex = SelectedPropertyList.IndexOf(propertyListData);
+                            SelectedPropertyList[propertyDataIndex].IsInventoryAdded = true;
+
+                            IsAddedInventoryProperty = true;
+                        }
+                        else
+                        {
+                            IsAddedInventoryProperty = false;
+                        }
+                    }
+                    else
+                    {
+                        await MaterialDialog.Instance.SnackbarAsync("Please select property.", 1000);
+                    }
+                });
+            }
+        }
+        #endregion
+
         #region AnotherServiceCommand
         public Command AnotherServiceCommand
         {
@@ -655,6 +1089,26 @@ namespace BroomService.ViewModels
                     {
                         AnotherServiceImage = ImageHelpers.ic_off;
                         IsAnotherService = false;
+                    }
+                });
+            }
+        }
+        #endregion
+
+        #region RepeatServiceCommand
+        public Command RepeatServiceCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    if (RepeatServiceImage.Equals(ImageHelpers.ic_off))
+                    {
+                        RepeatServiceImage = ImageHelpers.ic_on;
+                    }
+                    else
+                    {
+                        RepeatServiceImage = ImageHelpers.ic_off;
                     }
                 });
             }
@@ -683,6 +1137,28 @@ namespace BroomService.ViewModels
         }
         #endregion
 
+        #region FastOrderCommand
+        public Command FastOrderCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    if (FastOrderImage.Equals(ImageHelpers.ic_checkbox_uncheck))
+                    {
+                        FastOrderImage = ImageHelpers.ic_checkbox_check;
+                        IsFastOrder = true;
+                    }
+                    else
+                    {
+                        FastOrderImage = ImageHelpers.ic_checkbox_uncheck;
+                        IsFastOrder = false;
+                    }
+                });
+            }
+        }
+        #endregion
+
         #region BackIconCommand
         public Command BackIconCommand
         {
@@ -691,6 +1167,40 @@ namespace BroomService.ViewModels
                 return new Command(async () =>
                 {
                     await NavigationService.GoBackAsync();
+                });
+            }
+        }
+        #endregion
+
+        #region FastOrderCloseCommand
+        public Command FastOrderCloseCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    IsFastorderPopup = false;
+                    FastOrderName = string.Empty;
+                });
+            }
+        }
+        #endregion
+
+        #region FastOrderNextButton
+        public Command FastOrderNextButton
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    if (!string.IsNullOrEmpty(FastOrderName) && !string.IsNullOrWhiteSpace(FastOrderName))
+                    {
+                        AddJobApiCall();
+                    }
+                    else
+                    {
+                        await MaterialDialog.Instance.SnackbarAsync("Please enter Fast order Name.", 1000);
+                    }
                 });
             }
         }
@@ -705,59 +1215,15 @@ namespace BroomService.ViewModels
                 {
                     if (!string.IsNullOrEmpty(StartDate) && !string.IsNullOrWhiteSpace(StartDate) && StartDate != "Click here to choose the start date")
                     {
-                        try
+                        if (IsFastOrder)
                         {
-                            UserDialogs.Instance.ShowLoading();
-                            string boundary = "---8d0f01e6b3b5dafaaadaad";
-                            MultipartFormDataContent multipartContent = new MultipartFormDataContent(boundary);
-                            multipartContent.Add(new StringContent(StartDate), "JobStartDateTime");
-                            if (!string.IsNullOrWhiteSpace(Description) && !string.IsNullOrEmpty(Description))
-                            {
-                                multipartContent.Add(new StringContent(Description), "JobDesc"); 
-                            }
-                            multipartContent.Add(new StringContent(userId.ToString()), "UserId");
-                            if (!string.IsNullOrEmpty(EndTime) && !string.IsNullOrWhiteSpace(EndTime) && EndTime != "Click here to choose the end time")
-                            {
-                                multipartContent.Add(new StringContent(EndTime), "JobEndDateTime");
-                            }
-                            multipartContent.Add(new StringContent(AddJobDataModel.SelectedServiceId.ToString()), "CategoryId");
-                            if (AddedCheckList != null && AddedCheckList.Count > 0)
-                            {
-                                multipartContent.Add(new StringContent(JsonConvert.SerializeObject(AddedCheckList)), "CheckList");
-                            }
-                            multipartContent.Add(new StringContent(AddJobDataModel.propertyId.ToString()), "property_id");
-                            multipartContent.Add(new StringContent(AddJobDataModel.propertyAddress), "Address");
-                            multipartContent.Add(new StringContent(AddJobDataModel.propertyName), "Name");
-
-
-                            BaseModels response;
-                            try
-                            {
-                                response = await webApiRestClient.PostAsync<MultipartFormDataContent, BaseModels>(ApiUrl.AddJobRequest, multipartContent);
-                            }
-                            catch (Exception ex)
-                            {
-                                response = null;
-                            }
-                            if (response != null)
-                            {
-                                if (response.status)
-                                {
-
-                                    await NavigationService.NavigateAsync(new Uri("/NavigationPage/WelcomePage", UriKind.Absolute));
-                                }
-                                else
-                                {
-                                    await App.Current.MainPage.DisplayAlert("", response.message, "Ok");
-                                }
-                            }
+                            IsFastorderPopup = true;
                         }
-                        catch (Exception ex)
+                        else
                         {
-                        }
-                        finally
-                        {
-                            UserDialogs.Instance.HideLoading();
+                            IsFastorderPopup = false;
+                            FastOrderName = string.Empty;
+                            AddJobApiCall();
                         }
                         //await NavigationService.NavigateAsync(nameof(CardListPage)); 
                     }
@@ -766,6 +1232,77 @@ namespace BroomService.ViewModels
                         await MaterialDialog.Instance.SnackbarAsync("Please select job start date.", 3000);
                     }
                 });
+            }
+        }
+        #endregion
+
+        #region Api Call
+        private async void AddJobApiCall()
+        {
+            try
+            {
+                UserDialogs.Instance.ShowLoading();
+                string boundary = "---8d0f01e6b3b5dafaaadaad";
+                MultipartFormDataContent multipartContent = new MultipartFormDataContent(boundary);
+                multipartContent.Add(new StringContent(StartDate), "JobStartDateTime");
+                if (!string.IsNullOrWhiteSpace(Description) && !string.IsNullOrEmpty(Description))
+                {
+                    multipartContent.Add(new StringContent(Description), "JobDesc");
+                }
+
+                multipartContent.Add(new StringContent(JsonConvert.SerializeObject(SelectedServiceList)), "Categories");
+                multipartContent.Add(new StringContent(userId.ToString()), "UserId");
+                multipartContent.Add(new StringContent(IsFastOrder.ToString()), "IsFastOrder");
+
+                if (!string.IsNullOrWhiteSpace(FastOrderName) && !string.IsNullOrEmpty(FastOrderName))
+                {
+                    multipartContent.Add(new StringContent(FastOrderName), "FastOrderName");
+                }
+                if (!string.IsNullOrEmpty(EndTime) && !string.IsNullOrWhiteSpace(EndTime) && EndTime != "Click here to choose the end time")
+                {
+                    multipartContent.Add(new StringContent(EndTime), "JobEndDateTime");
+                }
+                if (AddedCheckList != null && AddedCheckList.Count > 0)
+                {
+                    multipartContent.Add(new StringContent(JsonConvert.SerializeObject(AddedCheckList)), "CheckList");
+                }
+                multipartContent.Add(new StringContent(JsonConvert.SerializeObject(AddedPropertyList)), "Property_List_Id");
+
+                if (InventoryAddedList != null && InventoryAddedList.Count > 0)
+                {
+                    multipartContent.Add(new StringContent(JsonConvert.SerializeObject(InventoryAddedList)), "InventoryList");
+                }
+
+
+                BaseModels response;
+                try
+                {
+                    response = await webApiRestClient.PostAsync<MultipartFormDataContent, BaseModels>(ApiUrl.AddJobRequest, multipartContent);
+                }
+                catch (Exception ex)
+                {
+                    response = null;
+                }
+                if (response != null)
+                {
+                    if (response.status)
+                    {
+                        IsFastorderPopup = false;
+                        FastOrderName = string.Empty;
+                        await NavigationService.NavigateAsync(new Uri("/NavigationPage/WelcomePage", UriKind.Absolute));
+                    }
+                    else
+                    {
+                        await App.Current.MainPage.DisplayAlert("", response.message, "Ok");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+            finally
+            {
+                UserDialogs.Instance.HideLoading();
             }
         }
         #endregion
@@ -862,26 +1399,51 @@ namespace BroomService.ViewModels
         {
         }
 
-        public void OnNavigatedTo(INavigationParameters parameters)
+        public async void OnNavigatedTo(INavigationParameters parameters)
         {
             if (parameters.ContainsKey("AddJobDataModel"))
             {
                 AddJobDataModel = (AddJobDataModel)parameters["AddJobDataModel"];
             }
 
+            try
+            {
+                var data = await SecureStorage.GetAsync("PropertyList");
+
+                var response = JsonConvert.DeserializeObject<PropertyListResponseModel>(data);
+
+                foreach (var item in response.data)
+                {
+                    item.PropertyModel.PropertyImages = item.PropertyImages;
+                    item.PropertyModel.property_Image_display = "image1.png";
+                    AllPropertyList.Add(item.PropertyModel);
+                }
+            }
+            catch (Exception ex)
+            {
+                AllPropertyList = new List<PropertyModel>();
+            }
+
 
             SelectedPropertyList.Add(new SelectedPropertyListModel
             {
+                PropertyName = AddJobDataModel.propertyName,
+                PropertyAddress = AddJobDataModel.propertyAddress,
                 PropertyNameAddress = AddJobDataModel.propertyName + ", " + AddJobDataModel.propertyAddress,
-                property_id = AddJobDataModel.propertyId
+                property_id = AddJobDataModel.propertyId,
+                IsShortTermAirBnb = AddJobDataModel.ShortTermApartment,
+                IsInventoryAdded = false
             });
+            AddedPropertyList.Add(AddJobDataModel.propertyId);
             PropertyListHeight = (55 * SelectedPropertyList.Count) + 10;
 
 
             SelectedServiceList.Add(new SelectedServiceListModel
             {
                 ServiceName = AddJobDataModel.SelectedService,
-                service_id = AddJobDataModel.SelectedServiceId
+                CategoryId = AddJobDataModel.SelectedServiceId,
+                SubCategoryId= AddJobDataModel.SelectedSubServiceId,
+                SubSubCategoryyId = AddJobDataModel.SelectedSubSubServiceId
             });
             ServiceListHeight = (55 * SelectedServiceList.Count) + 10;
 
@@ -920,10 +1482,20 @@ namespace BroomService.ViewModels
             {
                 if (response.status)
                 {
+                    inventoryData = response.inventoryData;
+                    foreach (var item in response.inventoryData)
+                    {
+                        item.display_Image = Common.IsImagesValid(item.Image, ApiUrl.InventoryImageBaseUrl);
+                        item.InventoryOrderCount = 0;
 
+                        AllInventoryList.Add(item);
+                    }
+
+                    InventoryList = AllInventoryList;
                 }
                 else
                 {
+                    inventoryData = null;
                 }
             }
         }

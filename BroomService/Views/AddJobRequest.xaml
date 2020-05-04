@@ -127,6 +127,10 @@
                                     </StackLayout>
                                     <Image Grid.Column="1" Style="{StaticResource Image20HW}" Source="ic_footer_calendar.png" HorizontalOptions="Center" VerticalOptions="Center"/>
                                 </Grid>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding StartDatePickerCommand}" NumberOfTapsRequired="1"/>
+                                </Frame.GestureRecognizers>
+                                
                             </Frame>
                             <!--#endregion-->
                             
@@ -172,6 +176,23 @@
                                     </Frame.GestureRecognizers>
                                 </Frame>
                                 <TimePicker x:Name="endTime_picker" IsVisible="False" Unfocused="endTime_picker_Unfocused"/>
+                            </StackLayout>
+
+                            <Label Text="Would You Like To Add Another Property?" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
+
+                            <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" HeightRequest="40">
+                                <Image Style="{StaticResource Image40H}" Source="{Binding PropertyImage}">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding PropertyCommand}" NumberOfTapsRequired="1"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                <Frame CornerRadius="25" Padding="20,0" HorizontalOptions="FillAndExpand" IsClippedToBounds="True" HasShadow="True" IsVisible="{Binding IsProperty}">
+                                    <Label Text="Add Property" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" VerticalOptions="Center" VerticalTextAlignment="Center"/>
+
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding AddPropertyCommand}" NumberOfTapsRequired="1"/>
+                                    </Frame.GestureRecognizers>
+                                </Frame>
                             </StackLayout>
 
                             <Label Text="Would You Like To Add Checklist?" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
@@ -238,6 +259,40 @@
                                 </Frame>
                             </StackLayout>
 
+                            <Frame HorizontalOptions="FillAndExpand" Padding="10,5" HasShadow="False" IsClippedToBounds="True" BorderColor="{StaticResource GrayColor}" IsVisible="{Binding IsAddedInventoryProperty}">
+                                <StackLayout HorizontalOptions="FillAndExpand">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="60"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Text="Property Name" Grid.Column="0" Style="{StaticResource Black1BoldLabel}" FontSize="{StaticResource FontSize16}" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"/>
+                                        <Label Text="Items" Grid.Column="1" Style="{StaticResource Black1BoldLabel}" FontSize="{StaticResource FontSize16}" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"/>
+                                        <Label Text="Order Count" Grid.Column="2" Style="{StaticResource Black1BoldLabel}" FontSize="{StaticResource FontSize16}" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"/>
+                                    </Grid>
+
+                                    <ListView ItemsSource="{Binding InventoryAddedList}" RowHeight="50" HeightRequest="{Binding InventoryAddedListHeight}" SeparatorVisibility="None" SelectionMode="None">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <ViewCell>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="60"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Label Text="{Binding PropertyName}" Grid.Column="0" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"/>
+                                                        <Label Text="{Binding InventoryName}" Grid.Column="1" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"/>
+                                                        <Label Text="{Binding Qty }" Grid.Column="2" Style="{StaticResource Black1RegularLabel}" FontSize="{StaticResource FontSize16}" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"/>
+                                                    </Grid>
+                                                </ViewCell>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </StackLayout>
+                            </Frame>
+
                             <Label Text="Would You Like To Add Another Job on Same Time?" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
 
                             <StackLayout HorizontalOptions="FillAndExpand" Spacing="10">
@@ -259,6 +314,16 @@
 
                             </StackLayout>
 
+                            <Label Text="Would you like to repeat the same service in the future?" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
+
+                            <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" >
+                                <Image Style="{StaticResource Image40H}" VerticalOptions="Start" Source="{Binding RepeatServiceImage}">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding RepeatServiceCommand}" NumberOfTapsRequired="1"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                            </StackLayout>
+
                             <Label Text="Would You Like To Add Job Description?" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}"/>
 
                             <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" >
@@ -270,6 +335,15 @@
                                 <Frame CornerRadius="25" HeightRequest="80" Padding="15" HorizontalOptions="FillAndExpand" IsClippedToBounds="True" HasShadow="True" IsVisible="{Binding IsDescription}">
                                     <Editor Text="{Binding Description}" Placeholder="Enter your Description" HorizontalOptions="FillAndExpand" FontSize="{StaticResource FontSize15}"/>
                                 </Frame>
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" >
+                                <Image Style="{StaticResource Image20H}" VerticalOptions="Start" Source="{Binding FastOrderImage}">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding FastOrderCommand}" NumberOfTapsRequired="1"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                <Label Text="Would you like to save job details as fast order for next? (Including inventory if AirBNB)." Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}" VerticalOptions="Center"/>
                             </StackLayout>
 
                             <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="End">
@@ -336,6 +410,157 @@
                 </StackLayout>
             </yummy:PancakeView>
         </StackLayout>
+        
+        <!--#region Add Property Popup-->
+        <BoxView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource Black1Color}" Opacity="0.7" IsVisible="{Binding IsFastorderPopup}"/>
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center" IsVisible="{Binding IsFastorderPopup}" Padding="0">
+            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Frame HasShadow="False" IsClippedToBounds="True" Padding="0,0,0,30" CornerRadius="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="15,15,15,30">
+                    <StackLayout HorizontalOptions="FillAndExpand" Spacing="15" Padding="10">
+                        <Label Text="Fast Order" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Margin="0,10,0,0"/>
+
+                        <Frame Style="{StaticResource Frame40h}" CornerRadius="25" Padding="20,0" HorizontalOptions="FillAndExpand" IsClippedToBounds="True" HasShadow="True" >
+                            <Entry Text="{Binding FastOrderName}" Placeholder="Enter Fast Order Name" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}"/>
+                        </Frame>
+                    </StackLayout>
+                </Frame>
+
+                <Image Source="ic_close_blue.png" Style="{StaticResource Image30HW}" HorizontalOptions="End" VerticalOptions="Start">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding FastOrderCloseCommand}" NumberOfTapsRequired="1"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+
+                <Image Source="ic_login_btn.png" Style="{StaticResource Image60HW}" HorizontalOptions="Center" VerticalOptions="End">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding FastOrderNextButton}" NumberOfTapsRequired="1"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </Grid>
+        </StackLayout>
+        <!--#endregion-->
+        
+        <!--#region Add Property Popup-->
+        <BoxView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource Black1Color}" Opacity="0.7" IsVisible="{Binding IsPropertyPopup}"/>
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="{Binding IsPropertyPopup}" Padding="0">
+            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Frame HasShadow="False" IsClippedToBounds="True" Padding="0,0,0,30" CornerRadius="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="15,15,15,30">
+                    <StackLayout HorizontalOptions="FillAndExpand" Spacing="15" Padding="10">
+                        <Label Text="Add Property" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Margin="0,10,0,0"/>
+
+                        <Frame Style="{StaticResource Frame40h}" CornerRadius="25" Padding="20,0" HorizontalOptions="FillAndExpand" IsClippedToBounds="True" HasShadow="True" >
+                            <Entry Text="{Binding PropertyName}" Placeholder="Enter property name" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" FontSize="{StaticResource FontSize15}"/>
+                        </Frame>
+
+                        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand" IsVisible="{Binding IsSearchProperty}">
+                            <ListView x:Name="anotherPropertyList" ItemsSource="{Binding AnotherPropertyList}" RowHeight="50" SeparatorVisibility="None" SelectionMode="Single" SelectedItem="{Binding SelectedAnotherProperty}" ItemSelected="anotherPropertyList_ItemSelected">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Grid HorizontalOptions="FillAndExpand">
+                                                <Label Text="{Binding Name}" Style="{StaticResource Black1SemiBoldLabel}" HorizontalOptions="Start" VerticalOptions="Center"/>
+                                            </Grid>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <Image Source="ic_close_blue.png" Style="{StaticResource Image30HW}" HorizontalOptions="End" VerticalOptions="Start">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AnotherPropertyCloseCommand}" NumberOfTapsRequired="1"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </Grid>
+        </StackLayout>
+        <!--#endregion-->
+        
+        <!--#region Add Inventory Popup-->
+        <BoxView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource Black1Color}" Opacity="0.7" IsVisible="{Binding IsInventoryPopup}"/>
+        <StackLayout HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding IsInventoryPopup}" Padding="0">
+            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Frame HasShadow="False" IsClippedToBounds="True" Padding="0,0,0,30" CornerRadius="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="15,15,15,30">
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Spacing="15" Padding="10">
+                        <Label Text="Add Inventory" Style="{StaticResource Black1SemiBoldLabel}" FontSize="{StaticResource FontSize16}" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Margin="0,10,0,0"/>
+
+                        <Frame Style="{StaticResource ShadowFrame40h}" CornerRadius="25" Padding="15,5">
+                            <cc:CustomPicker Icon="ic_drop.png" Title="Select your property" ItemsSource="{Binding InventoryPropertyList}" SelectedItem="{Binding InventoryPropertySelected}" HorizontalOptions="FillAndExpand" ItemDisplayBinding="{Binding PropertyName}" IsBorderDisplay="False" />
+                        </Frame>
+                        
+                        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="FillAndExpand">
+                            <ListView x:Name="inventoryList" ItemsSource="{Binding InventoryList}" RowHeight="70" SeparatorVisibility="None" SelectionMode="None">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Grid x:Name="inventoryListItem" HorizontalOptions="FillAndExpand">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="70"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Image Grid.Column="0" Style="{StaticResource Image50HW}" Source="{Binding display_Image}" HorizontalOptions="Center">
+                                                    <Image.GestureRecognizers>
+                                                        <TapGestureRecognizer Command="{Binding HomeCommand}"/>
+                                                    </Image.GestureRecognizers>
+                                                </Image>
+
+                                                <StackLayout Orientation="Horizontal" Grid.Column="1" HorizontalOptions="FillAndExpand">
+
+                                                    <StackLayout HorizontalOptions="FillAndExpand">
+                                                        <Label Text="{Binding Name}" Style="{StaticResource Black1SemiBoldLabel}" HorizontalOptions="Start" VerticalOptions="Center"/>
+                                                        <Label Text="{Binding Price}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalOptions="Center"/>
+                                                    </StackLayout>
+                                                    <StackLayout HorizontalOptions="End">
+                                                        <Frame CornerRadius="20" HeightRequest="20" Padding="10" HorizontalOptions="Start" IsClippedToBounds="True" HasShadow="True" Margin="0,0,5,0">
+                                                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                                                <Image Style="{StaticResource Image25HW}" Source="ic_minus.png">
+                                                                    <Image.GestureRecognizers>
+                                                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.InventoryCountMinusCommand, Source={x:Reference inventoryList}}" CommandParameter="{Binding Source={x:Reference inventoryListItem}, Path=BindingContext}" NumberOfTapsRequired="1"/>
+                                                                    </Image.GestureRecognizers>
+                                                                </Image>
+                                                                <Label Text="{Binding InventoryOrderCount}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" FontSize="{StaticResource FontSize15}" Style="{StaticResource Black1MediumLabel}" VerticalOptions="Center"/>
+                                                                <Image Style="{StaticResource Image25HW}" Source="ic_plus.png">
+                                                                    <Image.GestureRecognizers>
+                                                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.InventoryCountPlusCommand, Source={x:Reference inventoryList}}" CommandParameter="{Binding Source={x:Reference inventoryListItem}, Path=BindingContext}" NumberOfTapsRequired="1"/>
+                                                                    </Image.GestureRecognizers>
+                                                                </Image>
+                                                            </StackLayout>
+                                                        </Frame>
+                                                    </StackLayout>
+                                                </StackLayout>
+                                            </Grid>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+
+                        <Frame Style="{StaticResource Frame50h}" CornerRadius="5" Padding="10" BackgroundColor="{StaticResource LightGrayColor}">
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                <Label Text="Total Added Inventory Cost" HorizontalOptions="FillAndExpand" Style="{StaticResource Black1SemiBoldLabel}" HorizontalTextAlignment="Start" VerticalOptions="Center"/>
+
+                                <Label Text="{Binding TotalPrice}" Style="{StaticResource Black1BoldLabel}" HorizontalOptions="End" HorizontalTextAlignment="End" VerticalOptions="Center"/>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                </Frame>
+
+                <Image Source="ic_close_blue.png" Style="{StaticResource Image30HW}" HorizontalOptions="End" VerticalOptions="Start">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding InventoryPopupCloseCommand}" NumberOfTapsRequired="1"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Image Source="ic_login_btn.png" Style="{StaticResource Image60HW}" HorizontalOptions="Center" VerticalOptions="End">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AddInventoryButton}" NumberOfTapsRequired="1"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </Grid>
+        </StackLayout>
+        <!--#endregion-->
         
         <!--#region Another Service Popup-->
         <BoxView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource Black1Color}" Opacity="0.7" IsVisible="{Binding IsAnotherServicePopup}"/>

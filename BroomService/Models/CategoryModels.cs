@@ -148,11 +148,17 @@ namespace BroomService.Models
     public class SelectedPropertyListModel
     {
         public long property_id { get; set; }
+        public string PropertyAddress { get; set; }
+        public string PropertyName { get; set; }
         public string PropertyNameAddress { get; set; }
+        public bool IsInventoryAdded { get; set; }
+        public bool IsShortTermAirBnb { get; set; }
     }
     public class SelectedServiceListModel
     {
-        public long service_id { get; set; }
+        public long CategoryId { get; set; }
+        public long SubCategoryId { get; set; }
+        public long SubSubCategoryyId { get; set; }
         public string ServiceName { get; set; }
     }
     public class SelectedSubServiceListModel

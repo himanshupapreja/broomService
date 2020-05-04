@@ -28,13 +28,18 @@ namespace BroomService.Views
 		private void startDate_picker_Unfocused(object sender, FocusEventArgs e)
 		{
 			selectedDateTime = ((DatePicker)sender).Date;
-			AddJobRequestViewModel.StartDate = ((DatePicker)sender).Date.ToString("dd/MM/yyyy");
+			AddJobRequestViewModel.StartDate = ((DatePicker)sender).Date.ToString("MM/dd/yyyy");
 		}
 
 		private void endTime_picker_Unfocused(object sender, FocusEventArgs e)
 		{
 			selectedDateTime = selectedDateTime.Add(((TimePicker)sender).Time);
-			AddJobRequestViewModel.EndTime = selectedDateTime.ToString("hh:mm tt");
+			AddJobRequestViewModel.EndTime = selectedDateTime.ToString("HH:mm");
+		}
+
+		private void anotherPropertyList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+		{
+			anotherPropertyList.SelectedItem = null;
 		}
 	}
 }

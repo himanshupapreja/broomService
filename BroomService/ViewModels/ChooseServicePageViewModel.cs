@@ -41,7 +41,7 @@ namespace BroomService.ViewModels
                     AddJobDataModel.ServiceList = ServiceList;
                     AddJobDataModel.DisplayServiceName = SelectedServiceList.display_Name;
                     AddJobDataModel.DisplayServiceDescription = SelectedServiceList.display_Description;
-                    //AddJobDataModel.SelectedServiceId = SelectedServiceList.Id;
+                    AddJobDataModel.SelectedServiceId = SelectedServiceList.Id;
                     var item = ServiceList.Where(x => x.SelectedColor == ColorHelpers.BlueColor).FirstOrDefault();
 
                     if (item != null)

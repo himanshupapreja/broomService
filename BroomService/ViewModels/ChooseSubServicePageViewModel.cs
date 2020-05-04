@@ -70,6 +70,7 @@ namespace BroomService.ViewModels
 
                     AddJobDataModel.DisplaySubServiceName = SelectedSubServiceList.display_Name;
                     AddJobDataModel.DisplaySubServiceDescription = SelectedSubServiceList.display_Description;
+                    AddJobDataModel.SelectedSubServiceId = SelectedSubServiceList.Id;
 
                     if (subsubitem != null && subsubitem.Count >0)
                     {
@@ -85,7 +86,6 @@ namespace BroomService.ViewModels
                     {
                         AddJobDataModel.SelectedService = SelectedSubServiceList.display_Name;
                         AddJobDataModel.SelectedServiceDescription = SelectedSubServiceList.display_Description;
-                        AddJobDataModel.SelectedServiceId = SelectedSubServiceList.Id;
                         Device.BeginInvokeOnMainThread(async () =>
                         {
                             var param = new NavigationParameters();
